@@ -4,6 +4,8 @@ import Link from "next/link";
 import { motion, type Variants } from "motion/react";
 import { ArrowRight, TrendingUp, Users, Trophy, CheckCircle2 } from "lucide-react";
 import { KpiCard } from "./KpiCard";
+import { CursorSpotlight } from "./CursorSpotlight";
+import { AnimatedNumber } from "./AnimatedNumber";
 
 const heroStagger: Variants = {
   hidden: {},
@@ -24,6 +26,7 @@ export function Hero() {
 
   return (
     <section className="hero-gradient relative overflow-hidden">
+      <CursorSpotlight size={680} color="rgba(99, 102, 241, 0.55)" opacity={0.22} />
       <motion.div
         className="max-w-5xl mx-auto px-6 pt-24 pb-24 md:pt-32 md:pb-32 text-center"
         initial="hidden"
@@ -94,9 +97,9 @@ function DashboardPreview() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-3 mb-3">
-          <KpiCard variant="dark" icon={Users} label="Candidatos" value="142" sub="+18 sem" iconColor="#a8b8ff" />
-          <KpiCard variant="dark" icon={CheckCircle2} label="Matrículas" value="34" sub="+12 sem" iconColor="#7ce0b8" />
-          <KpiCard variant="dark" icon={TrendingUp} label="Conversão" value="24%" sub="+9 pp" iconColor="#ffb88a" />
+          <KpiCard variant="dark" icon={Users} label="Candidatos" value={<AnimatedNumber value={142} />} sub="+18 sem" iconColor="#a8b8ff" />
+          <KpiCard variant="dark" icon={CheckCircle2} label="Matrículas" value={<AnimatedNumber value={34} />} sub="+12 sem" iconColor="#7ce0b8" />
+          <KpiCard variant="dark" icon={TrendingUp} label="Conversão" value={<AnimatedNumber value={24} suffix="%" />} sub="+9 pp" iconColor="#ffb88a" />
           <KpiCard variant="dark" icon={Trophy} label="Top" value="Aline" sub="2.140 XP" iconColor="#e7afff" />
         </div>
 

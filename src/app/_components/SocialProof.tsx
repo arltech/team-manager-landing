@@ -13,29 +13,34 @@ import { Reveal, Stagger, StaggerItem } from "./Reveal";
 import { SectionHeader } from "./SectionHeader";
 import { IconBadge } from "./IconBadge";
 import { KpiCard } from "./KpiCard";
+import { AnimatedNumber } from "./AnimatedNumber";
 
 const KPIS = [
   {
     icon: Layers,
-    value: "14",
+    valueNumber: 14,
+    valueSuffix: "",
     label: "componentes integrados",
     sub: "CRM + tarefas + rotinas + ranking + IA",
   },
   {
     icon: Building2,
-    value: "5+",
+    valueNumber: 5,
+    valueSuffix: "+",
     label: "verticais cobertas",
     sub: "Educação, saúde, imobiliário, fitness, beleza",
   },
   {
     icon: Clock,
-    value: "72h",
+    valueNumber: 72,
+    valueSuffix: "h",
     label: "do setup ao primeiro insight",
     sub: "Setup técnico + onboarding incluso",
   },
   {
     icon: CheckCircle2,
-    value: "30 dias",
+    valueNumber: 30,
+    valueSuffix: " dias",
     label: "garantia integral",
     sub: "100% devolvido se equipe não usar",
   },
@@ -92,7 +97,9 @@ export function SocialProof() {
               <KpiCard
                 icon={k.icon}
                 label={k.label}
-                value={k.value}
+                value={
+                  <AnimatedNumber value={k.valueNumber} suffix={k.valueSuffix} />
+                }
                 sub={k.sub}
                 variant="light"
               />

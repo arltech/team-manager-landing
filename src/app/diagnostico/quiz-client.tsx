@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "motion/react";
+import confetti from "canvas-confetti";
 import { Logo } from "@/app/_components/Logo";
 import { Accordion } from "@/app/_components/Accordion";
 import {
@@ -194,8 +195,51 @@ const CONFIDENCE_COPY = {
   low: { label: "Zona cinzenta", color: "#6b7280" },
 } as const;
 
+function fireDiagnosticConfetti(diagnostic: Diagnostic, accent: string) {
+  if (typeof window === "undefined") return;
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced) return;
+
+  if (diagnostic === "inconclusive") return;
+
+  const isHealthy = diagnostic === "healthy_operation";
+  const palette = isHealthy
+    ? ["#22d3a4", "#34d399", "#86efac", "#ffffff"]
+    : [accent, "#c7d2fe", "#1e3a8a", "#ffffff"];
+
+  const particles = isHealthy ? 90 : 50;
+  const spread = isHealthy ? 78 : 60;
+
+  // Two soft bursts from the corners — sutil
+  confetti({
+    particleCount: Math.round(particles * 0.5),
+    angle: 60,
+    spread,
+    startVelocity: 38,
+    origin: { x: 0.05, y: 0.85 },
+    colors: palette,
+    scalar: 0.85,
+    ticks: 120,
+  });
+  confetti({
+    particleCount: Math.round(particles * 0.5),
+    angle: 120,
+    spread,
+    startVelocity: 38,
+    origin: { x: 0.95, y: 0.85 },
+    colors: palette,
+    scalar: 0.85,
+    ticks: 120,
+  });
+}
+
 function ResultView({ result }: { result: SubmitResult }) {
   const { copy, diagnostic, id, evidence } = result;
+
+  useEffect(() => {
+    fireDiagnosticConfetti(diagnostic, copy.accentColor);
+  }, [diagnostic, copy.accentColor]);
+
   const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "/#oferta";
 
   const [email, setEmail] = useState("");
