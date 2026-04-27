@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Download, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "motion/react";
 import confetti from "canvas-confetti";
@@ -242,16 +242,58 @@ function ResultView({ result }: { result: SubmitResult }) {
 
   const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "/#oferta";
 
-  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
   const [name, setName] = useState("");
   const [networkName, setNetworkName] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [downloadingPdf, setDownloadingPdf] = useState(false);
+
+  async function downloadPdf() {
+    setDownloadingPdf(true);
+    try {
+      const res = await fetch("/api/quiz/pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          diagnostic,
+          name: name || undefined,
+          networkName: networkName || undefined,
+          scores: evidence?.scores,
+          signals: evidence?.signals,
+          confidence: evidence?.confidence,
+        }),
+      });
+      if (!res.ok) throw new Error("pdf failed");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "diagnostico-team-manager.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch {
+      toast.error("Erro ao gerar PDF. Tenta de novo.");
+    } finally {
+      setDownloadingPdf(false);
+    }
+  }
 
   async function submitLead(e: React.FormEvent) {
     e.preventDefault();
-    if (!email || !email.includes("@")) {
-      toast.error("Email inválido");
+    const digits = whatsapp.replace(/\D/g, "");
+    if (digits.length < 10 || digits.length > 13) {
+      toast.error("WhatsApp inválido — inclua DDD");
+      return;
+    }
+    if (!name.trim()) {
+      toast.error("Preencha seu nome");
+      return;
+    }
+    if (!networkName.trim()) {
+      toast.error("Preencha o nome da rede");
       return;
     }
     setSending(true);
@@ -261,7 +303,7 @@ function ResultView({ result }: { result: SubmitResult }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           quizResponseId: id,
-          email,
+          whatsapp,
           name: name || undefined,
           networkName: networkName || undefined,
           diagnostic,
@@ -269,12 +311,19 @@ function ResultView({ result }: { result: SubmitResult }) {
       });
       if (!res.ok) throw new Error("lead failed");
       setSent(true);
-      toast.success("Plano enviado pro seu email.");
+      toast.success("Vamos te chamar no WhatsApp.");
     } catch {
       toast.error("Erro ao enviar. Tenta de novo.");
     } finally {
       setSending(false);
     }
+  }
+
+  function formatWhatsapp(value: string): string {
+    const d = value.replace(/\D/g, "").slice(0, 11);
+    if (d.length <= 2) return d;
+    if (d.length <= 7) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
   }
 
   return (
@@ -427,17 +476,19 @@ function ResultView({ result }: { result: SubmitResult }) {
         {!sent ? (
           <form onSubmit={submitLead} className="card !p-6 md:!p-10 mb-7">
             <h2 className="text-lg md:text-xl mb-3 leading-snug">
-              Receba o diagnóstico completo no seu email
+              Receba o diagnóstico completo no seu WhatsApp
             </h2>
             <p className="text-sm text-[var(--muted-foreground)] mb-6 md:mb-7 leading-relaxed">
-              Versão expandida do plano + PDF anexado para compartilhar com sócios e diretoria.
+              Versão expandida do plano + PDF para compartilhar com sócios e
+              diretoria. Sem spam — só uma mensagem.
             </p>
             <div className="space-y-3 md:space-y-4">
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="seu@email.com"
+                type="tel"
+                inputMode="tel"
+                value={whatsapp}
+                onChange={(e) => setWhatsapp(formatWhatsapp(e.target.value))}
+                placeholder="(11) 99999-9999"
                 required
                 className="w-full px-4 md:px-5 py-3.5 md:py-4 rounded-xl bg-[var(--surface)] border-2 border-[var(--border)] outline-none focus:border-[var(--primary)] transition-colors text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] text-base"
               />
@@ -446,14 +497,16 @@ function ResultView({ result }: { result: SubmitResult }) {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Seu nome (opcional)"
+                  placeholder="Seu nome"
+                  required
                   className="w-full px-4 md:px-5 py-3.5 md:py-4 rounded-xl bg-[var(--surface)] border-2 border-[var(--border)] outline-none focus:border-[var(--primary)] transition-colors text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] text-base"
                 />
                 <input
                   type="text"
                   value={networkName}
                   onChange={(e) => setNetworkName(e.target.value)}
-                  placeholder="Nome da rede (opcional)"
+                  placeholder="Nome da rede"
+                  required
                   className="w-full px-4 md:px-5 py-3.5 md:py-4 rounded-xl bg-[var(--surface)] border-2 border-[var(--border)] outline-none focus:border-[var(--primary)] transition-colors text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] text-base"
                 />
               </div>
@@ -467,26 +520,43 @@ function ResultView({ result }: { result: SubmitResult }) {
                     <Loader2 size={16} className="animate-spin" /> Enviando…
                   </>
                 ) : (
-                  "Enviar pra mim"
+                  "Receber no WhatsApp"
                 )}
               </button>
             </div>
           </form>
         ) : (
           <div className="card mb-7 !p-6 md:!p-7 border-[var(--success)]/40 bg-[var(--success-subtle)]">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mb-5">
               <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[var(--success)]/15 text-[var(--success)] flex items-center justify-center flex-shrink-0">
                 <Check size={20} />
               </div>
               <div>
                 <div className="font-bold text-[var(--foreground)] text-sm md:text-base">
-                  Enviado pro seu email
+                  Vamos te chamar no WhatsApp
                 </div>
                 <div className="text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
-                  Confere a caixa de entrada (e o spam, por garantia).
+                  Em até 1 hora útil — com o diagnóstico completo e plano em
+                  3 passos.
                 </div>
               </div>
             </div>
+            <button
+              type="button"
+              onClick={downloadPdf}
+              disabled={downloadingPdf}
+              className="btn-primary w-full justify-center disabled:opacity-50"
+            >
+              {downloadingPdf ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" /> Gerando PDF…
+                </>
+              ) : (
+                <>
+                  <Download size={16} /> Baixar diagnóstico em PDF
+                </>
+              )}
+            </button>
           </div>
         )}
 

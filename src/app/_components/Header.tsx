@@ -12,7 +12,6 @@ const NAV = [
 ];
 
 export function Header() {
-  const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "#oferta";
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -45,12 +44,12 @@ export function Header() {
           ))}
         </nav>
 
-        <a
-          href={calendly}
+        <Link
+          href="/diagnostico"
           className="hidden md:inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg bg-white text-[var(--primary)] hover:bg-white/95 shadow-[0_4px_14px_rgba(0,0,0,0.18)] transition-all"
         >
           Demonstração
-        </a>
+        </Link>
 
         {/* Mobile: just CTA, sticky bottom bar handles the rest */}
         <Link

@@ -1,17 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getAdminClient } from "@/lib/supabase-admin";
-import { sendEmail, buildDiagnosticEmail } from "@/lib/email";
-import { DIAGNOSTICS, type Diagnostic } from "@/lib/quiz-types";
-import { generateDiagnosticPdf } from "@/lib/diagnostic-pdf";
+import { DIAGNOSTICS, DIAGNOSTIC_COPY, type Diagnostic } from "@/lib/quiz-types";
+import { notifyLeadWebhook } from "@/lib/lead-webhook";
 
 export const runtime = "nodejs";
 
 const leadSchema = z.object({
   quizResponseId: z.string().uuid().optional(),
-  email: z.string().email().max(200),
-  name: z.string().max(120).optional(),
-  networkName: z.string().max(120).optional(),
+  whatsapp: z
+    .string()
+    .min(10)
+    .max(20)
+    .transform((v) => v.replace(/\D/g, ""))
+    .refine((v) => v.length >= 10 && v.length <= 13, {
+      message: "WhatsApp inválido",
+    }),
+  name: z.string().min(2).max(120),
+  networkName: z.string().min(2).max(120),
   diagnostic: z.enum(DIAGNOSTICS as [string, ...string[]]),
 });
 
@@ -31,47 +37,27 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { quizResponseId, email, name, networkName, diagnostic } = parsed.data;
+  const { quizResponseId, whatsapp, name, networkName, diagnostic } =
+    parsed.data;
   const supabase = getAdminClient();
+  const diagnosticBadge =
+    DIAGNOSTIC_COPY[diagnostic as Diagnostic]?.badge ?? diagnostic;
 
-  async function sendDiagnostic(): Promise<boolean> {
-    const { subject, html } = buildDiagnosticEmail(
-      diagnostic as Diagnostic,
-      name
-    );
-    let pdfAttachment: { filename: string; content: Buffer } | undefined;
-    try {
-      const pdfBuffer = await generateDiagnosticPdf({
-        diagnostic: diagnostic as Diagnostic,
-        name,
-        networkName,
-      });
-      pdfAttachment = {
-        filename: "diagnostico-team-manager.pdf",
-        content: pdfBuffer,
-      };
-    } catch (pdfError) {
-      console.error("[quiz/lead] PDF generation failed (sending without attachment):", pdfError);
-    }
-    return sendEmail({
-      to: email,
-      subject,
-      html,
-      attachments: pdfAttachment ? [pdfAttachment] : undefined,
-    });
-  }
+  // Dispara webhook de notificação em paralelo (não bloqueia resposta)
+  const webhookPromise = notifyLeadWebhook({
+    name,
+    whatsapp,
+    networkName,
+    diagnostic,
+    diagnosticBadge,
+  });
 
-  // Fallback path: no DB — try email only, never block UI
   if (!supabase) {
     console.warn(
       "[quiz/lead] Supabase not configured — accepting lead without persistence",
-      { email, diagnostic, networkName }
+      { whatsapp, diagnostic, networkName }
     );
-    try {
-      await sendDiagnostic();
-    } catch (emailError) {
-      console.error("[quiz/lead] email failed in ephemeral mode:", emailError);
-    }
+    await webhookPromise;
     return NextResponse.json({ ok: true, leadId: null, ephemeral: true });
   }
 
@@ -79,9 +65,9 @@ export async function POST(request: NextRequest) {
     .from("quiz_leads")
     .insert({
       quiz_response_id: quizResponseId ?? null,
-      email,
-      name: name ?? null,
-      network_name: networkName ?? null,
+      whatsapp,
+      name,
+      network_name: networkName,
       diagnostic,
     })
     .select("id")
@@ -92,17 +78,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Failed to save lead" }, { status: 500 });
   }
 
-  try {
-    const sent = await sendDiagnostic();
-    if (sent) {
-      await supabase
-        .from("quiz_leads")
-        .update({ email_sent: true, email_sent_at: new Date().toISOString() })
-        .eq("id", lead.id);
-    }
-  } catch (emailError) {
-    console.error("[quiz/lead] email failed (lead saved anyway):", emailError);
-  }
-
+  await webhookPromise;
   return NextResponse.json({ ok: true, leadId: lead.id });
 }
