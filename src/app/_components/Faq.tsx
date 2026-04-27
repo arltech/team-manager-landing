@@ -8,7 +8,7 @@ const FAQS = [
   },
   {
     q: "É caro, planilha funciona.",
-    a: "Planilha não tem custo de assinatura. Tem custo de lead perdido. Escola média recebe 30 leads/mês. Taxa sem follow-up sistematizado: 15-20%. Com: 30-40%. Ticket médio R$ 500 × 3 unidades × 15 pontos extras = R$ 6.750/mês recuperados. Plano Rede custa R$ 1.397. ROI líquido no mês 1: R$ 5.353. Payback em menos de 7 dias de uso ativo.",
+    a: "Planilha não tem custo de assinatura. Tem custo de lead perdido. Escola média recebe 30 leads/mês. Taxa sem follow-up sistematizado: 15-20%. Com: 30-40%. Ticket médio R$ 500 × 3 unidades × 15 pontos extras = R$ 6.750/mês recuperados. Plano Rede custa R$ 1.797. ROI líquido no mês 1: R$ 4.953. Payback em menos de 9 dias de uso ativo.",
   },
   {
     q: "Minha rede é pequena, faz sentido?",
@@ -20,7 +20,7 @@ const FAQS = [
   },
   {
     q: "Quanto tempo leva pra implantar?",
-    a: "72 horas. Setup técnico em 2 horas (incluso nos planos Rede e Regional). Vídeo de onboarding pronto pra mandar no WhatsApp do time. Templates por vertical pré-configurados (educação, saúde, imobiliário). Suporte dedicado nos primeiros 7 dias. Não é \"3 meses de implantação consultiva\".",
+    a: "72 horas. Setup técnico em 2 horas (incluso nos planos Rede e Regional). Vídeo de onboarding pronto pra mandar no WhatsApp do time. Templates por segmento pré-configurados: idiomas, profissionalizantes, infantil, ensino regular. Suporte dedicado nos primeiros 7 dias. Não é \"3 meses de implantação consultiva\".",
   },
 ];
 

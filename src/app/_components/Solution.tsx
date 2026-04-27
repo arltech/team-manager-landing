@@ -46,11 +46,11 @@ const CARDS = [
   {
     icon: Target,
     title: "Do primeiro contato à matrícula",
-    is: "IA encontra leads (Google + Maps), o sistema distribui pra unidade certa por telefone e cobra follow-up automático candidato a candidato.",
+    is: "IA encontra leads em fontes públicas, o sistema distribui pra unidade certa por telefone e cobra follow-up automático candidato a candidato.",
     eliminates: [
-      "Lead que chegou e sumiu porque ninguém lembrou",
-      "Planilha de prospecção sem dono",
-      "Franqueadora mandando lista que vira pasta de downloads esquecida",
+      "Candidato que pediu informação e sumiu porque ninguém lembrou",
+      "Planilha de captação de matrícula sem dono",
+      "Lista de leads da franqueadora que vira pasta de downloads esquecida",
     ],
   },
 ];

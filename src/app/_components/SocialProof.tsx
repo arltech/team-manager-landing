@@ -1,11 +1,9 @@
-import Image from "next/image";
 import {
-  Quote,
   Database,
   ShieldCheck,
   Zap,
   Layers,
-  Building2,
+  GraduationCap,
   Clock,
   CheckCircle2,
 } from "lucide-react";
@@ -14,6 +12,7 @@ import { SectionHeader } from "./SectionHeader";
 import { IconBadge } from "./IconBadge";
 import { KpiCard } from "./KpiCard";
 import { AnimatedNumber } from "./AnimatedNumber";
+import { TestimonialCarousel } from "./TestimonialCarousel";
 
 const KPIS = [
   {
@@ -24,11 +23,11 @@ const KPIS = [
     sub: "CRM + tarefas + rotinas + ranking + IA",
   },
   {
-    icon: Building2,
-    valueNumber: 5,
-    valueSuffix: "+",
-    label: "verticais cobertas",
-    sub: "Educação, saúde, imobiliário, fitness, beleza",
+    icon: GraduationCap,
+    valueNumber: 4,
+    valueSuffix: "",
+    label: "segmentos de matrícula",
+    sub: "Idiomas, profissional, infantil, ensino regular",
   },
   {
     icon: Clock,
@@ -60,7 +59,7 @@ const TRUST = [
   {
     icon: Zap,
     title: "2 horas pra estar rodando",
-    body: "Templates prontos por segmento. Sem consultoria de 3 meses, sem manual de 80 páginas.",
+    body: "Templates prontos por segmento de escola: idiomas, profissional, infantil, ensino regular. Sem consultoria de 3 meses.",
   },
 ];
 
@@ -107,43 +106,9 @@ export function SocialProof() {
           ))}
         </Stagger>
 
-        {/* Featured testimonial */}
-        <Reveal className="relative max-w-4xl mx-auto mb-20" y={32}>
-          <div className="absolute -inset-px bg-gradient-to-br from-[var(--primary)]/15 via-transparent to-[var(--primary)]/10 rounded-3xl pointer-events-none" />
-          <div className="relative card !p-10 md:!p-14 bg-gradient-to-br from-[var(--card)] to-[var(--surface-container-low)]">
-            <Quote
-              className="absolute top-8 right-8 text-[var(--primary)]/15"
-              size={64}
-              strokeWidth={1.5}
-              aria-hidden
-            />
-            <p className="text-xl md:text-2xl lg:text-[28px] leading-snug font-semibold text-[var(--foreground)] mb-8 max-w-3xl">
-              &quot;Pela primeira vez, o assessor ligou pra perguntar o que
-              tinha acontecido. O gestor não precisou ligar pra cobrar.&quot;
-            </p>
-            <div className="flex items-center gap-4">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-[var(--primary)]/15 shadow-[0_4px_12px_rgba(30,58,138,0.18)] flex-shrink-0">
-                <Image
-                  src="/testimonial-avatar.jpg"
-                  alt=""
-                  width={96}
-                  height={96}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div>
-                <div className="font-bold text-[var(--foreground)] text-sm">
-                  Gestor de rede
-                </div>
-                <div className="text-xs text-[var(--muted-foreground)]">
-                  3 unidades · Educação · Piloto Team Manager
-                </div>
-                <div className="text-[10px] text-[var(--muted-foreground)]/70 mt-1 italic">
-                  Identidade preservada a pedido do cliente · imagem ilustrativa
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Featured testimonial carousel */}
+        <Reveal className="mb-20" y={32}>
+          <TestimonialCarousel />
         </Reveal>
 
         {/* Trust stripe */}

@@ -130,7 +130,7 @@ export default async function PreviewPdfPage({ searchParams }: PageProps) {
                   className="text-[15px] font-extrabold tracking-tight text-[#1e3a8a]"
                   style={{ fontFamily: "Manrope, Inter, sans-serif" }}
                 >
-                  Rede multi-unidade
+                  Rede de escolas e cursos
                 </div>
               </div>
             </div>
@@ -292,7 +292,7 @@ export default async function PreviewPdfPage({ searchParams }: PageProps) {
           {/* Footer */}
           <footer className="pt-6 border-t border-[#e5e5ee] flex items-center justify-between text-[10px] text-[var(--muted-foreground)]">
             <span>
-              Team Manager · sistema de operação para redes 2-20 unidades
+              Team Manager · sistema de operação para redes de escolas e cursos
             </span>
             <span>diagnóstico gerado automaticamente</span>
           </footer>

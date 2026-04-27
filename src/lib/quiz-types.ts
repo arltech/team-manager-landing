@@ -188,7 +188,7 @@ export const DIAGNOSTIC_COPY: Record<Diagnostic, DiagnosticCopy> = {
     ],
     emailSubject: "Seu diagnóstico: Visibilidade comprometida — plano em 3 passos",
     emailIntro:
-      "Você marcou que descobre o resultado da rede tarde demais. Esse é o diagnóstico mais comum entre gestores de redes 2-20 unidades — e o de maior impacto financeiro.",
+      "Você marcou que descobre o resultado da rede tarde demais. Esse é o diagnóstico mais comum entre gestores de redes de escolas e cursos — e o de maior impacto financeiro.",
     accentColor: "#ef4444",
   },
   turnover_risk: {
@@ -255,7 +255,7 @@ export const DIAGNOSTIC_COPY: Record<Diagnostic, DiagnosticCopy> = {
     badge: "Operação saudável",
     title: "Sua rede já roda com visibilidade — raro e admirável",
     summary:
-      "Você é minoria. A maioria das redes 2-20 unidades vive de planilha desatualizada e reunião reconstruindo a semana. Se sua operação está saudável, vale aprofundar o que já funciona — e reforçar nos pontos onde a cultura ainda pode regredir quando a rede crescer.",
+      "Você é minoria. A maioria das redes de escolas e cursos vive de planilha desatualizada e reunião reconstruindo a semana. Se sua operação está saudável, vale aprofundar o que já funciona — e reforçar nos pontos onde a cultura ainda pode regredir quando a rede crescer.",
     actionSteps: [
       "Documente o que funciona — quando crescer para 8+ unidades, processo informal vira gargalo.",
       "Indique outras redes do seu segmento que ainda estão na planilha — você ganha network e nós ganhamos clientes que precisam.",

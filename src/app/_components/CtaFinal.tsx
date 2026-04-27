@@ -1,8 +1,7 @@
+import Link from "next/link";
 import { ArrowRight, Shield } from "lucide-react";
 
 export function CtaFinal() {
-  const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "#oferta";
-
   return (
     <section className="section-y hero-gradient">
       <div className="max-w-3xl mx-auto px-6 text-center">
@@ -28,18 +27,19 @@ export function CtaFinal() {
           </p>
         </div>
 
-        <a
-          href={calendly}
+        <Link
+          href="/diagnostico"
           className="btn-primary text-base md:text-lg px-10 py-5"
         >
           Ativar o Team Manager — garantia de 30 dias
           <ArrowRight size={18} />
-        </a>
+        </Link>
 
         <p className="mt-8 text-sm text-white/55 flex items-center justify-center gap-2 max-w-md mx-auto">
           <Shield size={14} className="flex-shrink-0" />
-          Se em 30 dias você não enxergar diferença no controle das suas
-          unidades, devolução integral. Sem perguntas.
+          Se em 30 dias você não enxergar diferença no follow-up de candidatos
+          e na visibilidade de matrícula da rede, devolução integral. Sem
+          perguntas.
         </p>
       </div>
     </section>

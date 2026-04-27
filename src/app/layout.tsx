@@ -1,11 +1,76 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 import "./globals.css";
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://teammanager.app";
+const SITE_NAME = "Team Manager";
+const TITLE =
+  "Team Manager — Sistema de operação para redes de escolas e cursos";
+const DESCRIPTION =
+  "CRM de candidatos, follow-up automático, ranking de equipe e rotinas semanais para redes de escolas e cursos com 2 a 15 unidades. Pare de cobrar matrícula: o sistema cobra por você.";
+
 export const metadata: Metadata = {
-  title: "Team Manager — Sistema de Operação de Redes Multi-Unidade",
-  description:
-    "Gerencie candidatos, tarefas, rotinas semanais e ranking da equipe em uma única plataforma feita para redes com 2 ou mais unidades. Sem integrações complicadas.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: "%s · Team Manager",
+  },
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "sistema gestão escola idiomas",
+    "CRM de matrículas",
+    "gestão de rede de cursos",
+    "follow-up de candidatos escola",
+    "ranking de equipe comercial educação",
+    "software para escola de cursos",
+    "Team Manager",
+  ],
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0e27" },
+  ],
+  colorScheme: "light",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
