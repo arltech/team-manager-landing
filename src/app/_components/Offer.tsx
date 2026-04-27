@@ -1,51 +1,101 @@
+import Link from "next/link";
 import { Shield, Sparkles } from "lucide-react";
 import { Accordion } from "./Accordion";
 import { SectionHeader } from "./SectionHeader";
 
-const VALUE_STACK_CORE = [
-  ["Painel multi-unidade com permissão por unidade na raiz", "R$ 18.000 base"],
-  ["CRM com funil de 6 etapas, histórico e exportação", "R$ 812/mês"],
-  ["Follow-up automático + lembretes por candidato", "R$ 870/mês"],
-  ["Quadro de tarefas com responsáveis, prazos e lembretes", "R$ 570/mês"],
-  ["Rotinas semanais que puxam dados do CRM sozinhas", "R$ 600/mês"],
-  ["Análise de funil com comparação semana a semana", "R$ 800/mês"],
-  ["Busca de leads com IA (Google + Maps)", "R$ 1.400/mês"],
+type StackItem = { item: string; price: string; ref: string };
+
+const VALUE_STACK_CORE: StackItem[] = [
+  {
+    item: "Painel multi-unidade com permissão por unidade na raiz",
+    price: "R$ 1.500/mês",
+    ref: "Salesforce Multi-Org (rateio)",
+  },
+  {
+    item: "CRM com funil de 6 etapas, histórico e exportação",
+    price: "R$ 950/mês",
+    ref: "Pipedrive Pro · 10 vendedores",
+  },
+  {
+    item: "Follow-up automático + lembretes por candidato",
+    price: "R$ 1.100/mês",
+    ref: "Lemlist / Reply.io",
+  },
+  {
+    item: "Quadro de tarefas (até 30 usuários)",
+    price: "R$ 870/mês",
+    ref: "Asana Business · 30 usuários",
+  },
+  {
+    item: "Rotinas semanais que puxam dados do CRM sozinhas",
+    price: "R$ 400/mês",
+    ref: "Zapier Pro + Make",
+  },
+  {
+    item: "Análise de funil com comparação semana a semana",
+    price: "R$ 800/mês",
+    ref: "Looker Studio Pro / Power BI",
+  },
+  {
+    item: "Busca de leads com IA em fontes públicas",
+    price: "R$ 1.400/mês",
+    ref: "Apollo + Phantombuster",
+  },
 ];
 
-const VALUE_STACK_DIFF = [
-  ["Gamificação: 14 ações pontuáveis, 8 níveis, conquistas", "R$ 1.450/mês"],
-  ["Automação no WhatsApp: bot de respostas + 6 eventos celebrados", "R$ 900/mês"],
-  ["Gerador de scripts de venda com IA, por candidato", "R$ 600/mês"],
-  ["Desconto automático de XP por inatividade", "Sem equivalente"],
-  ["10 automações prontas (sem Zapier, sem configuração)", "R$ 770/mês"],
-  ["Feed da equipe + ranking + Hall da Fama", "R$ 350/mês"],
-  ["Frase motivacional diária por IA", "R$ 80/mês"],
+const VALUE_STACK_DIFF: StackItem[] = [
+  {
+    item: "Gamificação completa: 14 ações + 8 níveis + ranking + Hall da Fama + XP automático",
+    price: "R$ 1.800/mês",
+    ref: "Bunchball / Kazoo",
+  },
+  {
+    item: "Automação WhatsApp interna: lembretes e 6 eventos celebrados",
+    price: "R$ 700/mês",
+    ref: "Z-API + desenvolvimento custom",
+  },
+  {
+    item: "Gerador de scripts de venda com IA, por candidato",
+    price: "R$ 600/mês",
+    ref: "OpenAI API + dev",
+  },
+  {
+    item: "10 automações prontas (sem Zapier, sem configuração)",
+    price: "R$ 770/mês",
+    ref: "Zapier + n8n self-hosted",
+  },
+  {
+    item: "Setup técnico + onboarding (consultor implementador)",
+    price: "R$ 1.500/mês",
+    ref: "Consultoria · amortizado em 12 meses",
+  },
 ];
 
 const PLANS = [
   {
     name: "Starter",
-    units: "1-3 unidades",
+    units: "1-2 unidades",
     users: "Até 15 usuários",
-    price: 697,
-    annual: 6274,
+    price: 897,
+    annual: 8073,
     featured: false,
     highlight: "Para começar a sair da planilha",
   },
   {
     name: "Rede",
-    units: "4-10 unidades",
-    users: "Até 40 usuários",
-    price: 1397,
-    annual: 12574,
+    units: "3-6 unidades",
+    users: "Até 30 usuários",
+    price: 1797,
+    annual: 16173,
     featured: true,
-    highlight: "Mais escolhido — inclui Setup WhatsApp + Diagnóstico Fundador",
+    highlight:
+      "Mais escolhido — inclui Setup WhatsApp interno (lembretes e ranking, não chatbot) + Diagnóstico Fundador",
   },
   {
     name: "Regional",
-    units: "11-20 unidades",
+    units: "7-15 unidades",
     users: "Ilimitado",
-    price: 2497,
+    price: 3197,
     annual: null,
     featured: false,
     highlight: "ROI dominante para redes que já escalam",
@@ -55,8 +105,6 @@ const PLANS = [
 const DIAGNOSTIC_SLOTS_AVAILABLE = 20;
 
 export function Offer() {
-  const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "#";
-
   return (
     <section
       id="oferta"
@@ -69,10 +117,10 @@ export function Offer() {
           title="Você paga por um sistema. Recebe a operação inteira."
           subtitle={
             <>
-              Equivalente de mercado: R$ 10.102/mês.
+              Equivalente de mercado: R$ 12.390/mês.
               <br className="hidden md:block" />
               <span className="text-[var(--foreground)] font-bold">
-                Você paga a partir de R$ 697/mês.
+                Você paga a partir de R$ 897/mês.
               </span>
             </>
           }
@@ -111,7 +159,7 @@ export function Offer() {
               </div>
               {p.annual ? (
                 <div className="text-xs text-[var(--muted-foreground)] mb-8">
-                  ou R$ {p.annual.toLocaleString("pt-BR")}/ano (2 meses grátis)
+                  ou R$ {p.annual.toLocaleString("pt-BR")}/ano (3 meses grátis)
                 </div>
               ) : (
                 <div className="text-xs text-[var(--muted-foreground)] mb-8">
@@ -121,8 +169,8 @@ export function Offer() {
               <p className="text-sm text-[var(--foreground)]/80 mb-8 leading-relaxed">
                 {p.highlight}
               </p>
-              <a
-                href={calendly}
+              <Link
+                href="/diagnostico"
                 className={
                   p.featured
                     ? "btn-primary w-full justify-center"
@@ -130,7 +178,7 @@ export function Offer() {
                 }
               >
                 Agendar demonstração
-              </a>
+              </Link>
             </div>
           ))}
         </div>
@@ -145,7 +193,7 @@ export function Offer() {
                 Por que vale isso?
               </div>
               <div className="font-bold text-[var(--foreground)]">
-                Os 14 componentes que somam R$ 10.102/mês de mercado
+                Os 12 componentes que somam R$ 12.390/mês de mercado
               </div>
             </>
           }
@@ -153,39 +201,15 @@ export function Offer() {
           <h3 className="text-xs uppercase tracking-[0.12em] font-bold mb-4 text-[var(--on-surface-variant)]">
             Core
           </h3>
-          <div className="space-y-2">
-            {VALUE_STACK_CORE.map(([item, price], i) => (
-              <div
-                key={i}
-                className="flex justify-between items-start gap-4 py-2.5 border-b border-[var(--border)]/30 last:border-0"
-              >
-                <span className="text-sm text-[var(--foreground)]/85">{item}</span>
-                <span className="text-sm text-[var(--foreground)] font-bold whitespace-nowrap">
-                  {price}
-                </span>
-              </div>
-            ))}
-          </div>
+          <StackTable items={VALUE_STACK_CORE} />
           <h3 className="text-xs uppercase tracking-[0.12em] font-bold mb-4 mt-8 text-[var(--on-surface-variant)]">
             Diferenciais
           </h3>
-          <div className="space-y-2">
-            {VALUE_STACK_DIFF.map(([item, price], i) => (
-              <div
-                key={i}
-                className="flex justify-between items-start gap-4 py-2.5 border-b border-[var(--border)]/30 last:border-0"
-              >
-                <span className="text-sm text-[var(--foreground)]/85">{item}</span>
-                <span className="text-sm text-[var(--foreground)] font-bold whitespace-nowrap">
-                  {price}
-                </span>
-              </div>
-            ))}
-          </div>
+          <StackTable items={VALUE_STACK_DIFF} />
           <div className="mt-7 pt-5 border-t-2 border-[var(--primary)]/20 flex justify-between items-baseline">
             <span className="text-sm text-[var(--muted-foreground)]">Total stack</span>
             <span className="text-2xl md:text-3xl font-extrabold text-[var(--primary)]">
-              R$ 10.102/mês
+              R$ 12.390/mês
             </span>
           </div>
         </Accordion>
@@ -222,5 +246,28 @@ export function Offer() {
         </div>
       </div>
     </section>
+  );
+}
+
+function StackTable({ items }: { items: StackItem[] }) {
+  return (
+    <div className="space-y-2">
+      {items.map((row, i) => (
+        <div
+          key={i}
+          className="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] md:items-center gap-1 md:gap-6 py-3 border-b border-[var(--border)]/30 last:border-0"
+        >
+          <span className="text-sm text-[var(--foreground)]/85 leading-snug">
+            {row.item}
+          </span>
+          <span className="text-[11px] text-[var(--muted-foreground)] italic md:text-right md:whitespace-nowrap">
+            ref. {row.ref}
+          </span>
+          <span className="text-sm text-[var(--foreground)] font-bold whitespace-nowrap md:min-w-[110px] md:text-right">
+            {row.price}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }
