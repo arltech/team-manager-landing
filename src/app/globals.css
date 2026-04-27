@@ -38,9 +38,20 @@
 
   --color-hero-from: var(--hero-from);
   --color-hero-to: var(--hero-to);
+  --color-primary-vibrant: var(--primary-vibrant);
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Manrope", "Inter", sans-serif;
+
+  /* Display sizes — used in hero/section titles */
+  --text-display-sm: 28px;
+  --text-display-md: 36px;
+  --text-display-lg: 44px;
+  --text-display-xl: 56px;
+
+  /* Micro sizes — used in eyebrows, deltas, monospace tags */
+  --text-micro: 9px;
+  --text-mini: 10px;
 
   --radius-sm: 0.45rem;
   --radius-md: 0.6rem;

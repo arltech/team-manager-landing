@@ -19,15 +19,19 @@ interface SendEmailParams {
   attachments?: EmailAttachment[];
 }
 
+/**
+ * @returns `true` when the email was actually dispatched, `false` when skipped
+ *          (e.g. missing RESEND_API_KEY in dev). Throws on real send failures.
+ */
 export async function sendEmail({
   to,
   subject,
   html,
   attachments,
-}: SendEmailParams) {
+}: SendEmailParams): Promise<boolean> {
   if (!process.env.RESEND_API_KEY) {
     console.warn("[email] RESEND_API_KEY not set, skipping:", subject);
-    return;
+    return false;
   }
   try {
     await getResend().emails.send({
@@ -40,6 +44,7 @@ export async function sendEmail({
         content: a.content,
       })),
     });
+    return true;
   } catch (error) {
     console.error("[email] Failed to send:", error);
     throw error;

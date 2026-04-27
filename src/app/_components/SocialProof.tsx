@@ -10,6 +10,9 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "./Reveal";
+import { SectionHeader } from "./SectionHeader";
+import { IconBadge } from "./IconBadge";
+import { KpiCard } from "./KpiCard";
 
 const KPIS = [
   {
@@ -60,52 +63,41 @@ export function SocialProof() {
   return (
     <section className="section-y bg-[var(--surface)]">
       <div className="max-w-6xl mx-auto px-6">
-        <Reveal className="text-center max-w-3xl mx-auto mb-16">
-          <div className="mb-6">
-            <span className="pill bg-[var(--success-subtle)] text-[var(--success)] border border-[var(--success)]/20">
+        <SectionHeader
+          pill={
+            <>
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)] animate-pulse" />
               Em produção hoje
-            </span>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl mb-6">
-            Não é beta. Não é demo.
-            <br />
-            <span className="text-[var(--muted-foreground)]">
-              É operação rodando.
-            </span>
-          </h2>
-          <p className="text-[var(--muted-foreground)] text-base md:text-lg leading-relaxed">
-            Sistema sólido, dados reais, retorno mensurável nos primeiros 7 dias.
-          </p>
-        </Reveal>
+            </>
+          }
+          pillTone="success"
+          title={
+            <>
+              Não é beta. Não é demo.
+              <br />
+              <span className="text-[var(--muted-foreground)]">
+                É operação rodando.
+              </span>
+            </>
+          }
+          subtitle="Sistema sólido, dados reais, retorno mensurável nos primeiros 7 dias."
+          align="center"
+          className="mb-16"
+        />
 
         {/* KPI metrics bar */}
         <Stagger className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-20">
-          {KPIS.map((k, i) => {
-            const Icon = k.icon;
-            return (
-              <StaggerItem
-                key={i}
-                className="rounded-2xl bg-gradient-to-b from-[var(--surface-container-low)] to-[var(--surface-container)] border border-[var(--border)]/60 p-6 md:p-7 transition-all hover:border-[var(--primary)]/30 hover:shadow-[var(--shadow-card-hover)]"
-              >
-                <div className="flex items-center gap-2 mb-4 text-[var(--primary)]">
-                  <Icon size={16} strokeWidth={2.4} />
-                  <span className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--on-surface-variant)]">
-                    {k.label}
-                  </span>
-                </div>
-                <div
-                  className="text-3xl md:text-4xl font-extrabold text-[var(--foreground)] mb-2 leading-none tracking-tight"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  {k.value}
-                </div>
-                <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
-                  {k.sub}
-                </p>
-              </StaggerItem>
-            );
-          })}
+          {KPIS.map((k, i) => (
+            <StaggerItem key={i}>
+              <KpiCard
+                icon={k.icon}
+                label={k.label}
+                value={k.value}
+                sub={k.sub}
+                variant="light"
+              />
+            </StaggerItem>
+          ))}
         </Stagger>
 
         {/* Featured testimonial */}
@@ -156,9 +148,9 @@ export function SocialProof() {
                 key={i}
                 className="flex gap-4 p-6 rounded-2xl bg-[var(--surface-container-low)] border border-[var(--border)]/40"
               >
-                <div className="w-10 h-10 rounded-xl bg-[var(--primary)]/10 text-[var(--primary)] flex items-center justify-center flex-shrink-0">
+                <IconBadge size="sm" tone="primary">
                   <Icon size={18} strokeWidth={2.4} />
-                </div>
+                </IconBadge>
                 <div>
                   <h3 className="text-sm font-bold mb-1.5 leading-tight text-[var(--foreground)]">
                     {t.title}

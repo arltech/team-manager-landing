@@ -1,4 +1,6 @@
-import { Shield, Sparkles, ChevronDown } from "lucide-react";
+import { Shield, Sparkles } from "lucide-react";
+import { Accordion } from "./Accordion";
+import { SectionHeader } from "./SectionHeader";
 
 const VALUE_STACK_CORE = [
   ["Painel multi-unidade com permissão por unidade na raiz", "R$ 18.000 base"],
@@ -61,23 +63,24 @@ export function Offer() {
       className="section-y bg-[var(--surface-container-low)] scroll-mt-20"
     >
       <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="mb-6">
-            <span className="pill bg-[var(--accent)] text-[var(--accent-foreground)]">
-              A Oferta
-            </span>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl mb-6">
-            Você paga por um sistema. Recebe a operação inteira.
-          </h2>
-          <p className="text-[var(--muted-foreground)] text-base md:text-lg leading-relaxed">
-            Equivalente de mercado: R$ 10.102/mês.
-            <br className="hidden md:block" />
-            <span className="text-[var(--foreground)] font-bold">
-              Você paga a partir de R$ 697/mês.
-            </span>
-          </p>
-        </div>
+        <SectionHeader
+          pill="A Oferta"
+          pillTone="accent"
+          title="Você paga por um sistema. Recebe a operação inteira."
+          subtitle={
+            <>
+              Equivalente de mercado: R$ 10.102/mês.
+              <br className="hidden md:block" />
+              <span className="text-[var(--foreground)] font-bold">
+                Você paga a partir de R$ 697/mês.
+              </span>
+            </>
+          }
+          align="center"
+          className="mb-16"
+        />
+
+
 
         {/* Pricing first — Nielsen P0 fix */}
         <div className="grid md:grid-cols-3 gap-7 mb-14">
@@ -132,64 +135,60 @@ export function Offer() {
           ))}
         </div>
 
-        {/* Value stack agora colapsado — Rams + Nielsen P0 fix */}
-        <details className="card !p-7 max-w-3xl mx-auto mb-12 group cursor-pointer">
-          <summary className="flex items-center justify-between gap-4 list-none [&::-webkit-details-marker]:hidden">
-            <div>
+        {/* Value stack — Rams + Nielsen P0 fix */}
+        <Accordion
+          variant="card"
+          className="max-w-3xl mx-auto mb-12"
+          summary={
+            <>
               <div className="text-xs uppercase tracking-[0.12em] font-bold text-[var(--on-surface-variant)] mb-1">
                 Por que vale isso?
               </div>
               <div className="font-bold text-[var(--foreground)]">
                 Os 14 componentes que somam R$ 10.102/mês de mercado
               </div>
-            </div>
-            <ChevronDown
-              size={20}
-              className="text-[var(--primary)] transition-transform group-open:rotate-180 flex-shrink-0"
-            />
-          </summary>
-
-          <div className="mt-7 pt-7 border-t border-[var(--border)]/40">
-            <h3 className="text-xs uppercase tracking-[0.12em] font-bold mb-4 text-[var(--on-surface-variant)]">
-              Core
-            </h3>
-            <div className="space-y-2">
-              {VALUE_STACK_CORE.map(([item, price], i) => (
-                <div
-                  key={i}
-                  className="flex justify-between items-start gap-4 py-2.5 border-b border-[var(--border)]/30 last:border-0"
-                >
-                  <span className="text-sm text-[var(--foreground)]/85">{item}</span>
-                  <span className="text-sm text-[var(--foreground)] font-bold whitespace-nowrap">
-                    {price}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <h3 className="text-xs uppercase tracking-[0.12em] font-bold mb-4 mt-8 text-[var(--on-surface-variant)]">
-              Diferenciais
-            </h3>
-            <div className="space-y-2">
-              {VALUE_STACK_DIFF.map(([item, price], i) => (
-                <div
-                  key={i}
-                  className="flex justify-between items-start gap-4 py-2.5 border-b border-[var(--border)]/30 last:border-0"
-                >
-                  <span className="text-sm text-[var(--foreground)]/85">{item}</span>
-                  <span className="text-sm text-[var(--foreground)] font-bold whitespace-nowrap">
-                    {price}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-7 pt-5 border-t-2 border-[var(--primary)]/20 flex justify-between items-baseline">
-              <span className="text-sm text-[var(--muted-foreground)]">Total stack</span>
-              <span className="text-2xl md:text-3xl font-extrabold text-[var(--primary)]">
-                R$ 10.102/mês
-              </span>
-            </div>
+            </>
+          }
+        >
+          <h3 className="text-xs uppercase tracking-[0.12em] font-bold mb-4 text-[var(--on-surface-variant)]">
+            Core
+          </h3>
+          <div className="space-y-2">
+            {VALUE_STACK_CORE.map(([item, price], i) => (
+              <div
+                key={i}
+                className="flex justify-between items-start gap-4 py-2.5 border-b border-[var(--border)]/30 last:border-0"
+              >
+                <span className="text-sm text-[var(--foreground)]/85">{item}</span>
+                <span className="text-sm text-[var(--foreground)] font-bold whitespace-nowrap">
+                  {price}
+                </span>
+              </div>
+            ))}
           </div>
-        </details>
+          <h3 className="text-xs uppercase tracking-[0.12em] font-bold mb-4 mt-8 text-[var(--on-surface-variant)]">
+            Diferenciais
+          </h3>
+          <div className="space-y-2">
+            {VALUE_STACK_DIFF.map(([item, price], i) => (
+              <div
+                key={i}
+                className="flex justify-between items-start gap-4 py-2.5 border-b border-[var(--border)]/30 last:border-0"
+              >
+                <span className="text-sm text-[var(--foreground)]/85">{item}</span>
+                <span className="text-sm text-[var(--foreground)] font-bold whitespace-nowrap">
+                  {price}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-7 pt-5 border-t-2 border-[var(--primary)]/20 flex justify-between items-baseline">
+            <span className="text-sm text-[var(--muted-foreground)]">Total stack</span>
+            <span className="text-2xl md:text-3xl font-extrabold text-[var(--primary)]">
+              R$ 10.102/mês
+            </span>
+          </div>
+        </Accordion>
 
         {/* Garantia */}
         <div className="card max-w-3xl mx-auto !p-10 border-[var(--success)]/40 bg-[var(--success-subtle)]">

@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
   const { quizResponseId, email, name, networkName, diagnostic } = parsed.data;
   const supabase = getAdminClient();
 
-  async function sendDiagnostic() {
+  async function sendDiagnostic(): Promise<boolean> {
     const { subject, html } = buildDiagnosticEmail(
       diagnostic as Diagnostic,
       name
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     } catch (pdfError) {
       console.error("[quiz/lead] PDF generation failed (sending without attachment):", pdfError);
     }
-    await sendEmail({
+    return sendEmail({
       to: email,
       subject,
       html,
@@ -93,11 +93,13 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    await sendDiagnostic();
-    await supabase
-      .from("quiz_leads")
-      .update({ email_sent: true, email_sent_at: new Date().toISOString() })
-      .eq("id", lead.id);
+    const sent = await sendDiagnostic();
+    if (sent) {
+      await supabase
+        .from("quiz_leads")
+        .update({ email_sent: true, email_sent_at: new Date().toISOString() })
+        .eq("id", lead.id);
+    }
   } catch (emailError) {
     console.error("[quiz/lead] email failed (lead saved anyway):", emailError);
   }

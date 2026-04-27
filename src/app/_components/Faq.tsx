@@ -1,4 +1,5 @@
-import { ChevronDown } from "lucide-react";
+import { Accordion } from "./Accordion";
+import { SectionHeader } from "./SectionHeader";
 
 const FAQS = [
   {
@@ -27,34 +28,28 @@ export function Faq() {
   return (
     <section id="faq" className="section-y bg-[var(--surface)] scroll-mt-20">
       <div className="max-w-3xl mx-auto px-6">
-        <div className="mb-6">
-          <span className="pill bg-[var(--surface-container)] text-[var(--on-surface-variant)] border border-[var(--border)]">
-            Perguntas frequentes
-          </span>
-        </div>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl mb-14">
-          As 5 que mais aparecem.
-        </h2>
+        <SectionHeader
+          pill="Perguntas frequentes"
+          pillTone="muted"
+          title="As 5 que mais aparecem."
+          align="left"
+        />
 
         <div className="space-y-4">
           {FAQS.map((f, i) => (
-            <details
+            <Accordion
               key={i}
-              className="group card cursor-pointer !p-7 hover:border-[var(--primary)]/40 transition-colors"
-            >
-              <summary className="flex items-center justify-between gap-4 list-none [&::-webkit-details-marker]:hidden">
+              variant="card"
+              summary={
                 <span className="text-base md:text-lg font-bold text-[var(--foreground)]">
                   {f.q}
                 </span>
-                <ChevronDown
-                  size={20}
-                  className="text-[var(--primary)] transition-transform group-open:rotate-180 flex-shrink-0"
-                />
-              </summary>
-              <p className="text-[var(--muted-foreground)] leading-relaxed mt-5 pt-5 border-t border-[var(--border)]/40 text-sm md:text-base">
+              }
+            >
+              <p className="text-[var(--muted-foreground)] leading-relaxed text-sm md:text-base">
                 {f.a}
               </p>
-            </details>
+            </Accordion>
           ))}
         </div>
       </div>

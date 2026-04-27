@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, ChevronDown, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "motion/react";
 import { Logo } from "@/app/_components/Logo";
+import { Accordion } from "@/app/_components/Accordion";
 import {
   QUESTIONS,
   type QuizAnswers,
@@ -106,7 +107,7 @@ export function QuizClient() {
         </div>
         <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
           <motion.div
-            className="h-full rounded-full bg-gradient-to-r from-[#6366f1] to-[#3b82f6]"
+            className="h-full rounded-full bg-gradient-to-r from-[var(--primary-vibrant)] to-[var(--primary-container)]"
             initial={false}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -141,7 +142,7 @@ export function QuizClient() {
                     disabled={isSelected}
                     className={`w-full text-left px-5 py-5 md:p-6 rounded-2xl border transition-all min-h-[60px] md:min-h-[68px] flex items-center justify-between gap-4 ${
                       isSelected
-                        ? "border-[#6366f1] bg-[#6366f1]/15 shadow-[0_4px_20px_rgba(99,102,241,0.25)]"
+                        ? "border-[var(--primary-vibrant)] bg-[var(--primary-vibrant)]/15 shadow-[0_4px_20px_rgba(99,102,241,0.25)]"
                         : "border-white/12 bg-white/[0.04] hover:bg-white/[0.07] hover:border-white/25 active:bg-white/[0.09] backdrop-blur-sm"
                     }`}
                   >
@@ -316,28 +317,26 @@ function ResultView({ result }: { result: SubmitResult }) {
         </motion.div>
 
         {evidence && (
-          <motion.details
-            className="mb-10 md:mb-12 rounded-2xl bg-[var(--surface-container-low)] border border-[var(--border)]/60 group cursor-pointer"
+          <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.32 }}
+            className="mb-10 md:mb-12"
           >
-            <summary className="list-none [&::-webkit-details-marker]:hidden flex items-center justify-between gap-4 p-5 md:p-6">
-              <div>
-                <div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--on-surface-variant)] mb-1">
-                  Como chegamos a esse diagnóstico
-                </div>
-                <div className="text-sm md:text-base text-[var(--foreground)]/85">
-                  Ver os sinais e pontuação por dimensão
-                </div>
-              </div>
-              <ChevronDown
-                size={18}
-                className="text-[var(--primary)] transition-transform group-open:rotate-180 flex-shrink-0"
-              />
-            </summary>
-            <div className="px-5 md:px-6 pb-6 md:pb-7 pt-0">
-              <div className="border-t border-[var(--border)]/40 pt-5 space-y-2.5">
+            <Accordion
+              variant="subtle"
+              summary={
+                <>
+                  <div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--on-surface-variant)] mb-1">
+                    Como chegamos a esse diagnóstico
+                  </div>
+                  <div className="text-sm md:text-base text-[var(--foreground)]/85">
+                    Ver os sinais e pontuação por dimensão
+                  </div>
+                </>
+              }
+            >
+              <div className="space-y-2.5">
                 {(Object.keys(evidence.scores) as Array<keyof typeof evidence.scores>).map((k) => {
                   const score = evidence.scores[k];
                   const max = k === "turnover" ? 3 : k === "healthy" ? 6 : 4;
@@ -377,8 +376,8 @@ function ResultView({ result }: { result: SubmitResult }) {
                   </div>
                 </div>
               )}
-            </div>
-          </motion.details>
+            </Accordion>
+          </motion.div>
         )}
 
         {!sent ? (

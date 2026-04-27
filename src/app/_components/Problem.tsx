@@ -1,4 +1,5 @@
 import { Reveal, Stagger, StaggerItem } from "./Reveal";
+import { SectionHeader } from "./SectionHeader";
 
 const PAINS = [
   { text: "Você sabe o resultado do mês só quando o mês acabou.", emphasis: true },
@@ -13,16 +14,12 @@ export function Problem() {
   return (
     <section id="problema" className="section-y bg-[var(--surface)] scroll-mt-20">
       <div className="max-w-4xl mx-auto px-6">
-        <Reveal className="mb-6">
-          <span className="pill bg-[var(--destructive)]/10 text-[var(--destructive)] border border-[var(--destructive)]/20">
-            O Problema
-          </span>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl mb-14 max-w-2xl">
-            Reconhece algum desses?
-          </h2>
-        </Reveal>
+        <SectionHeader
+          pill="O Problema"
+          pillTone="destructive"
+          title="Reconhece algum desses?"
+          align="left"
+        />
 
         <Stagger>
           <ul className="space-y-7">

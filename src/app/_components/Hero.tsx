@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion, type Variants } from "motion/react";
 import { ArrowRight, TrendingUp, Users, Trophy, CheckCircle2 } from "lucide-react";
+import { KpiCard } from "./KpiCard";
 
 const heroStagger: Variants = {
   hidden: {},
@@ -93,10 +94,10 @@ function DashboardPreview() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-3 mb-3">
-          <KpiCard icon={Users} label="Candidatos" value="142" delta="+18 sem" color="#a8b8ff" />
-          <KpiCard icon={CheckCircle2} label="Matrículas" value="34" delta="+12 sem" color="#7ce0b8" />
-          <KpiCard icon={TrendingUp} label="Conversão" value="24%" delta="+9 pp" color="#ffb88a" />
-          <KpiCard icon={Trophy} label="Top" value="Aline" delta="2.140 XP" color="#e7afff" />
+          <KpiCard variant="dark" icon={Users} label="Candidatos" value="142" sub="+18 sem" iconColor="#a8b8ff" />
+          <KpiCard variant="dark" icon={CheckCircle2} label="Matrículas" value="34" sub="+12 sem" iconColor="#7ce0b8" />
+          <KpiCard variant="dark" icon={TrendingUp} label="Conversão" value="24%" sub="+9 pp" iconColor="#ffb88a" />
+          <KpiCard variant="dark" icon={Trophy} label="Top" value="Aline" sub="2.140 XP" iconColor="#e7afff" />
         </div>
 
         <div className="rounded-xl bg-white/[0.04] border border-white/[0.08] p-3 md:p-4">
@@ -115,35 +116,6 @@ function DashboardPreview() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function KpiCard({
-  icon: Icon,
-  label,
-  value,
-  delta,
-  color,
-}: {
-  icon: typeof Users;
-  label: string;
-  value: string;
-  delta: string;
-  color: string;
-}) {
-  return (
-    <div className="rounded-xl bg-white/[0.04] border border-white/[0.08] p-3 md:p-3.5 text-left">
-      <div className="flex items-center gap-1.5 mb-2">
-        <Icon size={12} style={{ color }} />
-        <span className="text-[9px] text-white/50 uppercase tracking-wider font-bold">
-          {label}
-        </span>
-      </div>
-      <div className="text-lg md:text-2xl font-extrabold text-white mb-0.5 leading-none">
-        {value}
-      </div>
-      <div className="text-[10px] text-white/45 mt-1">{delta}</div>
     </div>
   );
 }

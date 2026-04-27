@@ -1,5 +1,7 @@
 import { Bot, MessageSquareHeart, Eye, FileCheck, Target } from "lucide-react";
-import { Reveal, Stagger, StaggerItem } from "./Reveal";
+import { Stagger, StaggerItem } from "./Reveal";
+import { SectionHeader } from "./SectionHeader";
+import { IconBadge } from "./IconBadge";
 
 const CARDS = [
   {
@@ -57,16 +59,13 @@ export function Solution() {
   return (
     <section id="solucao" className="section-y bg-[var(--surface-container-low)] scroll-mt-20">
       <div className="max-w-6xl mx-auto px-6">
-        <Reveal className="text-center mb-16 max-w-3xl mx-auto">
-          <div className="mb-6">
-            <span className="pill bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/15">
-              A Solução
-            </span>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl">
-            Team Manager foi construído pra isso.
-          </h2>
-        </Reveal>
+        <SectionHeader
+          pill="A Solução"
+          pillTone="primary"
+          title="Team Manager foi construído pra isso."
+          align="center"
+          className="mb-16"
+        />
 
         <Stagger className="grid md:grid-cols-2 gap-8">
           {CARDS.map((c, i) => {
@@ -77,9 +76,9 @@ export function Solution() {
                 key={i}
                 className={`card group ${isLast ? "md:col-span-2" : ""}`}
               >
-                <div className="w-14 h-14 rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] flex items-center justify-center mb-7">
+                <IconBadge size="lg" tone="primary" className="mb-7">
                   <Icon size={24} />
-                </div>
+                </IconBadge>
                 <h3 className="text-xl md:text-2xl mb-5">{c.title}</h3>
                 <div className="text-[10px] uppercase tracking-[0.12em] text-[var(--on-surface-variant)] mb-2 font-bold">
                   O que é
