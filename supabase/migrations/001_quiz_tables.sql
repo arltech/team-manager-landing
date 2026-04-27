@@ -7,7 +7,7 @@ create table public.quiz_responses (
   q3_units_below_target text not null check (q3_units_below_target in ('daily', 'mid_month', 'closing', 'after')),
   q4_lost_seller text not null check (q4_lost_seller in ('never', 'once', 'few_times', 'frequent')),
   q5_monday_meeting text not null check (q5_monday_meeting in ('productive', 'half', 'mostly', 'only_way')),
-  diagnostic text not null check (diagnostic in ('visibility_compromised', 'turnover_risk', 'pressure_culture', 'blind_closing', 'healthy_operation')),
+  diagnostic text not null check (diagnostic in ('visibility_compromised', 'turnover_risk', 'pressure_culture', 'blind_closing', 'healthy_operation', 'inconclusive')),
   network_size text,
   vertical text,
   user_agent text,
