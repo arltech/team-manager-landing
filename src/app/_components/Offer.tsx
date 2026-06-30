@@ -71,6 +71,8 @@ const VALUE_STACK_DIFF: StackItem[] = [
   },
 ];
 
+// price/annual mantidos no objeto mas ocultos na UI (Fase 1: preço sob
+// diagnóstico). Para reexibir, restaurar o bloco de preço no card.
 const PLANS = [
   {
     name: "Starter",
@@ -102,8 +104,6 @@ const PLANS = [
   },
 ];
 
-const DIAGNOSTIC_SLOTS_AVAILABLE = 20;
-
 export function Offer() {
   return (
     <section
@@ -120,7 +120,7 @@ export function Offer() {
               Equivalente de mercado: R$ 12.390/mês.
               <br className="hidden md:block" />
               <span className="text-[var(--foreground)] font-bold">
-                Você paga a partir de R$ 897/mês.
+                Seu investimento sai no diagnóstico gratuito.
               </span>
             </>
           }
@@ -128,9 +128,15 @@ export function Offer() {
           className="mb-16"
         />
 
+        <p className="text-center text-[var(--muted-foreground)] max-w-2xl mx-auto mb-14 -mt-4 leading-relaxed">
+          Pense no custo do contrário:{" "}
+          <span className="text-[var(--foreground)] font-semibold">
+            uma matrícula perdida por mês porque ninguém fez o follow-up
+          </span>{" "}
+          costuma custar mais que o plano inteiro. O Team Manager se paga
+          recuperando uma.
+        </p>
 
-
-        {/* Pricing first — Nielsen P0 fix */}
         <div className="grid md:grid-cols-3 gap-7 mb-14">
           {PLANS.map((p) => (
             <div
@@ -151,21 +157,15 @@ export function Offer() {
               <div className="text-sm text-[var(--muted-foreground)] mb-8">
                 {p.users}
               </div>
-              <div className="mb-2">
-                <span className="text-4xl md:text-5xl font-extrabold text-[var(--foreground)]">
-                  R$ {p.price}
+              <div className="mb-8">
+                <span className="text-2xl md:text-3xl font-extrabold text-[var(--foreground)]">
+                  Sob diagnóstico
                 </span>
-                <span className="text-[var(--muted-foreground)] ml-1">/mês</span>
+                <p className="text-xs text-[var(--muted-foreground)] mt-1.5 leading-relaxed">
+                  Investimento definido pelo porte da sua rede, no diagnóstico
+                  gratuito.
+                </p>
               </div>
-              {p.annual ? (
-                <div className="text-xs text-[var(--muted-foreground)] mb-8">
-                  ou R$ {p.annual.toLocaleString("pt-BR")}/ano (3 meses grátis)
-                </div>
-              ) : (
-                <div className="text-xs text-[var(--muted-foreground)] mb-8">
-                  Negociação anual sob demanda
-                </div>
-              )}
               <p className="text-sm text-[var(--foreground)]/80 mb-8 leading-relaxed">
                 {p.highlight}
               </p>
@@ -221,15 +221,11 @@ export function Offer() {
               <Shield size={24} />
             </div>
             <div>
-              <h3 className="text-xl mb-3">Garantia em 2 camadas</h3>
-              <p className="text-[var(--foreground)]/85 leading-relaxed mb-4">
-                Se em <strong>30 dias</strong> sua equipe não estiver usando
-                ativamente — devolvemos 100%, sem perguntas.
-              </p>
+              <h3 className="text-xl mb-3">Garantia de 30 dias</h3>
               <p className="text-[var(--foreground)]/85 leading-relaxed">
-                E se em <strong>60 dias de uso ativo</strong> o número de
-                candidatos com follow-up registrado não aumentar — trabalhamos
-                com você de graça até resolver.
+                Se em <strong>30 dias</strong> você não conseguir ver o funil
+                de todas as unidades sem precisar perguntar a ninguém,
+                devolvemos 100%, sem perguntas.
               </p>
             </div>
           </div>
@@ -237,11 +233,11 @@ export function Offer() {
 
         <div className="mt-12 text-center">
           <p className="text-sm text-[var(--muted-foreground)]">
-            <span className="font-mono font-bold text-[var(--tertiary)]">
-              {DIAGNOSTIC_SLOTS_AVAILABLE} de 20
-            </span>{" "}
-            slots disponíveis para Diagnóstico de Funil ao Vivo com o fundador
-            (R$ 2.000) — incluso para os primeiros 20 contratos.
+            Diagnóstico de Funil ao Vivo com o fundador (R$ 2.000):{" "}
+            <span className="text-[var(--foreground)] font-semibold">
+              incluso em todo contrato fechado
+            </span>
+            .
           </p>
         </div>
       </div>
