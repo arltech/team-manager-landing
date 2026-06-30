@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getAdminClient } from "@/lib/supabase-admin";
 import { DIAGNOSTICS, DIAGNOSTIC_COPY, type Diagnostic } from "@/lib/quiz-types";
 import { notifyLeadWebhook } from "@/lib/lead-webhook";
+import { sendLeadCapi } from "@/lib/meta-capi";
 
 export const runtime = "nodejs";
 
@@ -19,6 +20,7 @@ const leadSchema = z.object({
   name: z.string().min(2).max(120),
   networkName: z.string().min(2).max(120),
   diagnostic: z.enum(DIAGNOSTICS as [string, ...string[]]),
+  eventId: z.string().max(100).optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -37,13 +39,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { quizResponseId, whatsapp, name, networkName, diagnostic } =
+  const { quizResponseId, whatsapp, name, networkName, diagnostic, eventId } =
     parsed.data;
   const supabase = getAdminClient();
   const diagnosticBadge =
     DIAGNOSTIC_COPY[diagnostic as Diagnostic]?.badge ?? diagnostic;
 
-  // Dispara webhook de notificação em paralelo (não bloqueia resposta)
+  // Dispara webhook + CAPI em paralelo (nenhum bloqueia a resposta ao usuário)
   const webhookPromise = notifyLeadWebhook({
     name,
     whatsapp,
@@ -51,13 +53,28 @@ export async function POST(request: NextRequest) {
     diagnostic,
     diagnosticBadge,
   });
+  const capiPromise = eventId
+    ? sendLeadCapi({
+        eventId,
+        whatsapp,
+        name,
+        eventSourceUrl: request.headers.get("referer") ?? undefined,
+        clientIp: request.headers
+          .get("x-forwarded-for")
+          ?.split(",")[0]
+          ?.trim(),
+        userAgent: request.headers.get("user-agent") ?? undefined,
+        fbp: request.cookies.get("_fbp")?.value,
+        fbc: request.cookies.get("_fbc")?.value,
+      })
+    : Promise.resolve();
 
   if (!supabase) {
     console.warn(
       "[quiz/lead] Supabase not configured — accepting lead without persistence",
       { whatsapp, diagnostic, networkName }
     );
-    await webhookPromise;
+    await Promise.all([webhookPromise, capiPromise]);
     return NextResponse.json({ ok: true, leadId: null, ephemeral: true });
   }
 
@@ -78,6 +95,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Failed to save lead" }, { status: 500 });
   }
 
-  await webhookPromise;
+  await Promise.all([webhookPromise, capiPromise]);
   return NextResponse.json({ ok: true, leadId: lead.id });
 }

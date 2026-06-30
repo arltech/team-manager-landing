@@ -15,6 +15,7 @@ import {
   type DiagnosticCopy,
   type DiagnosticEvidence,
 } from "@/lib/quiz-types";
+import { trackMeta, trackMetaCustom, newEventId } from "@/lib/meta-pixel";
 
 type SubmitResult = {
   id: string;
@@ -238,6 +239,7 @@ function ResultView({ result }: { result: SubmitResult }) {
 
   useEffect(() => {
     fireDiagnosticConfetti(diagnostic, copy.accentColor);
+    trackMetaCustom("QuizCompleted", { diagnostic });
   }, [diagnostic, copy.accentColor]);
 
   const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "/#oferta";
@@ -297,6 +299,7 @@ function ResultView({ result }: { result: SubmitResult }) {
       return;
     }
     setSending(true);
+    const eventId = newEventId();
     try {
       const res = await fetch("/api/quiz/lead", {
         method: "POST",
@@ -307,9 +310,11 @@ function ResultView({ result }: { result: SubmitResult }) {
           name: name || undefined,
           networkName: networkName || undefined,
           diagnostic,
+          eventId,
         }),
       });
       if (!res.ok) throw new Error("lead failed");
+      trackMeta("Lead", { content_name: diagnostic }, { eventID: eventId });
       setSent(true);
       toast.success("Vamos te chamar no WhatsApp.");
     } catch {
