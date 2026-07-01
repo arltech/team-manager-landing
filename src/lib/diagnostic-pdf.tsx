@@ -12,7 +12,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { DIAGNOSTIC_COPY, type Diagnostic } from "./quiz-types";
 
-const SITE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://teammanager.app";
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://teammanager.arltech.emp.br";
 
 // Logo carregado uma vez no boot do server
 let LOGO_DATA_URL: string | null = null;

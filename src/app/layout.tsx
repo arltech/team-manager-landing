@@ -4,7 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_APP_URL ?? "https://teammanager.app";
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://teammanager.arltech.emp.br";
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const SITE_NAME = "Team Manager";
 const TITLE =
@@ -75,6 +75,39 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const STRUCTURED_DATA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/ds/logo-mark.png`,
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: SITE_NAME,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      description: DESCRIPTION,
+      url: SITE_URL,
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "BRL",
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          description: "Preço definido no diagnóstico gratuito, conforme o porte da rede.",
+        },
+      },
+      audience: {
+        "@type": "Audience",
+        audienceType: "Redes de escolas e cursos com 1 a 15 unidades",
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -88,6 +121,10 @@ export default function RootLayout({
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
         />
       </head>
       <body suppressHydrationWarning>

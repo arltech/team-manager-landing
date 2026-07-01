@@ -1,0 +1,22 @@
+# Team Manager
+
+> Sistema de operação para redes de escolas e cursos (1 a 15 unidades): CRM de candidatos, follow-up automático, ranking de equipe e rotinas semanais, num só sistema que cobra, lembra, reconhece e reporta pelo gestor.
+
+Team Manager substitui a combinação de planilha + WhatsApp usada por redes de escolas de idiomas, cursos profissionalizantes, educação infantil e preparatórios. Centraliza CRM de candidatos, automação de follow-up, ranking de equipe comercial e rotinas semanais em um painel único, com visibilidade em tempo real por unidade.
+
+## Para quem é
+
+Gestores e donos de redes de escolas e cursos com 2 a 15 unidades que hoje dependem de planilhas manuais e mensagens de WhatsApp para acompanhar matrículas, follow-up de candidatos e desempenho da equipe comercial.
+
+## Principais páginas
+
+- [Página inicial](https://teammanager.arltech.emp.br/): proposta de valor completa, comparação antes/depois, planos e FAQ.
+- [Diagnóstico gratuito](https://teammanager.arltech.emp.br/diagnostico): quiz de 2 minutos que avalia a maturidade operacional da rede e recomenda o plano.
+
+## Planos
+
+- Starter (1–2 unidades, até 15 usuários)
+- Rede (3–6 unidades, até 30 usuários, inclui setup WhatsApp e diagnóstico fundador)
+- Regional (7–15 unidades, usuários ilimitados)
+
+Preço definido no diagnóstico gratuito, conforme o porte da rede. Garantia de 30 dias com devolução integral. Setup em até 72 horas.

@@ -562,6 +562,20 @@ export default function ComandoPage() {
 
       {/* ── FAQ ── */}
       <section id="faq" className="bg-[#fbf8ff] text-[#1a1b22] py-28 scroll-mt-20">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: FAQS.map(([q, a]) => ({
+                "@type": "Question",
+                name: q,
+                acceptedAnswer: { "@type": "Answer", text: a },
+              })),
+            }),
+          }}
+        />
         <div className="max-w-[760px] mx-auto px-7">
           <Reveal className="mb-4.5">
             <Eyebrow tone="#757684">Perguntas frequentes</Eyebrow>
