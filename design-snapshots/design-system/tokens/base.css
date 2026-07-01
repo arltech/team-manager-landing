@@ -1,0 +1,105 @@
+/* Base resets + signature utility classes — Team Manager
+   These ship to consumers as part of the global stylesheet so components and
+   UI kits can use them directly (className), mirroring the product codebase. */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 16px;
+  line-height: var(--body-leading);
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  line-height: var(--heading-leading);
+  margin: 0;
+}
+
+a { text-decoration: none; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.hero-gradient :focus-visible,
+.tm-header :focus-visible { outline-color: #ffffff; }
+
+/* ── Hero / CTA gradient — Yale blue + indigo + warm pink flare ── */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(99, 102, 241, 0.32) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(244, 114, 182, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 50% 110%, rgba(59, 130, 246, 0.18) 0%, transparent 60%),
+    linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
+  color: #f5f5fa;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+  color: var(--primary-foreground);
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--radius-lg);
+  transition: transform 150ms ease, box-shadow 200ms ease;
+  box-shadow: var(--shadow-btn);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-btn-hover); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--foreground);
+  font-weight: 500;
+  padding: 12px 4px;
+  transition: color 150ms ease;
+}
+.btn-ghost:hover { color: var(--primary); }
+.hero-gradient .btn-ghost { color: rgba(255,255,255,0.75); }
+.hero-gradient .btn-ghost:hover { color: #ffffff; }
+
+/* ── Card — signature 21.6px radius, soft border + shadow ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  padding: 32px;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  box-shadow: var(--shadow-card);
+}
+.card:hover { border-color: var(--outline); box-shadow: var(--shadow-card-hover); }
+
+/* ── Pill / eyebrow tag ── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Section vertical rhythm ── */
+.section-y { padding-top: var(--section-y); padding-bottom: var(--section-y); }
+@media (min-width: 768px) {
+  .section-y { padding-top: var(--section-y-md); padding-bottom: var(--section-y-md); }
+}

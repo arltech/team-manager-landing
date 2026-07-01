@@ -1,0 +1,25 @@
+<!-- @dsCard group="Brand" viewport="700x230" name="Logo" subtitle="Silver mark on dark · navy badge · wordmark" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 0; font-family: var(--font-sans); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 230px; }
+  .dark-cell { background: linear-gradient(135deg, var(--hero-from), var(--hero-to)); display:flex; align-items:center; justify-content:center; gap:16px; }
+  .light-cell { background: var(--surface-container-lowest); display:flex; align-items:center; justify-content:center; gap:20px; }
+  .cap { position:absolute; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="dark-cell">
+    <img src="../assets/logo-mark.png" alt="Team Manager" style="height:120px; filter: drop-shadow(0 2px 10px rgba(99,102,241,0.25));" />
+  </div>
+  <div class="light-cell">
+    <img src="../assets/icon-badge.png" alt="Team Manager badge" style="height:96px; border-radius:20px;" />
+  </div>
+</div>
+</body>
+</html>

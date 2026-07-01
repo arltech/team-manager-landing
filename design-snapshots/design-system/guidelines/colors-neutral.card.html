@@ -1,0 +1,26 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Neutrals & surfaces" subtitle="M3 surface ramp, foreground, borders" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 20px; background: var(--surface-container-lowest); font-family: var(--font-sans); }
+  .swatches { display: flex; gap: 12px; flex-wrap: wrap; }
+  .sw { flex: 1; min-width: 96px; }
+  .chip { height: 60px; border-radius: var(--radius-md); border: 1px solid var(--border); }
+  .nm { font-size: 11px; font-weight: 700; color: var(--foreground); margin-top: 7px; }
+  .hex { font-size: 10px; color: var(--muted-foreground); font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+<div class="swatches">
+  <div class="sw"><div class="chip" style="background:var(--background)"></div><div class="nm">Background</div><div class="hex">#fbf8ff</div></div>
+  <div class="sw"><div class="chip" style="background:var(--surface-container-low)"></div><div class="nm">Surface low</div><div class="hex">#f4f2fc</div></div>
+  <div class="sw"><div class="chip" style="background:var(--surface-container)"></div><div class="nm">Surface</div><div class="hex">#eeedf7</div></div>
+  <div class="sw"><div class="chip" style="background:var(--surface-container-high)"></div><div class="nm">Surface high</div><div class="hex">#e8e7f1</div></div>
+  <div class="sw"><div class="chip" style="background:var(--border)"></div><div class="nm">Border</div><div class="hex">#c4c5d5</div></div>
+  <div class="sw"><div class="chip" style="background:var(--foreground)"></div><div class="nm">Foreground</div><div class="hex">#1a1b22</div></div>
+</div>
+</body>
+</html>

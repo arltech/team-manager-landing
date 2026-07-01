@@ -1,0 +1,74 @@
+<!-- @dsCard group="Landing" viewport="1280x760" name="Sales landing page" subtitle="Full Team Manager sales page — hero, problem, solution, proof, offer, FAQ, CTA" -->
+<!-- @startingPoint section="Pages" subtitle="Team Manager sales landing page" viewport="1280x900" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Team Manager — Landing</title>
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; }
+  @media (max-width: 860px) {
+    .tm-header nav { display: none !important; }
+    section [style*="grid-template-columns: repeat(2"],
+    section [style*="grid-template-columns: repeat(3"],
+    section [style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr !important; }
+  }
+  /* toast */
+  .tm-toast { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 100;
+    background: var(--foreground); color: #fff; padding: 12px 22px; border-radius: 999px; font: 600 14px/1 var(--font-sans);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+  .tm-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="tm-toast" id="toast">✓ Diagnóstico — abriria o quiz de 2 min</div>
+<script type="text/babel" src="sections-1.jsx" data-presets="react"></script>
+<script type="text/babel" src="sections-2.jsx" data-presets="react"></script>
+<script type="text/babel" data-presets="react">
+  function App() {
+    const [slide, setSlide] = React.useState(1);
+    const { Header, Hero, Problem, Solution, SocialProof, Offer, Faq, CtaFinal } = window.TMLanding;
+    React.useEffect(() => {
+      const id = setInterval(() => setSlide((s) => (s % 4) + 1), 4000);
+      return () => clearInterval(id);
+    }, []);
+    const onCta = () => {
+      const t = document.getElementById("toast");
+      t.classList.add("show");
+      clearTimeout(window.__tmt);
+      window.__tmt = setTimeout(() => t.classList.remove("show"), 2200);
+    };
+    return (
+      <div>
+        <Header onCta={onCta} />
+        <main>
+          <Hero onCta={onCta} slide={slide} setSlide={setSlide} />
+          <Problem />
+          <Solution />
+          <SocialProof />
+          <Offer onCta={onCta} />
+          <Faq />
+          <CtaFinal onCta={onCta} />
+        </main>
+      </div>
+    );
+  }
+  // Wait for babel-transpiled section scripts to register on window.
+  function boot() {
+    if (window.TMLanding && window.TMLanding.CtaFinal) {
+      ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+    } else {
+      setTimeout(boot, 40);
+    }
+  }
+  boot();
+</script>
+</body>
+</html>

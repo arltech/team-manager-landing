@@ -1,0 +1,54 @@
+<!-- @dsCard group="Landing" viewport="2840x1180" name="Comparar — A vs B" subtitle="Duas direções de redesign lado a lado: Comando (escura) e Claridade (clara)" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="design_doc_mode" content="canvas" />
+<title>Team Manager · Comparar redesigns</title>
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; background: #e8e7f1; font-family: var(--font-sans); }
+  .frame { position: absolute; top: 90px; width: 1320px; }
+  .badge { display: inline-flex; align-items: center; gap: 10px; }
+  .badge .id { font-family: var(--font-heading); font-weight: 800; font-size: 15px; color: #fff; background: var(--primary); width: 30px; height: 30px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; }
+  .ttl { font-family: var(--font-heading); font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: #1a1b22; }
+  .sub { font-size: 14px; color: var(--muted-foreground); margin-top: 2px; }
+  .open { margin-left: auto; font-size: 13px; font-weight: 700; color: var(--primary); border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent); padding: 8px 14px; border-radius: 999px; background: #fff; }
+  .head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .shell { border-radius: 18px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 30px 70px -20px rgba(30,58,138,.3); background: #fff; }
+  iframe { width: 1320px; height: 900px; border: 0; display: block; }
+  .pagehead { position: absolute; top: 26px; left: 0; width: 100%; text-align: center; }
+  .pagehead h1 { font-family: var(--font-heading); font-weight: 800; font-size: 20px; letter-spacing: -.02em; color: #1a1b22; margin: 0; }
+</style>
+</head>
+<body>
+<div class="pagehead"><h1>Team Manager · 2 direções de redesign · role cada quadro, ou abra em tela cheia</h1></div>
+
+<!-- Option 1a -->
+<section id="1a" class="frame" style="left: 40px;">
+  <div class="head">
+    <span class="badge"><span class="id">1a</span></span>
+    <div>
+      <div class="ttl">Comando</div>
+      <div class="sub">Escura, editorial, alto impacto · aurora animada · bento · ledger Antes/Depois</div>
+    </div>
+    <a class="open" href="v2-comando.html" target="_blank" rel="noopener">Abrir ↗</a>
+  </div>
+  <div class="shell"><iframe src="v2-comando.html" title="Comando"></iframe></div>
+</section>
+
+<!-- Option 1b -->
+<section id="1b" class="frame" style="left: 1420px;">
+  <div class="head">
+    <span class="badge"><span class="id">1b</span></span>
+    <div>
+      <div class="ttl">Claridade</div>
+      <div class="sub">Clara, arejada, product-led · hero em janela · toggle Antes/Depois · tabela comparativa</div>
+    </div>
+    <a class="open" href="v2-claridade.html" target="_blank" rel="noopener">Abrir ↗</a>
+  </div>
+  <div class="shell"><iframe src="v2-claridade.html" title="Claridade"></iframe></div>
+</section>
+</body>
+</html>

@@ -91,8 +91,19 @@ export async function POST(request: NextRequest) {
     .single();
 
   if (error || !data) {
-    console.error("[quiz/submit] insert failed:", error);
-    return NextResponse.json({ error: "Failed to save response" }, { status: 500 });
+    // Banco indisponível não pode quebrar o funil: o diagnóstico é computado,
+    // não depende da persistência. Cai no modo efêmero em vez de 500.
+    console.error(
+      "[quiz/submit] insert failed, falling back to ephemeral:",
+      error
+    );
+    return NextResponse.json({
+      id: randomUUID(),
+      diagnostic,
+      copy: DIAGNOSTIC_COPY[diagnostic],
+      evidence,
+      ephemeral: true,
+    });
   }
 
   return NextResponse.json({

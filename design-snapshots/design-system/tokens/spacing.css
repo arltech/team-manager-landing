@@ -1,0 +1,15 @@
+/* Spacing, radius & layout tokens — Team Manager */
+
+:root {
+  /* Corner radii */
+  --radius-sm: 0.45rem;   /* 7.2px  — small chips */
+  --radius-md: 0.6rem;    /* 9.6px  — buttons, inputs */
+  --radius-lg: 0.75rem;   /* 12px   — primary buttons */
+  --radius-xl: 1.05rem;   /* 16.8px — icon badges */
+  --radius-2xl: 1.35rem;  /* 21.6px — cards (signature radius) */
+  --radius-full: 999px;   /* pills */
+
+  /* Section vertical rhythm (Brad Frost single-token) */
+  --section-y: 7rem;      /* mobile */
+  --section-y-md: 9rem;   /* >= 768px */
+}

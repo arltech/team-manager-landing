@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Brand & primary" subtitle="Yale blue, blue container, indigo vibrant, navy hero" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 20px; background: var(--surface-container-lowest); font-family: var(--font-sans); }
+  .swatches { display: flex; gap: 14px; flex-wrap: wrap; }
+  .sw { flex: 1; min-width: 120px; }
+  .chip { height: 64px; border-radius: var(--radius-lg); border: 1px solid color-mix(in srgb, var(--border) 60%, transparent); }
+  .nm { font-size: 12px; font-weight: 700; color: var(--foreground); margin-top: 8px; }
+  .hex { font-size: 11px; color: var(--muted-foreground); font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+<div class="swatches">
+  <div class="sw"><div class="chip" style="background:var(--primary)"></div><div class="nm">Primary</div><div class="hex">#1e3a8a</div></div>
+  <div class="sw"><div class="chip" style="background:var(--primary-container)"></div><div class="nm">Primary container</div><div class="hex">#3b82f6</div></div>
+  <div class="sw"><div class="chip" style="background:var(--primary-vibrant)"></div><div class="nm">Indigo vibrant</div><div class="hex">#6366f1</div></div>
+  <div class="sw"><div class="chip" style="background:linear-gradient(135deg,var(--hero-from),var(--hero-to))"></div><div class="nm">Hero gradient</div><div class="hex">#0a0e27 → #1e1b4b</div></div>
+  <div class="sw"><div class="chip" style="background:var(--accent)"></div><div class="nm">Accent</div><div class="hex">#c7d2fe</div></div>
+</div>
+</body>
+</html>

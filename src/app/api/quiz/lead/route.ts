@@ -91,8 +91,14 @@ export async function POST(request: NextRequest) {
     .single();
 
   if (insertError || !lead) {
-    console.error("[quiz/lead] insert failed:", insertError);
-    return NextResponse.json({ error: "Failed to save lead" }, { status: 500 });
+    // Banco fora não pode perder o lead: o webhook (n8n) e o CAPI já foram
+    // disparados. Aguarda, confirma sucesso e segue, em vez de 500.
+    console.error(
+      "[quiz/lead] insert failed, webhook/CAPI still fired:",
+      insertError
+    );
+    await Promise.all([webhookPromise, capiPromise]);
+    return NextResponse.json({ ok: true, leadId: null, ephemeral: true });
   }
 
   await Promise.all([webhookPromise, capiPromise]);

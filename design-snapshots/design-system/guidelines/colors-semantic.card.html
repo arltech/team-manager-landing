@@ -1,0 +1,24 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Semantic / status" subtitle="Success, destructive, warning + subtle fills" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 20px; background: var(--surface-container-lowest); font-family: var(--font-sans); }
+  .swatches { display: flex; gap: 14px; flex-wrap: wrap; }
+  .sw { flex: 1; min-width: 130px; }
+  .chip { height: 44px; border-radius: var(--radius-md); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; color:#fff; }
+  .sub { height: 24px; border-radius: 0 0 var(--radius-md) var(--radius-md); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px; }
+  .nm { font-size: 11px; font-weight: 700; color: var(--foreground); margin-top: 7px; }
+  .hex { font-size: 10px; color: var(--muted-foreground); font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+<div class="swatches">
+  <div class="sw"><div class="chip" style="background:var(--success)">Aa</div><div class="sub" style="background:var(--success-subtle);color:var(--success)">subtle</div><div class="nm">Success</div><div class="hex">#059669</div></div>
+  <div class="sw"><div class="chip" style="background:var(--destructive)">Aa</div><div class="sub" style="background:color-mix(in srgb,var(--destructive) 10%,transparent);color:var(--destructive)">subtle</div><div class="nm">Destructive</div><div class="hex">#dc2626</div></div>
+  <div class="sw"><div class="chip" style="background:var(--warning)">Aa</div><div class="sub" style="background:var(--warning-subtle);color:var(--warning)">subtle</div><div class="nm">Warning</div><div class="hex">#d97706</div></div>
+</div>
+</body>
+</html>

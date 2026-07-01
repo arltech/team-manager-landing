@@ -1,0 +1,407 @@
+<!-- @dsCard group="Landing" viewport="1280x780" name="Redesign B · Claridade" subtitle="Light product-led · browser-framed hero · before/after toggle · comparison table" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Team Manager · Claridade</title>
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: #fbf8ff; color: #1a1b22; }
+  ::selection { background: rgba(99,102,241,.2); }
+  a { color: inherit; }
+  .dot-bg { background-image: radial-gradient(circle, rgba(30,58,138,.08) 1px, transparent 1px); background-size: 22px 22px; }
+  .winframe { box-shadow: 0 40px 100px -20px rgba(30,58,138,.35), 0 0 0 1px rgba(0,0,0,.04); }
+  .floatchip { animation: bob2 6s ease-in-out infinite; }
+  @keyframes bob2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  @media (prefers-reduced-motion: reduce){ .floatchip{ animation:none; } }
+  @media (max-width: 900px) {
+    .topnav { display: none !important; }
+    .feat-row { grid-template-columns: 1fr !important; }
+    .feat-row.rev > .feat-img { order: -1; }
+    .cols3 { grid-template-columns: 1fr !important; }
+    .nums4 { grid-template-columns: repeat(2,1fr) !important; }
+    .plans3 { grid-template-columns: 1fr !important; }
+    .cmp-table { font-size: 13px !important; }
+    .hero-h1b { font-size: 38px !important; }
+  }
+  .tm-toast { position: fixed; top: 22px; left: 50%; transform: translateX(-50%) translateY(-8px); z-index: 100; background: #1a1b22; color: #fff; padding: 12px 22px; border-radius: 999px; font: 600 14px/1 var(--font-sans); box-shadow: 0 12px 32px rgba(0,0,0,.25); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+  .tm-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="tm-toast" id="toast">✓ Diagnóstico: abriria o quiz de 2 min</div>
+<script type="text/babel" src="v2-shared.jsx" data-presets="react"></script>
+<script type="text/babel" src="v2-whatsapp.jsx" data-presets="react"></script>
+<script type="text/babel" data-presets="react">
+const TM = window.TeamManagerDesignSystem_6cb67c;
+function App() {
+  const { Icon, ic, Reveal, CountUp } = window.TMv2;
+  const { Button, Pill, Card, Accordion } = TM;
+  const WhatsProof = (window.TMWhats || {}).WhatsProof;
+  const [scrolled, setScrolled] = React.useState(false);
+  const [mode, setMode] = React.useState("sem"); // before/after toggle
+  React.useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", on, { passive: true }); on();
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  const toast = () => { const t = document.getElementById("toast"); t.classList.add("show"); clearTimeout(window.__t); window.__t = setTimeout(() => t.classList.remove("show"), 2200); };
+  const A = (p) => <Icon size={p.size||18}>{ic.arrow}</Icon>;
+
+  const SEGMENTS = ["Idiomas", "Profissionalizantes", "Educação infantil", "Vestibular"];
+
+  const PAINS = [
+    "Você sabe o resultado do mês só quando o mês acabou.",
+    "O follow-up depende do assessor lembrar, e ele esquece.",
+    "Segunda de manhã é reconstruir a semana de memória.",
+    "Cada unidade tem uma planilha diferente.",
+  ];
+  const FIXES = [
+    "Funil de todas as unidades em tempo real, sem perguntar a ninguém.",
+    "O sistema cobra o follow-up candidato a candidato, sozinho.",
+    "Tudo já está no painel quando você chega na segunda.",
+    "Uma fonte da verdade, com permissão na raiz dos dados.",
+  ];
+
+  const TOPCARDS = [
+    { ic: ic.bot, t: "Cobrança automática", d: "Monitora presença, follow-ups e prazos 24/7. Age antes de você pedir." },
+    { ic: ic.heart, t: "Reconhecimento via WhatsApp", d: "Matrículas e top performers celebrados no grupo, automaticamente." },
+    { ic: ic.trophy, t: "Ranking & gamificação", d: "14 ações, 8 níveis, XP automático e Hall da Fama que move a equipe." },
+  ];
+
+  const FEATROWS = [
+    { img: "slide-2.png", eyebrow: "CRM de candidatos", t: "Cada lead com dono, etapa e próximo passo.", d: "Funil de 6 etapas, histórico completo e situações ativas (Quente, Em negociação, Indeciso). Exportação em um clique. Nada mais some entre planilhas.", bullets: ["Funil visual por unidade", "Follow-up cobrado pelo sistema", "Conversão lead → matrícula visível"] },
+    { img: "slide-1.png", eyebrow: "Visão executiva", t: "A operação inteira numa tela só.", d: "Tarefas, candidatos, produção da semana e ranking de equipe, com filtro por unidade. Você para de investigar e começa a decidir.", bullets: ["Top 5 do mês + conquistas recentes", "Tarefas atrasadas em destaque", "Filtro Todas as unidades / por unidade"] },
+  ];
+
+  const CMP = [
+    ["Visibilidade do resultado", "No fim do mês", "Em tempo real"],
+    ["Follow-up de candidatos", "Manual, esquecível", "Automático, cobrado"],
+    ["Reconhecimento da equipe", "Inexistente", "Celebrado no grupo + ranking"],
+    ["Fonte da verdade", "Planilhas soltas", "Um sistema, permissão na raiz"],
+    ["Tempo de implantação", "Não tem", "72 horas"],
+    ["Scripts de venda", "Cada um inventa o seu", "Gerados por IA por candidato"],
+  ];
+
+  const NUMS = [
+    { to: 14, suffix: "", label: "componentes integrados" },
+    { to: 72, suffix: "h", label: "do setup ao 1º insight" },
+    { to: 4, suffix: "", label: "segmentos de matrícula" },
+    { to: 30, suffix: " dias", label: "de garantia integral" },
+  ];
+
+  const PLANS = [
+    { name: "Starter", units: "1–2 unidades", users: "Até 15 usuários", hi: "Para começar a sair da planilha", feat: false },
+    { name: "Rede", units: "3–6 unidades", users: "Até 30 usuários", hi: "Mais escolhido. Inclui Setup WhatsApp + Diagnóstico Fundador", feat: true },
+    { name: "Regional", units: "7–15 unidades", users: "Ilimitado", hi: "ROI dominante para redes que já escalam", feat: false },
+  ];
+
+  const FAQS = [
+    ["Minha equipe não vai usar.", "A gamificação resolve adoção: quem aparece no ranking não para de usar, e o sistema tira XP de quem some. Registro em 30s. Você não cobra: o sistema cobra."],
+    ["É caro, planilha funciona.", "Planilha tem custo de lead perdido. Ticket R$ 500 × 3 unidades × 15 pontos extras = R$ 6.750/mês recuperados. Payback em menos de 9 dias."],
+    ["Minha rede é pequena, faz sentido?", "O melhor momento de criar o hábito certo é quando a rede ainda é pequena. Com 2–3 unidades você corrige o processo antes de multiplicar o problema."],
+    ["Integram com meu ERP?", "Em vez de integrar, substituímos a operação (CRM + tarefas + rotinas + ranking). Seu ERP financeiro continua financeiro."],
+    ["Quanto tempo pra implantar?", "72 horas. Setup técnico em 2h (incluso em Rede e Regional), templates por segmento e suporte dedicado nos primeiros 7 dias."],
+  ];
+
+  const Eyebrow = ({ children, c }) => (
+    <span style={{ display:"inline-flex", alignItems:"center", gap:8, fontSize:12.5, fontWeight:700, letterSpacing:".12em", textTransform:"uppercase", color: c || "var(--primary)" }}>{children}</span>
+  );
+  const navy = "var(--primary)";
+
+  return (
+    <div>
+      {/* ── HEADER ── */}
+      <header style={{ position:"fixed", top:0, left:0, right:0, zIndex:50, transition:"all .3s",
+        background: scrolled ? "rgba(251,248,255,.85)" : "transparent", backdropFilter: scrolled ? "blur(12px)" : "none",
+        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent" }}>
+        <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 28px", height:74, display:"flex", alignItems:"center", justifyContent:"space-between", gap:24 }}>
+          <span style={{ display:"inline-flex", alignItems:"center", gap:11 }}>
+            <img src="../../assets/icon-badge.png" alt="Team Manager" style={{ height:38, borderRadius:11 }} />
+            <span style={{ fontFamily:"var(--font-heading)", fontWeight:800, fontSize:18, letterSpacing:"-.02em", color:navy }}>Team Manager</span>
+          </span>
+          <nav className="topnav" style={{ display:"flex", gap:30 }}>
+            {[["O problema","problema"],["Solução","solucao"],["Comparar","comparar"],["Preços","oferta"],["FAQ","faq"]].map(([l,h]) =>
+              <a key={h} href={"#"+h} style={{ fontSize:14, fontWeight:500, color:"var(--muted-foreground)" }}>{l}</a>)}
+          </nav>
+          <Button variant="primary" size="sm" onClick={toast}>Agendar demonstração</Button>
+        </div>
+      </header>
+
+      {/* ── HERO ── */}
+      <section style={{ position:"relative", overflow:"hidden", paddingTop:140, paddingBottom:80 }}>
+        <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 70% 50% at 50% -5%, rgba(99,102,241,.14), transparent 60%)" }} />
+        <div className="dot-bg" style={{ position:"absolute", inset:0, opacity:.5, maskImage:"radial-gradient(ellipse 60% 50% at 50% 30%, #000, transparent 70%)" }} />
+        <div style={{ position:"relative", maxWidth:880, margin:"0 auto", padding:"0 28px", textAlign:"center" }}>
+          <Reveal><div style={{ marginBottom:22 }}><Pill tone="primary" style={{ whiteSpace:"nowrap" }}>Para redes de 1 a 15 unidades</Pill></div></Reveal>
+          <Reveal delay={.06}>
+            <h1 className="hero-h1b" style={{ fontFamily:"var(--font-heading)", fontWeight:800, letterSpacing:"-.03em", lineHeight:1.06, fontSize:"clamp(38px,5.2vw,58px)", margin:"0 0 22px" }}>
+              A operação da sua rede,<br/><span style={{ color:navy }}>visível numa tela só.</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={.12}>
+            <p style={{ fontSize:19, color:"var(--muted-foreground)", lineHeight:1.6, maxWidth:600, margin:"0 auto 30px" }}>
+              CRM de candidatos, follow-up automático, ranking de equipe e rotinas semanais. O Team Manager <strong style={{ color:"#1a1b22" }}>cobra, lembra e reporta por você</strong>. Você cresce a rede.
+            </p>
+          </Reveal>
+          <Reveal delay={.18}>
+            <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"center", gap:14, marginBottom:18 }}>
+              <Button variant="primary" iconRight={<A/>} onClick={toast}>Agendar demonstração</Button>
+              <Button variant="secondary" icon={<Icon size={16}>{ic.play}</Icon>} onClick={toast}>Ver diagnóstico de 2 min</Button>
+            </div>
+          </Reveal>
+          <Reveal delay={.22}><div style={{ fontSize:13.5, color:"var(--muted-foreground)", display:"inline-flex", alignItems:"center", gap:8 }}><Icon size={15} style={{ color:"var(--success)" }}>{ic.shield}</Icon>Garantia de 30 dias · Setup em 72h · Sem fidelidade</div></Reveal>
+        </div>
+        {/* browser-framed product shot */}
+        <Reveal delay={.16} y={36} style={{ position:"relative", maxWidth:1080, margin:"56px auto 0", padding:"0 28px" }}>
+          <div style={{ position:"relative" }}>
+            <div className="winframe" style={{ borderRadius:16, overflow:"hidden", background:"#fff" }}>
+              <div style={{ height:38, background:"#f4f2fc", borderBottom:"1px solid var(--border)", display:"flex", alignItems:"center", gap:8, padding:"0 16px" }}>
+                <span style={{ width:11, height:11, borderRadius:"50%", background:"#ff5f57" }} /><span style={{ width:11, height:11, borderRadius:"50%", background:"#febc2e" }} /><span style={{ width:11, height:11, borderRadius:"50%", background:"#28c840" }} />
+                <span style={{ marginLeft:14, fontSize:12, color:"var(--muted-foreground)", background:"#fff", border:"1px solid var(--border)", borderRadius:7, padding:"3px 14px" }}>app.teammanager.com</span>
+              </div>
+              <img src="../../assets/dashboard/slide-1.png" alt="Painel Team Manager" style={{ width:"100%", display:"block" }} />
+            </div>
+            <div className="floatchip" style={{ position:"absolute", top:60, right:-10, background:"#fff", borderRadius:14, padding:"12px 16px", boxShadow:"0 18px 40px rgba(30,58,138,.18)", border:"1px solid var(--border)" }}>
+              <div style={{ display:"flex", alignItems:"center", gap:8 }}><span style={{ width:8, height:8, borderRadius:"50%", background:"var(--success)" }} /><span style={{ fontSize:11.5, fontWeight:700, color:"var(--muted-foreground)", textTransform:"uppercase", letterSpacing:".08em" }}>Conversão</span></div>
+              <div style={{ fontFamily:"var(--font-heading)", fontWeight:800, fontSize:24, color:navy, marginTop:2 }}><CountUp to={8} suffix="%" /></div>
+            </div>
+            <div className="floatchip" style={{ animationDelay:"-3s", position:"absolute", bottom:40, left:-12, background:navy, color:"#fff", borderRadius:14, padding:"12px 16px", boxShadow:"0 18px 40px rgba(30,58,138,.35)" }}>
+              <div style={{ fontSize:11.5, fontWeight:700, opacity:.7, textTransform:"uppercase", letterSpacing:".08em" }}>Matrículas · mês</div>
+              <div style={{ fontFamily:"var(--font-heading)", fontWeight:800, fontSize:24, marginTop:2 }}>+<CountUp to={29} /></div>
+            </div>
+          </div>
+        </Reveal>
+        {/* trust strip */}
+        <div style={{ position:"relative", maxWidth:1000, margin:"60px auto 0", padding:"0 28px", textAlign:"center" }}>
+          <Reveal>
+            <div style={{ fontSize:12, fontWeight:700, letterSpacing:".14em", textTransform:"uppercase", color:"var(--on-surface-variant)", marginBottom:16, display:"inline-flex", alignItems:"center", gap:8 }}>
+              <span style={{ width:7, height:7, borderRadius:"50%", background:"var(--success)" }} />Em produção hoje em redes de
+            </div>
+            <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"center", gap:10 }}>
+              {SEGMENTS.map((s) => <span key={s} style={{ padding:"8px 16px", borderRadius:999, background:"#fff", border:"1px solid var(--border)", fontSize:14, fontWeight:600, color:"var(--foreground)" }}>{s}</span>)}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── PROBLEM (before/after toggle) ── */}
+      <section id="problema" style={{ background:"#fff", padding:"112px 0", borderTop:"1px solid var(--border)" }}>
+        <div style={{ maxWidth:880, margin:"0 auto", padding:"0 28px", textAlign:"center" }}>
+          <Reveal><div style={{ marginBottom:16 }}><Eyebrow c="#dc2626">O problema</Eyebrow></div></Reveal>
+          <Reveal delay={.05}><h2 style={{ fontFamily:"var(--font-heading)", fontWeight:800, letterSpacing:"-.025em", fontSize:"clamp(30px,4vw,46px)", margin:"0 0 14px" }}>Se você precisa perguntar, está investigando.</h2></Reveal>
+          <Reveal delay={.1}><p style={{ fontSize:18, color:"var(--muted-foreground)", maxWidth:580, margin:"0 auto 36px", lineHeight:1.6 }}>Veja o que muda quando a operação para de morar em planilhas e grupos de WhatsApp.</p></Reveal>
+          <Reveal delay={.12}>
+            <div style={{ display:"inline-flex", padding:5, borderRadius:999, background:"var(--surface-container)", border:"1px solid var(--border)", marginBottom:36 }}>
+              {[["sem","Sem sistema"],["com","Com Team Manager"]].map(([k,l]) => (
+                <button key={k} onClick={() => setMode(k)} style={{ border:0, cursor:"pointer", padding:"10px 22px", borderRadius:999, fontFamily:"var(--font-sans)", fontSize:14.5, fontWeight:700, transition:"all .2s",
+                  background: mode===k ? (k==="com" ? "var(--primary)" : "#1a1b22") : "transparent",
+                  color: mode===k ? "#fff" : "var(--muted-foreground)" }}>{l}</button>
+              ))}
+            </div>
+          </Reveal>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(2,1fr)", gap:16, textAlign:"left" }}>
+            {(mode==="sem" ? PAINS : FIXES).map((t,i) => {
+              const bad = mode==="sem";
+              return (
+                <div key={mode+i} style={{ display:"flex", gap:14, padding:"22px 24px", borderRadius:18, border:"1px solid "+(bad?"color-mix(in srgb,var(--destructive) 22%,transparent)":"color-mix(in srgb,var(--success) 30%,transparent)"), background: bad?"color-mix(in srgb,var(--destructive) 4%,transparent)":"var(--success-subtle)",
+                  animation:"fadeup .4s ease both", animationDelay:(i*60)+"ms" }}>
+                  <Icon size={20} sw={2.5} style={{ color: bad?"var(--destructive)":"var(--success)", marginTop:2 }}>{bad?ic.x:ic.check}</Icon>
+                  <span style={{ fontSize:15.5, lineHeight:1.5 }}>{t}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <style>{`@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}`}</style>
+      </section>
+
+      {/* ── SOLUTION: 3 cards + alternating rows ── */}
+      <section id="solucao" style={{ background:"#fbf8ff", padding:"112px 0" }}>
+        <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 28px" }}>
+          <Reveal style={{ textAlign:"center", marginBottom:16 }}><Eyebrow>A solução</Eyebrow></Reveal>
+          <Reveal delay={.05}><h2 style={{ fontFamily:"var(--font-heading)", fontWeight:800, letterSpacing:"-.025em", fontSize:"clamp(30px,4vw,46px)", textAlign:"center", margin:"0 0 50px" }}>Um sistema. A operação inteira.</h2></Reveal>
+          <div className="cols3" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:20, marginBottom:80 }}>
+            {TOPCARDS.map((c,i) => (
+              <Reveal key={i} delay={i*.07}>
+                <div style={{ background:"#fff", border:"1px solid var(--border)", borderRadius:22, padding:30, height:"100%", boxSizing:"border-box", boxShadow:"var(--shadow-card)" }}>
+                  <span style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", width:52, height:52, borderRadius:15, background:"color-mix(in srgb,var(--primary) 10%,transparent)", color:"var(--primary)", marginBottom:20 }}><Icon size={25}>{c.ic}</Icon></span>
+                  <h3 style={{ fontFamily:"var(--font-heading)", fontWeight:700, fontSize:20, letterSpacing:"-.02em", margin:"0 0 10px" }}>{c.t}</h3>
+                  <p style={{ fontSize:15, color:"var(--muted-foreground)", lineHeight:1.6, margin:0 }}>{c.d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          {FEATROWS.map((f,i) => (
+            <Reveal key={i} delay={.04}>
+              <div className={"feat-row"+(i%2?" rev":"")} style={{ display:"grid", gridTemplateColumns: i%2 ? "1fr 1.05fr" : "1.05fr 1fr", gap:48, alignItems:"center", marginBottom: i<FEATROWS.length-1?72:0 }}>
+                <div style={{ order: i%2?2:1 }}>
+                  <Eyebrow>{f.eyebrow}</Eyebrow>
+                  <h3 style={{ fontFamily:"var(--font-heading)", fontWeight:800, fontSize:"clamp(24px,3vw,34px)", letterSpacing:"-.025em", margin:"14px 0 16px", lineHeight:1.15 }}>{f.t}</h3>
+                  <p style={{ fontSize:16.5, color:"var(--muted-foreground)", lineHeight:1.6, margin:"0 0 22px" }}>{f.d}</p>
+                  <ul style={{ listStyle:"none", padding:0, margin:0, display:"flex", flexDirection:"column", gap:12 }}>
+                    {f.bullets.map((b,j) => (
+                      <li key={j} style={{ display:"flex", gap:12, fontSize:15.5 }}>
+                        <span style={{ flexShrink:0, width:24, height:24, borderRadius:"50%", background:"color-mix(in srgb,var(--success) 14%,transparent)", color:"var(--success)", display:"inline-flex", alignItems:"center", justifyContent:"center" }}><Icon size={14} sw={3}>{ic.check}</Icon></span>{b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="feat-img" style={{ order: i%2?1:2 }}>
+                  <div className="winframe" style={{ borderRadius:16, overflow:"hidden", border:"1px solid var(--border)", background:"#fff" }}>
+                    <img src={"../../assets/dashboard/"+f.img} alt={f.eyebrow} style={{ width:"100%", display:"block" }} />
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ── COMPARISON table ── */}
+      <section id="comparar" style={{ background:"#fff", padding:"112px 0", borderTop:"1px solid var(--border)" }}>
+        <div style={{ maxWidth:920, margin:"0 auto", padding:"0 28px" }}>
+          <Reveal style={{ textAlign:"center", marginBottom:16 }}><Eyebrow>Comparar</Eyebrow></Reveal>
+          <Reveal delay={.05}><h2 style={{ fontFamily:"var(--font-heading)", fontWeight:800, letterSpacing:"-.025em", fontSize:"clamp(30px,4vw,46px)", textAlign:"center", margin:"0 0 50px" }}>Planilha + WhatsApp vs. Team Manager.</h2></Reveal>
+          <Reveal>
+            <div className="cmp-table" style={{ border:"1px solid var(--border)", borderRadius:20, overflow:"hidden", fontSize:15 }}>
+              <div style={{ display:"grid", gridTemplateColumns:"1.3fr 1fr 1fr", background:"var(--surface-container-low)", borderBottom:"1px solid var(--border)" }}>
+                <div style={{ padding:"18px 22px", fontWeight:700, color:"var(--on-surface-variant)", fontSize:13, textTransform:"uppercase", letterSpacing:".08em" }}>Recurso</div>
+                <div style={{ padding:"18px 22px", fontWeight:700, color:"var(--muted-foreground)", display:"flex", alignItems:"center", gap:8 }}><Icon size={15}>{ic.x}</Icon>Planilha + Zap</div>
+                <div style={{ padding:"18px 22px", fontWeight:800, color:"var(--primary)", background:"color-mix(in srgb,var(--primary) 6%,transparent)", display:"flex", alignItems:"center", gap:8 }}><Icon size={15} fill="currentColor" sw={0}>{ic.spark}</Icon>Team Manager</div>
+              </div>
+              {CMP.map((r,i) => (
+                <div key={i} style={{ display:"grid", gridTemplateColumns:"1.3fr 1fr 1fr", borderBottom: i<CMP.length-1?"1px solid color-mix(in srgb,var(--border) 60%,transparent)":"0" }}>
+                  <div style={{ padding:"18px 22px", fontWeight:600 }}>{r[0]}</div>
+                  <div style={{ padding:"18px 22px", color:"var(--muted-foreground)" }}>{r[1]}</div>
+                  <div style={{ padding:"18px 22px", background:"color-mix(in srgb,var(--primary) 5%,transparent)", display:"flex", gap:10, fontWeight:600 }}><Icon size={17} sw={2.6} style={{ color:"var(--success)", flexShrink:0, marginTop:1 }}>{ic.check}</Icon>{r[2]}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── NÚMEROS ── */}
+      <section style={{ background:"#fbf8ff", padding:"90px 0" }}>
+        <div className="nums4" style={{ maxWidth:1040, margin:"0 auto", padding:"0 28px", display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:20 }}>
+          {NUMS.map((n,i) => (
+            <Reveal key={i} delay={i*.07}>
+              <div style={{ background:"#fff", border:"1px solid var(--border)", borderRadius:20, padding:"28px 26px", textAlign:"center", boxShadow:"var(--shadow-card)" }}>
+                <div style={{ fontFamily:"var(--font-heading)", fontWeight:800, fontSize:"clamp(32px,4vw,44px)", color:"var(--primary)", lineHeight:1 }}><CountUp to={n.to} suffix={n.suffix} /></div>
+                <div style={{ fontSize:13.5, color:"var(--muted-foreground)", marginTop:10, lineHeight:1.4 }}>{n.label}</div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ── TESTIMONIAL ── */}
+      <section style={{ background:"#fff", padding:"100px 0", borderTop:"1px solid var(--border)" }}>
+        <div style={{ maxWidth:840, margin:"0 auto", padding:"0 28px", textAlign:"center" }}>
+          <Reveal>
+            <p style={{ fontFamily:"var(--font-heading)", fontWeight:700, fontSize:"clamp(24px,3.2vw,34px)", lineHeight:1.3, letterSpacing:"-.02em", margin:"0 0 28px" }}>
+              “Em 6 semanas parei de cobrar follow-up. O sistema cobra sozinho. Eu olho o que importa: <span style={{ color:"var(--primary)" }}>por que a unidade A matricula 30% mais que a B.</span>”
+            </p>
+            <div style={{ display:"inline-flex", alignItems:"center", gap:14 }}>
+              <span style={{ width:48, height:48, borderRadius:"50%", background:"var(--surface-container)", display:"inline-flex", alignItems:"center", justifyContent:"center", fontFamily:"var(--font-heading)", fontWeight:700, color:"var(--on-surface-variant)" }}>SF</span>
+              <div style={{ textAlign:"left" }}>
+                <div style={{ fontWeight:700, fontSize:14 }}>Sócia-fundadora</div>
+                <div style={{ fontSize:13, color:"var(--muted-foreground)" }}>5 unidades · Cursos profissionalizantes</div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {WhatsProof && <WhatsProof/>}
+
+      {/* ── OFFER ── */}
+      <section id="oferta" style={{ background:"#fbf8ff", padding:"112px 0" }}>
+        <div style={{ maxWidth:1140, margin:"0 auto", padding:"0 28px" }}>
+          <Reveal style={{ textAlign:"center", marginBottom:16 }}><Eyebrow>A oferta</Eyebrow></Reveal>
+          <Reveal delay={.05}><h2 style={{ fontFamily:"var(--font-heading)", fontWeight:800, letterSpacing:"-.025em", fontSize:"clamp(30px,4vw,46px)", textAlign:"center", margin:"0 0 12px" }}>Você paga por um sistema. Recebe a operação inteira.</h2></Reveal>
+          <Reveal delay={.1}><p style={{ textAlign:"center", color:"var(--muted-foreground)", fontSize:17, maxWidth:600, margin:"0 auto 50px", lineHeight:1.6 }}>Equivalente de mercado: R$ 12.390/mês. <strong style={{ color:"#1a1b22" }}>Seu investimento sai no diagnóstico gratuito.</strong></p></Reveal>
+          <div className="plans3" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:24, alignItems:"start" }}>
+            {PLANS.map((p,i) => (
+              <Reveal key={p.name} delay={i*.07}>
+                <div style={{ position:"relative", background:"#fff", border: p.feat?"2px solid var(--primary)":"1px solid var(--border)", borderRadius:24, padding:36, boxShadow: p.feat?"var(--shadow-glow-primary)":"var(--shadow-card)" }}>
+                  {p.feat && <div style={{ position:"absolute", top:-13, left:"50%", transform:"translateX(-50%)" }}><Pill tone="solid-primary"><Icon size={13} fill="currentColor" sw={0}>{ic.spark}</Icon> Recomendado</Pill></div>}
+                  <h3 style={{ fontFamily:"var(--font-heading)", fontWeight:800, fontSize:28, margin:"0 0 6px" }}>{p.name}</h3>
+                  <div style={{ fontSize:13.5, color:"var(--muted-foreground)" }}>{p.units}</div>
+                  <div style={{ fontSize:13.5, color:"var(--muted-foreground)", marginBottom:24 }}>{p.users}</div>
+                  <div style={{ fontFamily:"var(--font-heading)", fontWeight:800, fontSize:26 }}>Sob diagnóstico</div>
+                  <p style={{ fontSize:12, color:"var(--muted-foreground)", margin:"6px 0 24px", lineHeight:1.5 }}>Definido pelo porte da sua rede, no diagnóstico gratuito.</p>
+                  <p style={{ fontSize:14, color:"color-mix(in srgb,#1a1b22 82%,transparent)", lineHeight:1.6, marginBottom:26, minHeight:62 }}>{p.hi}</p>
+                  <Button variant={p.feat?"primary":"outline"} fullWidth onClick={toast}>Agendar demonstração</Button>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={.1} style={{ maxWidth:760, margin:"40px auto 0" }}>
+            <div style={{ display:"flex", gap:20, alignItems:"flex-start", padding:36, borderRadius:22, border:"1px solid color-mix(in srgb,var(--success) 40%,transparent)", background:"var(--success-subtle)" }}>
+              <span style={{ display:"inline-flex", alignItems:"center", justifyContent:"center", width:54, height:54, borderRadius:18, background:"color-mix(in srgb,var(--success) 15%,transparent)", color:"var(--success)", flexShrink:0 }}><Icon size={24}>{ic.shield}</Icon></span>
+              <div>
+                <h3 style={{ fontFamily:"var(--font-heading)", fontWeight:700, fontSize:20, margin:"0 0 10px" }}>Garantia de 30 dias</h3>
+                <p style={{ color:"color-mix(in srgb,#1a1b22 85%,transparent)", lineHeight:1.6, margin:0 }}>Se em 30 dias você não conseguir ver o funil de todas as unidades sem perguntar a ninguém, devolvemos 100%, sem perguntas.</p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section id="faq" style={{ background:"#fff", padding:"112px 0", borderTop:"1px solid var(--border)" }}>
+        <div style={{ maxWidth:760, margin:"0 auto", padding:"0 28px" }}>
+          <Reveal style={{ textAlign:"center", marginBottom:16 }}><Eyebrow c="#757684">Perguntas frequentes</Eyebrow></Reveal>
+          <Reveal delay={.05}><h2 style={{ fontFamily:"var(--font-heading)", fontWeight:800, letterSpacing:"-.025em", fontSize:"clamp(28px,3.5vw,42px)", textAlign:"center", margin:"0 0 40px" }}>As 5 que mais aparecem.</h2></Reveal>
+          <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
+            {FAQS.map(([q,a],i) => (
+              <Reveal key={i} delay={i*.04}>
+                <Accordion variant="card" summary={<span style={{ fontWeight:700, fontSize:17 }}>{q}</span>}>
+                  <p style={{ color:"var(--muted-foreground)", lineHeight:1.6, margin:0, fontSize:15 }}>{a}</p>
+                </Accordion>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA card ── */}
+      <section style={{ background:"#fbf8ff", padding:"40px 0 110px" }}>
+        <div style={{ maxWidth:1040, margin:"0 auto", padding:"0 28px" }}>
+          <Reveal>
+            <div className="hero-gradient" style={{ position:"relative", overflow:"hidden", borderRadius:32, padding:"72px 48px", textAlign:"center" }}>
+              <h2 style={{ fontFamily:"var(--font-heading)", fontWeight:800, letterSpacing:"-.025em", fontSize:"clamp(30px,4vw,48px)", lineHeight:1.1, margin:"0 0 20px", color:"#fff" }}>Seja o gestor que não precisa cobrar.</h2>
+              <p style={{ fontSize:18, color:"rgba(255,255,255,.78)", maxWidth:540, margin:"0 auto 32px", lineHeight:1.6 }}>O sistema cobra. O grupo celebra. Você decide. Comece pelo diagnóstico gratuito de 2 minutos.</p>
+              <Button variant="white" size="lg" iconRight={<A/>} onClick={toast}>Agendar demonstração</Button>
+              <p style={{ marginTop:22, fontSize:13.5, color:"rgba(255,255,255,.6)", display:"flex", alignItems:"center", justifyContent:"center", gap:8 }}><Icon size={14}>{ic.shield}</Icon>Garantia integral de 30 dias. Sem perguntas.</p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer style={{ background:"#fff", borderTop:"1px solid var(--border)", padding:"40px 0" }}>
+        <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 28px", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:16 }}>
+          <span style={{ display:"inline-flex", alignItems:"center", gap:10 }}>
+            <img src="../../assets/icon-badge.png" alt="" style={{ height:30, borderRadius:9 }} />
+            <span style={{ fontFamily:"var(--font-heading)", fontWeight:800, fontSize:15, color:navy }}>Team Manager</span>
+          </span>
+          <span style={{ fontSize:13, color:"var(--muted-foreground)" }}>© Team Manager · ARLTech · Sistema de operação para redes de escolas e cursos</span>
+        </div>
+      </footer>
+    </div>
+  );
+}
+function boot(){ if(window.TMv2 && window.TeamManagerDesignSystem_6cb67c){ ReactDOM.createRoot(document.getElementById("root")).render(<App/>); } else setTimeout(boot,40); }
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+/* Color tokens — Team Manager
+   Material-3-inspired light theme (primary) + dark theme (app surfaces).
+   Base values declared here; semantic aliases reference them.
+   Values lifted verbatim from the product codebase (globals.css). */
+
+:root {
+  /* ── Core surfaces & text ── */
+  --background: #fbf8ff;          /* app/page background — warm off-white */
+  --foreground: #1a1b22;          /* primary text — near-black indigo */
+  --card: #ffffff;                /* card surface */
+  --card-foreground: #1a1b22;
+
+  /* ── Brand / primary ── */
+  --primary: #1e3a8a;             /* Yale blue — primary actions, links */
+  --primary-foreground: #ffffff;
+  --primary-container: #3b82f6;   /* lighter blue — gradient pair */
+  --primary-vibrant: #6366f1;     /* indigo — glow / spotlight accent */
+
+  --secondary: #525c87;           /* muted slate-blue */
+  --secondary-foreground: #ffffff;
+
+  /* ── Neutrals ── */
+  --muted: #eeedf7;               /* muted fill */
+  --muted-foreground: #444653;    /* secondary text */
+  --accent: #c7d2fe;              /* soft indigo accent fill */
+  --accent-foreground: #1e1b4b;
+
+  --border: #c4c5d5;              /* default border */
+  --ring: #1e3a8a;                /* focus ring */
+
+  /* ── M3 surface ramp ── */
+  --surface: #fbf8ff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f4f2fc;
+  --surface-container: #eeedf7;
+  --surface-container-high: #e8e7f1;
+  --on-surface: #1a1b22;
+  --on-surface-variant: #444653;
+  --outline: #757684;
+  --outline-variant: #c4c5d5;
+  --tertiary: #611e00;
+  --tertiary-fixed: #ffdbce;
+
+  /* ── Hero gradient stops (dark) ── */
+  --hero-from: #0a0e27;           /* deep navy */
+  --hero-to: #1e1b4b;             /* indigo-950 */
+
+  /* ── Semantic / status ── */
+  --destructive: #dc2626;
+  --success: #059669;
+  --success-subtle: rgb(5 150 105 / 0.12);
+  --warning: #d97706;
+  --warning-subtle: rgb(217 119 6 / 0.12);
+}
+
+/* Dark theme — used by the product app surfaces (sidebar / dashboard).
+   Apply by adding class="dark" to a wrapping element. */
+.dark {
+  --background: #18181b;
+  --foreground: #e4e4e7;
+  --card: #27272a;
+  --card-foreground: #e4e4e7;
+
+  --primary: #6b8aff;
+  --primary-foreground: #ffffff;
+  --primary-container: #3b52c7;
+
+  --secondary: #a1a1aa;
+  --secondary-foreground: #ffffff;
+
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #3d4670;
+  --accent-foreground: #e4e4e7;
+
+  --border: #3f3f46;
+  --ring: #6b8aff;
+
+  --surface: #18181b;
+  --surface-container-lowest: #1c1c1f;
+  --surface-container-low: #212124;
+  --surface-container: #27272a;
+  --surface-container-high: #2d2d31;
+  --on-surface: #e4e4e7;
+  --on-surface-variant: #a1a1aa;
+  --outline: #71717a;
+  --outline-variant: #52525b;
+  --tertiary: #d89a7f;
+
+  --hero-from: #050812;
+  --hero-to: #0f172a;
+
+  --destructive: #ff6b6b;
+}

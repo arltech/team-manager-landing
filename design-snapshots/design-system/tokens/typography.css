@@ -1,0 +1,26 @@
+/* Typography tokens — Team Manager
+   Inter for body/UI; Manrope for headings (tight tracking, bold).
+   Display & micro sizes are fixed-pixel for hero/section titles and eyebrows. */
+
+:root {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Manrope", "Inter", sans-serif;
+
+  /* Display sizes — hero / section titles */
+  --text-display-sm: 28px;
+  --text-display-md: 36px;
+  --text-display-lg: 44px;
+  --text-display-xl: 56px;
+
+  /* Micro sizes — eyebrows, deltas, monospace tags */
+  --text-micro: 9px;
+  --text-mini: 10px;
+
+  /* Heading character: bold, negative tracking, tight leading */
+  --heading-weight: 700;
+  --heading-tracking: -0.025em;
+  --heading-leading: 1.12;
+
+  /* Body */
+  --body-leading: 1.6;
+}

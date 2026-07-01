@@ -1,0 +1,57 @@
+<!-- @dsCard group="Components" viewport="700x340" name="Primitives" subtitle="Pill, Badge, IconBadge, Avatar, Card" -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; padding: 28px; background: var(--surface-container-low); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .lbl { font: 700 10px/1 var(--font-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--on-surface-variant); margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Pill, Badge, IconBadge, Avatar, Card } = window.TeamManagerDesignSystem_6cb67c;
+  const Spark = () => (<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.5L21 11l-6.8 2.5L12 20l-2.2-6.5L3 11l6.8-2.5z"/></svg>);
+  const Users = () => (<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>);
+  function Demo() {
+    return (
+      <div>
+        <div className="lbl">Pill — eyebrows & tags</div>
+        <div className="row">
+          <Pill tone="primary">A Solução</Pill>
+          <Pill tone="destructive">O Problema</Pill>
+          <Pill tone="success">Em produção</Pill>
+          <Pill tone="accent">A Oferta</Pill>
+          <Pill tone="solid-primary"><Spark/> Recomendado</Pill>
+        </div>
+        <div className="lbl">Badge — CRM status chips</div>
+        <div className="row">
+          <Badge tone="destructive" dot>Quente <span style={{opacity:.7}}>40</span></Badge>
+          <Badge tone="success" dot>Em negociação <span style={{opacity:.7}}>25</span></Badge>
+          <Badge tone="warning" dot>Indeciso <span style={{opacity:.7}}>14</span></Badge>
+          <Badge tone="neutral" dot>Vácuo <span style={{opacity:.7}}>10</span></Badge>
+        </div>
+        <div className="lbl">IconBadge & Avatar</div>
+        <div className="row">
+          <IconBadge tone="primary"><Users/></IconBadge>
+          <IconBadge tone="success"><Users/></IconBadge>
+          <IconBadge tone="destructive"><Users/></IconBadge>
+          <IconBadge tone="accent" size="lg"><Users/></IconBadge>
+          <Avatar name="João Marcos" ring />
+          <Avatar name="Juliana Tozer" />
+          <Avatar src="../../assets/testimonial-avatar.jpg" name="Cliente" ring />
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<Demo/>);
+</script>
+</body>
+</html>
