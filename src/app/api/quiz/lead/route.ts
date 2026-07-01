@@ -4,6 +4,7 @@ import { getAdminClient } from "@/lib/supabase-admin";
 import { DIAGNOSTICS, DIAGNOSTIC_COPY, type Diagnostic } from "@/lib/quiz-types";
 import { notifyLeadWebhook } from "@/lib/lead-webhook";
 import { sendLeadCapi } from "@/lib/meta-capi";
+import { checkWhatsappExists } from "@/lib/waha-check";
 
 export const runtime = "nodejs";
 
@@ -18,7 +19,7 @@ const leadSchema = z.object({
       message: "WhatsApp inválido",
     }),
   name: z.string().min(2).max(120),
-  networkName: z.string().min(2).max(120),
+  networkName: z.string().min(2).max(120).optional(),
   diagnostic: z.enum(DIAGNOSTICS as [string, ...string[]]),
   eventId: z.string().max(100).optional(),
 });
@@ -41,6 +42,15 @@ export async function POST(request: NextRequest) {
 
   const { quizResponseId, whatsapp, name, networkName, diagnostic, eventId } =
     parsed.data;
+
+  const hasWhatsapp = await checkWhatsappExists(whatsapp);
+  if (hasWhatsapp === false) {
+    return NextResponse.json(
+      { error: "Esse número não está no WhatsApp. Confira o DDD e tenta de novo." },
+      { status: 422 }
+    );
+  }
+
   const supabase = getAdminClient();
   const diagnosticBadge =
     DIAGNOSTIC_COPY[diagnostic as Diagnostic]?.badge ?? diagnostic;
@@ -84,7 +94,7 @@ export async function POST(request: NextRequest) {
       quiz_response_id: quizResponseId ?? null,
       whatsapp,
       name,
-      network_name: networkName,
+      network_name: networkName ?? null,
       diagnostic,
     })
     .select("id")

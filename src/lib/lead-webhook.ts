@@ -12,7 +12,7 @@
 type LeadPayload = {
   name: string;
   whatsapp: string; // já em dígitos puros, ex. 11999998888
-  networkName: string;
+  networkName?: string;
   diagnostic: string;
   diagnosticBadge: string;
 };
@@ -32,10 +32,10 @@ function buildMessage(p: LeadPayload): string {
   const phoneDisplay = formatWhatsappDisplay(p.whatsapp);
   const wppLink = `https://wa.me/55${p.whatsapp}`;
   return [
-    `🎯 *Novo lead — Team Manager*`,
+    `🎯 *Novo lead · Team Manager*`,
     ``,
     `*Nome:* ${p.name}`,
-    `*Rede:* ${p.networkName}`,
+    ...(p.networkName ? [`*Rede:* ${p.networkName}`] : []),
     `*WhatsApp:* ${phoneDisplay}`,
     `*Conversar agora:* ${wppLink}`,
     ``,

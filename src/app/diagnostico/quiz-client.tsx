@@ -238,15 +238,13 @@ function ResultView({ result }: { result: SubmitResult }) {
   const { copy, diagnostic, id, evidence } = result;
 
   useEffect(() => {
-    fireDiagnosticConfetti(diagnostic, copy.accentColor);
     trackMetaCustom("QuizCompleted", { diagnostic });
-  }, [diagnostic, copy.accentColor]);
+  }, [diagnostic]);
 
   const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "/#oferta";
 
   const [whatsapp, setWhatsapp] = useState("");
   const [name, setName] = useState("");
-  const [networkName, setNetworkName] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [downloadingPdf, setDownloadingPdf] = useState(false);
@@ -260,7 +258,6 @@ function ResultView({ result }: { result: SubmitResult }) {
         body: JSON.stringify({
           diagnostic,
           name: name || undefined,
-          networkName: networkName || undefined,
           scores: evidence?.scores,
           signals: evidence?.signals,
           confidence: evidence?.confidence,
@@ -285,17 +282,18 @@ function ResultView({ result }: { result: SubmitResult }) {
 
   async function submitLead(e: React.FormEvent) {
     e.preventDefault();
-    const digits = whatsapp.replace(/\D/g, "");
-    if (digits.length < 10 || digits.length > 13) {
-      toast.error("WhatsApp inválido — inclua DDD");
+    const digits = whatsapp.replace(/\D/g, "").replace(/^55/, "");
+    // Celular BR: 11 dígitos (DDD + 9 + 8), DDD >= 11, 9º dígito na 3ª posição.
+    if (
+      digits.length !== 11 ||
+      digits[2] !== "9" ||
+      Number(digits.slice(0, 2)) < 11
+    ) {
+      toast.error("Informe um celular válido com DDD. Ex.: (11) 99999-9999");
       return;
     }
     if (!name.trim()) {
       toast.error("Preencha seu nome");
-      return;
-    }
-    if (!networkName.trim()) {
-      toast.error("Preencha o nome da rede");
       return;
     }
     setSending(true);
@@ -308,17 +306,20 @@ function ResultView({ result }: { result: SubmitResult }) {
           quizResponseId: id,
           whatsapp,
           name: name || undefined,
-          networkName: networkName || undefined,
           diagnostic,
           eventId,
         }),
       });
-      if (!res.ok) throw new Error("lead failed");
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || "Erro ao enviar. Tenta de novo.");
+      }
       trackMeta("Lead", { content_name: diagnostic }, { eventID: eventId });
       setSent(true);
-      toast.success("Vamos te chamar no WhatsApp.");
-    } catch {
-      toast.error("Erro ao enviar. Tenta de novo.");
+      fireDiagnosticConfetti(diagnostic, copy.accentColor);
+      toast.success("Diagnóstico liberado.");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Erro ao enviar. Tenta de novo.");
     } finally {
       setSending(false);
     }
@@ -344,6 +345,72 @@ function ResultView({ result }: { result: SubmitResult }) {
           </Link>
         </div>
 
+        {!sent ? (
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div
+              className="pill border mb-6"
+              style={{
+                color: copy.accentColor,
+                borderColor: `${copy.accentColor}55`,
+                background: `${copy.accentColor}15`,
+              }}
+            >
+              Diagnóstico pronto
+            </div>
+            <h1 className="text-3xl md:text-4xl font-extrabold mb-5 leading-[1.12] text-[var(--foreground)]">
+              Seu diagnóstico está pronto.
+            </h1>
+            <p className="text-[var(--muted-foreground)] text-base md:text-lg leading-relaxed mb-8">
+              Deixe seu nome e WhatsApp e a gente te mostra o resultado
+              completo, com o plano de ação pra sua rede. Uma mensagem só,
+              sem spam, e quem responde é o time, não robô.
+            </p>
+            <form
+              onSubmit={submitLead}
+              className="card !p-6 md:!p-8 !border-2 !border-[var(--primary)]"
+            >
+              <div className="space-y-3 md:space-y-4">
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Seu nome"
+                  required
+                  className="w-full px-4 md:px-5 py-3.5 md:py-4 rounded-xl bg-[var(--surface)] border-2 border-[var(--border)] outline-none focus:border-[var(--primary)] transition-colors text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] text-base"
+                />
+                <input
+                  type="tel"
+                  inputMode="tel"
+                  value={whatsapp}
+                  onChange={(e) => setWhatsapp(formatWhatsapp(e.target.value))}
+                  placeholder="(11) 99999-9999"
+                  required
+                  className="w-full px-4 md:px-5 py-3.5 md:py-4 rounded-xl bg-[var(--surface)] border-2 border-[var(--border)] outline-none focus:border-[var(--primary)] transition-colors text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] text-base"
+                />
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="btn-primary w-full justify-center disabled:opacity-50"
+                >
+                  {sending ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" /> Liberando…
+                    </>
+                  ) : (
+                    <>
+                      Ver meu diagnóstico <ArrowRight size={18} />
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </motion.div>
+        ) : (
+          <>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -478,60 +545,7 @@ function ResultView({ result }: { result: SubmitResult }) {
           </motion.div>
         )}
 
-        {!sent ? (
-          <form onSubmit={submitLead} className="card !p-6 md:!p-10 mb-7">
-            <h2 className="text-lg md:text-xl mb-3 leading-snug">
-              Receba o diagnóstico completo no seu WhatsApp
-            </h2>
-            <p className="text-sm text-[var(--muted-foreground)] mb-6 md:mb-7 leading-relaxed">
-              Versão expandida do plano + PDF para compartilhar com sócios e
-              diretoria. Sem spam — só uma mensagem.
-            </p>
-            <div className="space-y-3 md:space-y-4">
-              <input
-                type="tel"
-                inputMode="tel"
-                value={whatsapp}
-                onChange={(e) => setWhatsapp(formatWhatsapp(e.target.value))}
-                placeholder="(11) 99999-9999"
-                required
-                className="w-full px-4 md:px-5 py-3.5 md:py-4 rounded-xl bg-[var(--surface)] border-2 border-[var(--border)] outline-none focus:border-[var(--primary)] transition-colors text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] text-base"
-              />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Seu nome"
-                  required
-                  className="w-full px-4 md:px-5 py-3.5 md:py-4 rounded-xl bg-[var(--surface)] border-2 border-[var(--border)] outline-none focus:border-[var(--primary)] transition-colors text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] text-base"
-                />
-                <input
-                  type="text"
-                  value={networkName}
-                  onChange={(e) => setNetworkName(e.target.value)}
-                  placeholder="Nome da rede"
-                  required
-                  className="w-full px-4 md:px-5 py-3.5 md:py-4 rounded-xl bg-[var(--surface)] border-2 border-[var(--border)] outline-none focus:border-[var(--primary)] transition-colors text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] text-base"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={sending}
-                className="btn-primary w-full justify-center disabled:opacity-50"
-              >
-                {sending ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" /> Enviando…
-                  </>
-                ) : (
-                  "Receber no WhatsApp"
-                )}
-              </button>
-            </div>
-          </form>
-        ) : (
-          <div className="card mb-7 !p-6 md:!p-7 border-[var(--success)]/40 bg-[var(--success-subtle)]">
+        <div className="card mb-7 !p-6 md:!p-7 border-[var(--success)]/40 bg-[var(--success-subtle)]">
             <div className="flex items-center gap-4 mb-5">
               <div className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-[var(--success)]/15 text-[var(--success)] flex items-center justify-center flex-shrink-0">
                 <Check size={20} />
@@ -541,7 +555,7 @@ function ResultView({ result }: { result: SubmitResult }) {
                   Vamos te chamar no WhatsApp
                 </div>
                 <div className="text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
-                  Em até 1 hora útil — com o diagnóstico completo e plano em
+                  Em até 1 hora útil, com o diagnóstico completo e plano em
                   3 passos.
                 </div>
               </div>
@@ -563,7 +577,6 @@ function ResultView({ result }: { result: SubmitResult }) {
               )}
             </button>
           </div>
-        )}
 
         <div className="text-center pt-6">
           <a
@@ -574,6 +587,8 @@ function ResultView({ result }: { result: SubmitResult }) {
             <ArrowRight size={16} />
           </a>
         </div>
+          </>
+        )}
       </div>
     </div>
   );
