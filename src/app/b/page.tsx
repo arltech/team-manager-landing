@@ -160,7 +160,7 @@ export default function Page() {
             ))}
           </nav>
           <Button variant="primary" size="sm">
-            Agendar demonstração
+            Fazer diagnóstico grátis
           </Button>
         </div>
       </header>
@@ -201,7 +201,7 @@ export default function Page() {
           <Reveal delay={0.18}>
             <div className="flex flex-wrap justify-center gap-3.5 mb-[18px]">
               <Button variant="primary" iconRight={<ArrowRight size={18} />}>
-                Agendar demonstração
+                Fazer diagnóstico grátis
               </Button>
               <Button variant="secondary" icon={<PlayCircle size={16} />}>
                 Ver diagnóstico de 2 min
@@ -468,7 +468,7 @@ export default function Page() {
                   </p>
                   <p className="text-sm text-[#1a1b22]/[0.82] leading-relaxed mb-[26px] min-h-[62px]">{p.hi}</p>
                   <Button variant={p.feat ? "primary" : "outline"} fullWidth>
-                    Agendar demonstração
+                    Fazer diagnóstico grátis
                   </Button>
                 </div>
               </Reveal>
@@ -525,7 +525,7 @@ export default function Page() {
                 O sistema cobra. O grupo celebra. Você decide. Comece pelo diagnóstico gratuito de 2 minutos.
               </p>
               <Button variant="white" size="lg" iconRight={<ArrowRight size={18} />}>
-                Agendar demonstração
+                Fazer diagnóstico grátis
               </Button>
               <p className="mt-[22px] text-[13.5px] text-white/60 flex items-center justify-center gap-2">
                 <Shield size={14} />

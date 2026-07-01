@@ -206,7 +206,7 @@ export default function ComandoPage() {
             ))}
           </nav>
           <Button variant="white" size="sm">
-            Agendar demonstração
+            Fazer diagnóstico grátis
           </Button>
         </div>
       </header>
@@ -256,7 +256,7 @@ export default function ComandoPage() {
             <Reveal delay={0.22}>
               <div className="flex flex-wrap gap-3.5 my-7 mb-5.5">
                 <Button variant="primary" iconRight={<ArrowRight size={18} />}>
-                  Agendar demonstração
+                  Fazer diagnóstico grátis
                 </Button>
                 <Button variant="ghost" iconRight={<ArrowRight size={16} />}>
                   Diagnóstico em 2 min
@@ -466,26 +466,22 @@ export default function ComandoPage() {
         <div className="max-w-[880px] mx-auto px-7">
           <Reveal>
             <div className="bg-white border border-[var(--border)] rounded-[26px] p-12 md:p-[52px_48px] shadow-[var(--shadow-card)] relative">
-              <div className="inline-flex gap-2 mb-[22px]">
-                <span className="inline-flex items-center gap-[7px] text-xs font-bold text-[var(--success)] bg-[var(--success-subtle)] px-3 py-1.5 rounded-full">
-                  <span className="w-[7px] h-[7px] rounded-full bg-[var(--success)]" />
-                  Em produção hoje
-                </span>
-              </div>
               <p className="font-[var(--font-heading)] font-bold text-[clamp(22px,2.8vw,30px)] leading-[1.3] tracking-[-0.02em] mb-7">
-                &ldquo;Antes eu ligava toda segunda perguntando &lsquo;cadê as matrículas?&rsquo;. Agora a
-                unidade me liga na sexta dizendo{" "}
-                <span className="text-[var(--primary)]">&lsquo;fechei a meta&rsquo;.</span>&rdquo;
+                &ldquo;Antes eu ligava toda segunda perguntando &lsquo;cadê as matrículas?&rsquo;. Hoje eu só
+                abro o Team Manager e{" "}
+                <span className="text-[var(--primary)]">já sei de tudo, sem ligar pra ninguém.</span>&rdquo;
               </p>
               <div className="flex items-center gap-3.5">
-                <span
-                  className="w-12 h-12 rounded-full bg-[var(--surface-container)] inline-flex items-center justify-center font-[var(--font-heading)] font-bold text-[var(--on-surface-variant)]"
+                <Image
+                  src="/testimonial-avatar.jpg"
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="w-12 h-12 rounded-full object-cover"
                   style={{ boxShadow: "0 0 0 2px color-mix(in srgb,var(--primary) 15%,transparent)" }}
-                >
-                  DR
-                </span>
+                />
                 <div>
-                  <div className="font-bold text-sm">Diretor de rede</div>
+                  <div className="font-bold text-sm">Rodrigo Ferreira · Gerente Comercial</div>
                   <div className="text-[13px] text-[var(--muted-foreground)]">
                     3 unidades · Escola de idiomas · Piloto Team Manager
                   </div>
@@ -541,7 +537,7 @@ export default function ComandoPage() {
                   </p>
                   <p className="text-sm text-[#1a1b22]/[0.82] leading-relaxed mb-[26px] min-h-[62px]">{p.hi}</p>
                   <Button variant={p.feat ? "primary" : "outline"} fullWidth>
-                    Agendar demonstração
+                    Fazer diagnóstico grátis
                   </Button>
                 </div>
               </Reveal>
