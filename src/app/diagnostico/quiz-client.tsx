@@ -16,6 +16,7 @@ import {
   type DiagnosticEvidence,
 } from "@/lib/quiz-types";
 import { trackMeta, trackMetaCustom, newEventId } from "@/lib/meta-pixel";
+import { trackClarityEvent, setClarityTag, identifyClarityLead } from "@/lib/clarity";
 
 type SubmitResult = {
   id: string;
@@ -32,6 +33,13 @@ export function QuizClient() {
 
   const totalSteps = QUESTIONS.length;
   const progress = ((step + (result ? 1 : 0)) / (totalSteps + 1)) * 100;
+
+  // Marca no Clarity qual pergunta a sessão alcançou: a última tag antes do
+  // fim da gravação mostra exatamente em qual pergunta o lead parou.
+  useEffect(() => {
+    if (result) return;
+    trackClarityEvent(`quiz_step_${step + 1}_${QUESTIONS[step].key}`);
+  }, [step, result]);
 
   async function submitQuiz(final: QuizAnswers) {
     setSubmitting(true);
@@ -239,6 +247,7 @@ function ResultView({ result }: { result: SubmitResult }) {
 
   useEffect(() => {
     trackMetaCustom("QuizCompleted", { diagnostic });
+    trackClarityEvent(`quiz_completed_${diagnostic}`);
   }, [diagnostic]);
 
   const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "/#oferta";
@@ -315,6 +324,9 @@ function ResultView({ result }: { result: SubmitResult }) {
         throw new Error(data?.error || "Erro ao enviar. Tenta de novo.");
       }
       trackMeta("Lead", { content_name: diagnostic }, { eventID: eventId });
+      identifyClarityLead(digits, name);
+      setClarityTag("lead_whatsapp", digits);
+      trackClarityEvent("quiz_lead_captured");
       setSent(true);
       fireDiagnosticConfetti(diagnostic, copy.accentColor);
       toast.success("Diagnóstico liberado.");
