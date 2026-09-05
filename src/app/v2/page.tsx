@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Calculadora } from "./_parts/Calculadora";
 import { Ciclo } from "./_parts/Ciclo";
+import { Promessa } from "./_parts/Promessa";
 
 /**
  * Repaginada da landing, em preview. O que muda em relacao a "/":
@@ -13,29 +14,53 @@ import { Ciclo } from "./_parts/Ciclo";
  * 4. Entram "como funciona" e a calculadora, que a pagina nao tinha.
  */
 
-const PROVA = [
-  { n: "1.784", r: "candidatos no CRM", s: "de uma rede só, hoje" },
-  { n: "301", r: "matrículas registradas", s: "com origem e responsável" },
-  { n: "6", r: "unidades no mesmo painel", s: "sem planilha paralela" },
-  { n: "18", r: "pessoas usando", s: "sem cobrança do gestor" },
+
+/**
+ * A dor vira PERGUNTA e a resposta mostra o que resolve. Cada resposta cita a
+ * capacidade que existe de verdade no sistema, nao uma promessa vaga: e o que
+ * separa isto de uma lista de reclamacoes.
+ */
+const DORES: { p: string; r: string }[] = [
+  {
+    p: "Você só sabe o resultado do mês quando ele já acabou?",
+    r: "O painel fecha sozinho, por unidade e em tempo real. A reunião de segunda vira decisão, não reconstrução.",
+  },
+  {
+    p: "O follow-up depende de alguém lembrar?",
+    r: "Prazo vencendo, rotina em aberto e lead parado viram aviso automático para o responsável, no WhatsApp e no e-mail.",
+  },
+  {
+    p: "Cada unidade tem uma planilha, e nenhuma tem a mesma coluna?",
+    r: "Uma base só, com filtro por unidade. A diretoria vê o consolidado sem pedir arquivo para ninguém.",
+  },
+  {
+    p: "A panfletagem de sábado trouxe quantas matrículas?",
+    r: "Cada pessoa leva o próprio QR para a ação. O lead entra já ligado ao evento que o trouxe e a quem captou.",
+  },
+  {
+    p: "Descobre que o assessor sumiu só na reunião de sexta?",
+    r: "Mapa de Carga e Pulse do Time mostram quem parou e quem está afogado antes de virar problema.",
+  },
+  {
+    p: "O contrato foi impresso, assinado e fotografado?",
+    r: "Assinado no celular, com código de 6 dígitos, hash do PDF, IP e horário. A trilha existe se alguém contestar.",
+  },
 ];
 
-const DORES = [
-  "Você descobre o resultado do mês quando o mês já acabou.",
-  "O follow-up depende de alguém lembrar. Ninguém lembra.",
-  "Cada unidade tem uma planilha, e nenhuma tem a mesma coluna.",
-  "A panfletagem de sábado trouxe quantas matrículas? Ninguém sabe dizer.",
-  "O assessor sumiu por dois dias e isso só apareceu na reunião de sexta.",
-  "O contrato foi impresso, assinado, fotografado e está em alguma pasta.",
-];
 
-
+/**
+ * A tabela nao repete as dores da secao de cima: ela cobre o que a pagina
+ * ainda nao tocou. Toda linha aponta para algo que existe no sistema
+ * (comissao no Financeiro, grade em course_prices, renovacao com lembrete,
+ * fila de resgate, automacao por idade, auditoria de supervisao).
+ */
 const LEDGER: [string, string, string][] = [
-  ["Resultado do mês", "Você só sabe quando acabou", "Em tempo real, por unidade"],
-  ["Follow-up", "Depende do assessor lembrar", "Cobrado pelo sistema"],
-  ["Reconhecimento", "Ninguém vê quem performou", "Publicado no grupo, com ranking"],
-  ["Reunião de segunda", "Reconstruir a semana de memória", "Já está tudo no painel"],
-  ["Dados das unidades", "Uma planilha diferente em cada", "Uma fonte só, auditável"],
+  ["Comissão do assessor", "Calculada na mão no fim do mês", "Sai junto com a matrícula, por pessoa"],
+  ["Preço e desconto", "Cada um negocia o que acha", "Grade por curso, com teto de desconto"],
+  ["Renovação de contrato", "Lembra quem lembrar", "Avisa antes de vencer, com o contrato pronto"],
+  ["Lead que esfriou", "Só aparece se alguém for procurar", "Entra na fila de resgate sozinho"],
+  ["Aluno na idade de mudar de curso", "Ninguém cruza a base", "Vira mensagem no WhatsApp da unidade"],
+  ["O que foi tratado de verdade", "Confia no que o assessor contou", "Trilha por lead: quem fez, o quê e quando"],
 ];
 
 const PLANOS = [
@@ -143,7 +168,7 @@ export default function V2Page() {
         <div className="shell v2-hero-grid">
           <div>
             <p className="v2-sobre">Para redes de escolas e cursos, de 1 a 15 unidades</p>
-            <h1 className="v2-h1">Do QR na rua ao contrato assinado.</h1>
+            <Promessa />
             <p className="v2-sub">
               A operação comercial inteira da sua rede em um sistema: captura na
               rua, CRM, cobrança automática do follow-up, contrato assinado no
@@ -185,51 +210,39 @@ export default function V2Page() {
 
       {/* ── PROBLEMA ── */}
       <section className="band v2-dores-band">
-        <div className="shell v2-dores">
-          <div>
-            <h2 className="v2-h2">
-              Você não está gerenciando.
-              <br />
-              Está investigando.
-            </h2>
-            <p className="v2-lead">
-              Se para saber o que aconteceu na semana você precisa perguntar, o
-              problema não é a sua equipe. É que a resposta não mora em lugar
-              nenhum.
-            </p>
-          </div>
+        <div className="shell">
+          <h2 className="v2-h2 v2-centro">
+            Alguma dessas é a sua segunda-feira?
+          </h2>
+          <p className="v2-lead v2-centro v2-estreito">
+            Se você precisa perguntar para saber o que aconteceu na semana, o
+            problema não é a sua equipe. É que a resposta não mora em lugar
+            nenhum.
+          </p>
           <ul className="v2-dores-lista">
             {DORES.map((d) => (
-              <li key={d}>{d}</li>
+              <li key={d.p} className="v2-dor">
+                <p className="v2-dor-p">{d.p}</p>
+                <p className="v2-dor-r">
+                  <span aria-hidden="true" className="v2-dor-check" />
+                  {d.r}
+                </p>
+              </li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* ── PROVA ── */}
-      <section className="v2-prova">
-        <div className="shell">
-          <p className="v2-prova-titulo">
-            O que já está rodando numa rede real, agora
-          </p>
-          <div className="v2-prova-grid">
-            {PROVA.map((p) => (
-              <div key={p.r} className="v2-prova-item">
-                <strong className="tabular">{p.n}</strong>
-                <span className="v2-prova-rotulo">{p.r}</span>
-                <span className="v2-prova-sub">{p.s}</span>
-              </div>
-            ))}
-          </div>
-          <div className="v2-parceiro">
-            <span>Parceiro</span>
-            <Image
-              src="/parceiros/minds-english-school.png"
-              alt="Minds English School"
-              width={700}
-              height={316}
-            />
-          </div>
+      {/* ── PARCEIRO ── */}
+      <section className="v2-parceiro-band">
+        <div className="shell v2-parceiro">
+          <span className="rotulo">Parceiro</span>
+          <Image
+            src="/parceiros/minds-english-school.png"
+            alt="Minds English School"
+            width={700}
+            height={316}
+          />
         </div>
       </section>
 
@@ -264,7 +277,11 @@ export default function V2Page() {
       {/* ── COMPARAÇÃO ── */}
       <section className="band">
         <div className="shell">
-          <h2 className="v2-h2 v2-centro">O que muda na segunda-feira</h2>
+          <h2 className="v2-h2 v2-centro">E o que ninguém te conta que dá trabalho</h2>
+          <p className="v2-lead v2-centro v2-estreito">
+            As dores acima são as que doem na hora. Estas são as que corroem a
+            margem devagar, e são as que nenhuma planilha resolve.
+          </p>
           <table className="v2-tabela">
             <thead>
               <tr>
