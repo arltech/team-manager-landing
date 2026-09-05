@@ -17,7 +17,7 @@ import { useState } from "react";
  *    corte de 50% existe e agora esta explicado com essa palavra na tela.
  */
 
-const TICKET = 5438; // contrato medio de um aluno, em reais
+const TICKET = 5438; // contrato medio de um cliente, em reais
 const SEM_SEGUNDO_CONTATO = 0.3; // fatia dos leads que nunca recebe follow-up
 const RECUPERAVEL = 0.5; // metade do que se resgataria, porque lead frio converte menos
 
@@ -58,7 +58,7 @@ export function Calculadora() {
         </label>
 
         <label className="calc-campo">
-          <span className="calc-rotulo">Sua conversão de lead em matrícula</span>
+          <span className="calc-rotulo">Sua conversão de lead em venda</span>
           <output className="calc-valor num">{conversao}%</output>
           <input
             type="range" min={2} max={25} step={1} value={conversao}
@@ -102,12 +102,15 @@ export function Calculadora() {
         </p>
       </div>
 
-      <details className="calc-premissas">
-        <summary>De onde saem esses números</summary>
+      <details className="calc-premissas" open>
+        <summary>
+          <span aria-hidden="true" className="calc-seta" />
+          De onde saem esses números
+        </summary>
         <ul>
           <li>
-            Contrato médio de um aluno: <strong>{brl(TICKET)}</strong>. É a média
-            real da base em produção, 15,3 meses a R$ 356 mais taxa de R$ 194.
+            Contrato médio de um cliente: <strong>{brl(TICKET)}</strong>. É a média
+            real da base em produção: 15,3 meses de mensalidade a R$ 356, mais R$ 194 de entrada.
           </li>
           <li>
             Fatia de leads que nunca recebe segundo contato:{" "}

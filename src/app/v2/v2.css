@@ -445,3 +445,19 @@
 @media (prefers-reduced-motion: reduce) {
   .v2 .v2-promessa-frase { animation: none; }
 }
+
+/* O summary nao parecia clicavel e ficava fechado: a premissa a vista e o que
+   sustenta o numero da calculadora, entao ele abre por padrao e ganha cara de
+   botao (moldura + seta que gira). */
+.v2 .calc-premissas summary {
+  border: 1px solid var(--claro-linha); border-radius: 4px;
+  padding: 0 16px; font-weight: 600; color: #1a1b22;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+.v2 .calc-premissas summary:hover { border-color: var(--marca-texto); background: #fff; }
+.v2 .calc-seta {
+  width: 8px; height: 8px; margin-right: 12px; flex-shrink: 0;
+  border-right: 2px solid var(--marca-texto); border-bottom: 2px solid var(--marca-texto);
+  transform: rotate(45deg); transition: transform 200ms ease;
+}
+.v2 .calc-premissas[open] .calc-seta { transform: rotate(-135deg); }

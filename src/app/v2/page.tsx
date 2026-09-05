@@ -34,7 +34,7 @@ const DORES: { p: string; r: string }[] = [
     r: "Uma base só, com filtro por unidade. A diretoria vê o consolidado sem pedir arquivo para ninguém.",
   },
   {
-    p: "A panfletagem de sábado trouxe quantas matrículas?",
+    p: "A ação de rua de sábado trouxe quantos clientes?",
     r: "Cada pessoa leva o próprio QR para a ação. O lead entra já ligado ao evento que o trouxe e a quem captou.",
   },
   {
@@ -55,11 +55,11 @@ const DORES: { p: string; r: string }[] = [
  * fila de resgate, automacao por idade, auditoria de supervisao).
  */
 const LEDGER: [string, string, string][] = [
-  ["Comissão de quem vendeu", "Calculada na mão no fim do mês", "Sai junto com a matrícula, por pessoa"],
-  ["Preço e desconto", "Cada um negocia o que acha", "Grade por curso, com teto de desconto"],
+  ["Comissão de quem vendeu", "Calculada na mão no fim do mês", "Sai junto com o fechamento, por pessoa"],
+  ["Preço e desconto", "Cada um negocia o que acha", "Tabela por produto, com teto de desconto"],
   ["Renovação de contrato", "Lembra quem lembrar", "Avisa antes de vencer, com o contrato pronto"],
   ["Lead que esfriou", "Só aparece se alguém for procurar", "Entra na fila de resgate sozinho"],
-  ["De onde veio cada matrícula", "Anotada quando alguém lembra", "Amarrada à campanha e à parceria que trouxe"],
+  ["De onde veio cada venda", "Anotada quando alguém lembra", "Amarrada à campanha e à parceria que trouxe"],
   ["O que foi tratado de verdade", "Confia no que cada um contou na reunião", "Trilha por lead: quem fez, o quê e quando"],
 ];
 
@@ -111,12 +111,12 @@ const FAQ: [string, string][] = [
     "É a objeção mais comum e a que o produto foi desenhado para resolver. Registro leva 30 segundos, o ranking expõe quem produz e o XP cai sozinho para quem some. Você para de cobrar porque o sistema cobra.",
   ],
   [
-    "Já tenho um sistema de gestão escolar.",
-    "Ele cuida de turma, boletim e financeiro do aluno matriculado. O Team Manager cuida do que acontece antes: o candidato que ainda não é aluno. Os dois convivem, e o seu ERP continua sendo o ERP.",
+    "Já tenho um ERP de gestão.",
+    "Ele cuida de quem já é cliente: cadastro, financeiro, operação do dia. O Team Manager cuida do que acontece antes disso, de quem ainda é lead. Os dois convivem, e o seu ERP continua sendo o ERP.",
   ],
   [
     "É caro.",
-    "O contrato médio de um aluno na nossa base é de R$ 5.438. O Performance custa R$ 697 por mês. Se o sistema salvar duas matrículas por ano na rede inteira, ele já se pagou com folga.",
+    "O contrato médio de um cliente na nossa base é de R$ 5.438. O Performance custa R$ 697 por mês. Se o sistema salvar duas matrículas por ano na rede inteira, ele já se pagou com folga.",
   ],
   [
     "Minha rede é pequena, faz sentido?",
@@ -167,7 +167,6 @@ export default function V2Page() {
       <section className="v2-hero">
         <div className="shell v2-hero-grid">
           <div>
-            <p className="v2-sobre">Para redes de escolas e cursos, de 1 a 15 unidades</p>
             <Promessa />
             <p className="v2-sub">
               A operação comercial inteira da sua rede em um sistema: captura na
@@ -194,15 +193,15 @@ export default function V2Page() {
           <figure className="v2-tela">
             <Image
               src="/dashboard/slide-2.png"
-              alt="CRM de Candidatos do Team Manager: 363 leads novos no mês, 29 matrículas, 8% de conversão e o funil do pipeline com 356 candidatos ativos"
+              alt="Tela do Team Manager: 363 leads novos no mês, 29 fechamentos, 8% de conversão e o funil com 356 contatos ativos"
               width={3022}
               height={1560}
               priority
               sizes="(max-width: 1020px) 100vw, 52vw"
             />
             <figcaption>
-              CRM de Candidatos, tela real. O funil da rede inteira, com filtro
-              por unidade.
+              Tela real do sistema. O funil da rede inteira, com filtro por
+              unidade.
             </figcaption>
           </figure>
         </div>
@@ -412,8 +411,8 @@ export default function V2Page() {
             className="v2-logo v2-logo-rodape"
           />
           <p>
-            © Team Manager · ARLTech · Sistema de operação para redes de escolas e
-            cursos
+            © Team Manager · ARLTech · Sistema de operação para redes com várias
+            unidades
           </p>
         </div>
       </footer>

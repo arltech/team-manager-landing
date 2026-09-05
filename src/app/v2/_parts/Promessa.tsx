@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 
 const FRASES = [
   ["Do QR na rua", "ao contrato assinado."],
-  ["Do lead parado", "à matrícula fechada."],
+  ["Do lead parado", "à venda fechada."],
   ["Da planilha por unidade", "a um painel só."],
   ["Do follow-up esquecido", "à cobrança automática."],
   ["Do achismo de sexta", "ao número de terça."],

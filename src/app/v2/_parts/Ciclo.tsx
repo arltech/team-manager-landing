@@ -27,7 +27,7 @@ const ELOS = [
     nome: "Fechamento",
     titulo: "Contrato assinado no celular, com prova",
     texto:
-      "Emissão em PDF a partir do modelo do curso, link válido por 7 dias e código de 6 dígitos para assinar. Fica gravado o hash do documento, o IP e o horário: se alguém contestar depois, a trilha existe.",
+      "Emissão em PDF a partir do modelo do seu contrato, link válido por 7 dias e código de 6 dígitos para assinar. Fica gravado o hash do documento, o IP e o horário: se alguém contestar depois, a trilha existe.",
     prova: "Contratos",
   },
   {
@@ -35,7 +35,7 @@ const ELOS = [
     nome: "Time",
     titulo: "Quem fechou é visto na hora",
     texto:
-      "A matrícula é anunciada no grupo do WhatsApp automaticamente e entra no ranking da semana. A cobrança deixa de ser sua e vira disputa entre unidades.",
+      "O fechamento é anunciado no grupo do WhatsApp automaticamente e entra no ranking da semana. A cobrança deixa de ser sua e vira disputa entre unidades.",
     prova: "Gamificação e avisos",
   },
   {
@@ -43,7 +43,7 @@ const ELOS = [
     nome: "Dinheiro",
     titulo: "A receita aparece sem planilha",
     texto:
-      "Receita contratada, previsão do pipeline, perda em reais e comissão por pessoa do time. A entrada da matrícula pode ser cobrada por PIX ou cartão na mesma tela.",
+      "Receita contratada, previsão do pipeline, perda em reais e comissão por pessoa do time. A entrada do contrato pode ser cobrada por PIX ou cartão na mesma tela.",
     prova: "Financeiro e Cobrança",
   },
 ];
@@ -68,7 +68,7 @@ export function Ciclo() {
         <h3 className="v2-elo-fecho-titulo">É a volta inteira</h3>
         <p className="v2-elo-fecho-texto">
           Nenhum outro sistema do setor cobre os cinco. O que existe hoje é um
-          pedaço em cada lugar, e o buraco entre eles é onde a matrícula some.
+          pedaço em cada lugar, e o buraco entre eles é onde a venda some.
         </p>
         <a href="/diagnostico" className="btn btn-primary v2-elo-fecho-btn">
           Ver onde a sua rede perde
