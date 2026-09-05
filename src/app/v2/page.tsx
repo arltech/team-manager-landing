@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FluxoVivo } from "./_parts/FluxoVivo";
 import { Calculadora } from "./_parts/Calculadora";
+import { Placar } from "./_parts/Placar";
 
 /**
  * Repaginada da landing, em preview. O que muda em relacao a "/":
@@ -158,14 +159,11 @@ export default function V2Page() {
         <div className="shell v2-hero-grid">
           <div>
             <p className="v2-sobre">Para redes de escolas e cursos, de 1 a 15 unidades</p>
-            <h1 className="v2-h1">
-              Sua rede inteira em um painel que{" "}
-              <span className="mark">cobra a matrícula</span> por você.
-            </h1>
+            <h1 className="v2-h1">O painel que cobra a matrícula por você.</h1>
             <p className="v2-sub">
-              CRM de candidatos, follow-up automático, rotina semanal e ranking do
-              time. Um sistema só, no lugar da planilha de cada unidade e do grupo
-              de WhatsApp que ninguém lê.
+              Sua rede inteira em um lugar: CRM de candidatos, follow-up
+              automático, rotina semanal e ranking do time. No lugar da planilha
+              de cada unidade e do grupo de WhatsApp que ninguém lê.
             </p>
             <div className="v2-hero-ctas">
               <a href="/diagnostico" className="btn btn-primary">
@@ -212,7 +210,7 @@ export default function V2Page() {
       </section>
 
       {/* ── PROBLEMA ── */}
-      <section className="band rule">
+      <section className="band">
         <div className="shell v2-dores">
           <div>
             <h2 className="v2-h2">
@@ -234,8 +232,26 @@ export default function V2Page() {
         </div>
       </section>
 
+      {/* ── PLACAR ── */}
+      <section className="band band-claro">
+        <div className="shell">
+          <h2 className="v2-h2 v2-centro">O placar da semana</h2>
+          <p className="v2-lead v2-centro v2-estreito">
+            Quem produziu aparece. Quem sumiu também. Publicado no grupo toda
+            sexta, sem você precisar comentar nada.
+          </p>
+          <Placar />
+          <p className="v2-placar-nota">
+            É a resposta para a objeção que todo gestor tem: a equipe não usa o
+            sistema porque foi mandada, usa porque o placar é público. Pontos
+            saem de ação real, como matrícula fechada e follow-up feito no
+            prazo, e caem sozinhos para quem some.
+          </p>
+        </div>
+      </section>
+
       {/* ── COMO FUNCIONA ── */}
-      <section id="como" className="band rule v2-como">
+      <section id="como" className="band v2-como">
         <div className="shell">
           <h2 className="v2-h2 v2-centro">A semana da sua rede, sem você puxar</h2>
           <p className="v2-lead v2-centro v2-estreito">
@@ -255,12 +271,12 @@ export default function V2Page() {
       </section>
 
       {/* ── CALCULADORA ── */}
-      <section id="conta" className="band band-dark">
+      <section id="conta" className="band band-claro">
         <div className="shell">
           <h2 className="v2-h2 v2-centro">
             A conta que ninguém faz
           </h2>
-          <p className="v2-lead v2-centro v2-estreito v2-lead-claro">
+          <p className="v2-lead v2-centro v2-estreito">
             Lead que pede informação e nunca recebe um segundo contato não aparece
             em relatório nenhum. Ele só some. Mexa nos dois campos e veja o
             tamanho disso na sua rede.
@@ -270,7 +286,7 @@ export default function V2Page() {
       </section>
 
       {/* ── COMPARAÇÃO ── */}
-      <section className="band rule">
+      <section className="band">
         <div className="shell">
           <h2 className="v2-h2 v2-centro">O que muda já no primeiro dia</h2>
           <table className="v2-tabela">
@@ -295,7 +311,7 @@ export default function V2Page() {
       </section>
 
       {/* ── PREÇOS ── */}
-      <section id="precos" className="band rule v2-precos">
+      <section id="precos" className="band v2-precos">
         <div className="shell">
           <h2 className="v2-h2 v2-centro">Você paga por unidade, não por pessoa</h2>
           <p className="v2-lead v2-centro v2-estreito">
@@ -309,7 +325,12 @@ export default function V2Page() {
                 key={p.nome}
                 className={`v2-plano${p.destaque ? " v2-plano-destaque" : ""}`}
               >
-                {p.destaque && <span className="v2-plano-selo">Mais escolhido</span>}
+                <span
+                  className={`v2-plano-selo${p.destaque ? "" : " v2-plano-selo-vazio"}`}
+                  aria-hidden={!p.destaque}
+                >
+                  Mais escolhido
+                </span>
                 <h3 className="v2-plano-nome">{p.nome}</h3>
                 <p className="v2-plano-promessa">{p.promessa}</p>
                 <p className="v2-plano-preco">
@@ -347,7 +368,7 @@ export default function V2Page() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="band rule">
+      <section id="faq" className="band">
         <div className="shell v2-faq-shell">
           <h2 className="v2-h2">As seis que mais aparecem</h2>
           <div className="v2-faq">
@@ -362,14 +383,14 @@ export default function V2Page() {
       </section>
 
       {/* ── CTA FINAL ── */}
-      <section className="band band-dark v2-final">
+      <section className="band v2-final">
         <div className="shell">
           <h2 className="v2-h2 v2-centro">
             Cinco perguntas. Dois minutos.
             <br />
             Sem cadastro.
           </h2>
-          <p className="v2-lead v2-centro v2-estreito v2-lead-claro">
+          <p className="v2-lead v2-centro v2-estreito">
             O diagnóstico devolve onde a sua rede está perdendo visibilidade e um
             plano de ação em três passos. Se fizer sentido, a gente conversa
             depois disso.
