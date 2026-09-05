@@ -9,10 +9,14 @@ import type { LucideIcon } from "lucide-react";
 /**
  * Vitrine de tudo que existe no sistema.
  *
- * Nome e ICONE sao os mesmos de src/lib/navigation.ts no repo do app: quem
- * chega pela landing encontra a mesma palavra e o mesmo desenho no menu depois
- * de entrar. Renomear aqui so criaria a sensacao de ter comprado outra coisa.
- * O que muda e a DESCRICAO, escrita para quem ainda nao usa.
+ * Os ICONES sao os mesmos de src/lib/navigation.ts no repo do app, para quem
+ * chega pela landing reconhecer o menu depois de entrar.
+ *
+ * Os NOMES sao os neutros, e nao os rotulos padrao do sistema ("CRM de
+ * Candidatos"), porque o produto tem dicionario por tenant
+ * (src/lib/terminology.ts): Candidato, Matricula e Curso sao so o default de
+ * escola, e cada cliente configura como o negocio dele fala. A vitrine mostra
+ * a funcao; o rotulo quem escolhe e quem contrata.
  *
  * A etiqueta de plano sai de src/lib/planos.ts. Sem ela a lista viraria uma
  * promessa de que tudo vem em qualquer degrau.
@@ -40,7 +44,7 @@ const GRUPOS: { titulo: string; itens: Modulo[] }[] = [
   {
     titulo: "Da captura ao contrato",
     itens: [
-      { Icon: Users, nome: "CRM de Candidatos", desc: "Cada lead com dono, origem, etapa e o histórico inteiro da conversa.", plano: "Essencial" },
+      { Icon: Users, nome: "CRM de Leads", desc: "Cada lead com dono, origem, etapa e o histórico inteiro da conversa.", plano: "Essencial" },
       { Icon: MapPin, nome: "Atividades Externas", desc: "Ação de rua com escala, QR por pessoa e cada lead ligado ao evento.", plano: "Inteligência" },
       { Icon: Handshake, nome: "Parcerias", desc: "Quem indica, quanto traz e o que cada parceria rendeu de fato.", plano: "Essencial" },
       { Icon: Search, nome: "Buscar Leads", desc: "Prospecção na web com extração por IA, direto para o CRM.", plano: "Inteligência" },

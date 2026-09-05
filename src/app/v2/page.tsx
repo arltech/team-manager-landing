@@ -112,6 +112,10 @@ const FAQ: [string, string][] = [
     "É a objeção mais comum e a que o produto foi desenhado para resolver. Registro leva 30 segundos, o ranking expõe quem produz e o XP cai sozinho para quem some. Você para de cobrar porque o sistema cobra.",
   ],
   [
+    "Meu negócio não é escola. Serve?",
+    "Serve. O vocabulário do sistema é configurável: o que aqui chamamos de lead, contrato e produto recebe o nome que a sua operação usa, e só o rótulo muda. O que não muda é o funil: alguém pede informação, alguém precisa dar retorno, alguém fecha e alguém recebe.",
+  ],
+  [
     "Já tenho um ERP de gestão.",
     "Ele cuida de quem já é cliente: cadastro, financeiro, operação do dia. O Team Manager cuida do que acontece antes disso, de quem ainda é lead. Os dois convivem, e o seu ERP continua sendo o ERP.",
   ],
@@ -269,6 +273,11 @@ export default function V2Page() {
             e a etiqueta diz em qual plano cada uma entra.
           </p>
           <Modulos />
+          <p className="v2-mod-nota">
+            O sistema fala a língua do seu negócio: lead, matrícula, curso e
+            aluno são apenas o vocabulário padrão. Cada cliente troca esses
+            nomes na configuração, sem que nada mude por baixo.
+          </p>
         </div>
       </section>
 
@@ -379,7 +388,7 @@ export default function V2Page() {
       {/* ── FAQ ── */}
       <section id="faq" className="band">
         <div className="shell v2-faq-shell">
-          <h2 className="v2-h2">As seis que mais aparecem</h2>
+          <h2 className="v2-h2">As sete que mais aparecem</h2>
           <div className="v2-faq">
             {FAQ.map(([q, a]) => (
               <details key={q}>

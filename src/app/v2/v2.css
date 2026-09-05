@@ -493,3 +493,8 @@
 .v2 .v2-mod-p3 { background: rgba(25,195,125,0.16); color: var(--verde); }
 .v2 .v2-mod-av { background: rgba(255,255,255,0.06); color: var(--texto-fraco); }
 .v2 .v2-mod-desc { font-size: 14.5px; line-height: 1.45; color: var(--texto-claro); }
+.v2 .v2-mod-nota {
+  margin: 40px auto 0; max-width: 64ch; text-align: center;
+  font-size: 15px; color: var(--texto-claro);
+  border-top: 1px solid var(--linha); padding-top: 26px;
+}
