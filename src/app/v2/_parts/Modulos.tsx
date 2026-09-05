@@ -1,6 +1,6 @@
 import {
   Activity, BarChart3, BookOpen, ClipboardList, CreditCard, FileSignature,
-  FileText, Flame, Gauge, Gift, GraduationCap, Handshake, HeartPulse, History,
+  FileText, Flame, Gauge, Gift, Handshake, HeartPulse, History,
   LayoutDashboard, Lightbulb, MapPin, Megaphone, Radar, Search, ShieldAlert,
   ShieldCheck, Sparkles, TrendingUp, Trophy, Users, Wallet,
 } from "lucide-react";
@@ -46,7 +46,6 @@ const GRUPOS: { titulo: string; itens: Modulo[] }[] = [
       { Icon: Search, nome: "Buscar Leads", desc: "Prospecção na web com extração por IA, direto para o CRM.", plano: "Inteligência" },
       { Icon: FileText, nome: "Scripts de Vendas", desc: "O melhor pitch vira padrão, com o uso registrado lead a lead.", plano: "Performance" },
       { Icon: FileSignature, nome: "Contratos", desc: "Emissão em PDF, assinatura pelo celular e trilha de cada etapa.", plano: "Inteligência" },
-      { Icon: GraduationCap, nome: "Alunos", desc: "A base de quem já fechou, com contrato, turma e situação.", plano: "Essencial" },
     ],
   },
   {

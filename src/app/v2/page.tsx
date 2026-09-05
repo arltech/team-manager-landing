@@ -265,7 +265,7 @@ export default function V2Page() {
         <div className="shell">
           <h2 className="v2-h2 v2-centro">Tudo o que entra junto</h2>
           <p className="v2-lead v2-centro v2-estreito">
-            Não é um CRM com puxadinho. São 27 telas que já conversam entre si,
+            Não é um CRM com puxadinho. São 26 telas que já conversam entre si,
             e a etiqueta diz em qual plano cada uma entra.
           </p>
           <Modulos />
