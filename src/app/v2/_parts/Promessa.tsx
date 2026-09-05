@@ -23,10 +23,15 @@ const FRASES = [
 export function Promessa() {
   const [i, setI] = useState(0);
 
+  // Quem pede movimento reduzido nao quer o DESLIZE, e nao perder o conteudo:
+  // a troca continua, mais devagar, e o CSS tira a animacao. Congelar na
+  // primeira frase escondia quatro argumentos de quem tem a opcao ligada.
   useEffect(() => {
-    const parado = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (parado) return;
-    const t = setInterval(() => setI((n) => (n + 1) % FRASES.length), 3400);
+    const suave = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const t = setInterval(
+      () => setI((n) => (n + 1) % FRASES.length),
+      suave ? 5200 : 3400,
+    );
     return () => clearInterval(t);
   }, []);
 

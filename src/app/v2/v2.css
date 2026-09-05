@@ -436,15 +436,17 @@
 @media (max-width: 1019px) { .v2 .v2-promessa { min-height: 4.2em; } }
 .v2 .v2-promessa-frase {
   display: block;
-  animation: v2-entra 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: v2-entra 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @keyframes v2-entra {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* Sem deslize, mas o texto ainda aparece: some o transform, fica so o fade. */
 @media (prefers-reduced-motion: reduce) {
-  .v2 .v2-promessa-frase { animation: none; }
+  .v2 .v2-promessa-frase { animation: v2-surge 300ms ease both; }
 }
+@keyframes v2-surge { from { opacity: 0; } to { opacity: 1; } }
 
 /* O summary nao parecia clicavel e ficava fechado: a premissa a vista e o que
    sustenta o numero da calculadora, entao ele abre por padrao e ganha cara de
@@ -461,3 +463,33 @@
   transform: rotate(45deg); transition: transform 200ms ease;
 }
 .v2 .calc-premissas[open] .calc-seta { transform: rotate(-135deg); }
+
+/* ── MÓDULOS ──────────────────────────────────────────────── */
+.v2 .v2-modulos { margin-top: 52px; display: flex; flex-direction: column; gap: 44px; }
+.v2 .v2-mod-grupo-titulo {
+  font-family: var(--corpo); font-weight: 700; font-size: 12.5px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--acento);
+  padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid var(--linha);
+}
+.v2 .v2-mod-lista {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 22px 28px;
+}
+@media (min-width: 700px) { .v2 .v2-mod-lista { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1060px) { .v2 .v2-mod-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.v2 .v2-mod { display: flex; gap: 14px; align-items: flex-start; }
+.v2 .v2-mod svg { color: var(--acento); flex-shrink: 0; margin-top: 2px; }
+.v2 .v2-mod-texto { min-width: 0; }
+.v2 .v2-mod-nome {
+  font-size: 16px; color: #fff; margin-bottom: 4px;
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+}
+.v2 .v2-mod-plano {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 2px 6px; white-space: nowrap;
+}
+.v2 .v2-mod-p1 { background: rgba(255,255,255,0.1); color: var(--texto-claro); }
+.v2 .v2-mod-p2 { background: rgba(157,178,255,0.16); color: var(--acento); }
+.v2 .v2-mod-p3 { background: rgba(25,195,125,0.16); color: var(--verde); }
+.v2 .v2-mod-av { background: rgba(255,255,255,0.06); color: var(--texto-fraco); }
+.v2 .v2-mod-desc { font-size: 14.5px; line-height: 1.45; color: var(--texto-claro); }

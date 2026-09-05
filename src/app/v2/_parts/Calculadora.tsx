@@ -17,7 +17,10 @@ import { useState } from "react";
  *    corte de 50% existe e agora esta explicado com essa palavra na tela.
  */
 
-const TICKET = 5438; // contrato medio de um cliente, em reais
+// Valor de partida, nao imposicao: e a media real da base em producao, mas
+// quem le poe o ticket do PROPRIO negocio. Sem isso a conta so vale para quem
+// vende contrato parecido com o do cliente que gerou o numero.
+const TICKET_PADRAO = 5438;
 const SEM_SEGUNDO_CONTATO = 0.3; // fatia dos leads que nunca recebe follow-up
 const RECUPERAVEL = 0.5; // metade do que se resgataria, porque lead frio converte menos
 
@@ -34,10 +37,11 @@ export function Calculadora() {
   const [leads, setLeads] = useState(120);
   const [conversao, setConversao] = useState(8);
   const [unidades, setUnidades] = useState(3);
+  const [ticket, setTicket] = useState(TICKET_PADRAO);
 
   const perdidosAno = Math.round(leads * 12 * SEM_SEGUNDO_CONTATO);
   const matriculasPerdidas = (perdidosAno * conversao) / 100;
-  const receita = Math.round(matriculasPerdidas * RECUPERAVEL * TICKET);
+  const receita = Math.round(matriculasPerdidas * RECUPERAVEL * ticket);
 
   // O plano comparado e o que cobre o numero de unidades informado, nao um fixo.
   const plano = PLANOS.find((p) => unidades <= p.ate) ?? PLANOS[PLANOS.length - 1];
@@ -64,6 +68,16 @@ export function Calculadora() {
             type="range" min={2} max={25} step={1} value={conversao}
             onChange={(e) => setConversao(Number(e.target.value))}
             aria-label="Taxa de conversão"
+          />
+        </label>
+
+        <label className="calc-campo">
+          <span className="calc-rotulo">Quanto vale um contrato fechado, em média</span>
+          <output className="calc-valor num">{brl(ticket)}</output>
+          <input
+            type="range" min={500} max={20000} step={100} value={ticket}
+            onChange={(e) => setTicket(Number(e.target.value))}
+            aria-label="Valor médio do contrato"
           />
         </label>
 
@@ -109,8 +123,9 @@ export function Calculadora() {
         </summary>
         <ul>
           <li>
-            Contrato médio de um cliente: <strong>{brl(TICKET)}</strong>. É a média
-            real da base em produção: 15,3 meses de mensalidade a R$ 356, mais R$ 194 de entrada.
+            O valor do contrato é seu: o controle começa em{" "}
+            <strong>{brl(TICKET_PADRAO)}</strong>, que é a média real de uma
+            base em produção, mas a conta usa o número que você colocar.
           </li>
           <li>
             Fatia de leads que nunca recebe segundo contato:{" "}

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Calculadora } from "./_parts/Calculadora";
 import { Ciclo } from "./_parts/Ciclo";
 import { Promessa } from "./_parts/Promessa";
+import { Modulos } from "./_parts/Modulos";
 
 /**
  * Repaginada da landing, em preview. O que muda em relacao a "/":
@@ -148,6 +149,7 @@ export default function V2Page() {
           />
           <nav className="v2-nav">
             <a href="#ciclo">O ciclo</a>
+            <a href="#modulos">Módulos</a>
             <a href="#conta">A conta</a>
             <a href="#precos">Preços</a>
             <a href="#faq">Dúvidas</a>
@@ -255,6 +257,18 @@ export default function V2Page() {
             passa o bastão para o seguinte sozinho.
           </p>
           <Ciclo />
+        </div>
+      </section>
+
+      {/* ── MÓDULOS ── */}
+      <section id="modulos" className="band">
+        <div className="shell">
+          <h2 className="v2-h2 v2-centro">Tudo o que entra junto</h2>
+          <p className="v2-lead v2-centro v2-estreito">
+            Não é um CRM com puxadinho. São 27 telas que já conversam entre si,
+            e a etiqueta diz em qual plano cada uma entra.
+          </p>
+          <Modulos />
         </div>
       </section>
 
