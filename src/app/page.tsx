@@ -23,17 +23,18 @@ import { Avisos } from "@/app/_site/Avisos";
  * separa isto de uma lista de reclamacoes.
  */
 /**
- * WhatsApp comercial: +55 81 98214-9605.
+ * WhatsApp comercial. Para DISCAR o numero e (81) 98214-9605, mas aqui ele vai
+ * SEM o 9: no Brasil o WhatsApp guarda o identificador dos numeros antigos com
+ * 12 digitos (55 + DDD + 8), e e esse que o wa.me e o WAHA resolvem. Este e o
+ * mesmo formato que o PDF do diagnostico usa, e que a sessao do WAHA reconhece.
  *
- * O PDF do diagnostico (src/lib/diagnostic-pdf.tsx) trazia este numero SEM o 9
- * do celular, o que provavelmente derrubou todo mundo que clicou ali. Corrigido
- * nos dois lugares no mesmo commit.
+ * Nao "corrigir" acrescentando o 9: parece erro de digitacao e nao e.
  *
  * O texto vai pre-preenchido: quem atende sabe de onde a conversa veio sem
  * perguntar, e quem escreve nao precisa pensar na primeira frase.
  */
 const WHATSAPP =
-  "https://wa.me/5581982149605?text=" +
+  "https://wa.me/558182149605?text=" +
   encodeURIComponent(
     "Olá! Vim pelo site do Team Manager e queria falar sobre os planos.",
   );

@@ -488,7 +488,7 @@ function DiagnosticDocument({ data }: { data: DiagnosticPdfData }) {
           </Text>
           <View style={styles.ctaButtons}>
             <Link
-              src="https://wa.me/5581982149605"
+              src="https://wa.me/558182149605"
               style={styles.btnPrimary}
             >
               Falar no WhatsApp
