@@ -381,6 +381,22 @@ export default function ComandoPage() {
               ))}
             </div>
           </Reveal>
+          {/* Parceiro. Versao branca da marca porque a faixa e sobre fundo escuro;
+              a colorida tem azul-marinho que some no gradiente do hero. */}
+          <Reveal delay={0.1}>
+            <div className="mt-12 flex flex-col items-center gap-4">
+              <span className="text-xs font-bold tracking-[0.14em] uppercase text-white/35">
+                Parceiro
+              </span>
+              <Image
+                src="/parceiros/minds-english-school.png"
+                alt="Minds English School"
+                width={700}
+                height={316}
+                className="h-16 md:h-20 w-auto opacity-95"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 
