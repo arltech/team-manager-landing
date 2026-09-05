@@ -498,3 +498,44 @@
   font-size: 15px; color: var(--texto-claro);
   border-top: 1px solid var(--linha); padding-top: 26px;
 }
+
+/* ── AVISOS E AGENTES ─────────────────────────────────────── */
+.v2 .v2-canais {
+  margin-top: 52px; display: grid; gap: 2px;
+  background: var(--claro-linha); border: 2px solid var(--claro-linha);
+}
+@media (min-width: 880px) { .v2 .v2-canais { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.v2 .v2-canal { background: #fff; padding: 32px 28px; display: flex; flex-direction: column; }
+.v2 .v2-canal svg { color: var(--marca-texto); margin-bottom: 18px; }
+/* O grupo da diretoria e o que decide a compra: quem lidera quer saber sem
+   abrir o sistema. Por isso ele, e so ele, e o bloco escuro. */
+.v2 .band-claro .v2-canal-destaque { background: var(--marca); color: #fff; }
+.v2 .band-claro .v2-canal-destaque svg { color: var(--acento); }
+.v2 .v2-canal-para {
+  font-family: var(--display); text-transform: uppercase; font-size: 20px;
+  color: var(--marca-texto); margin-bottom: 10px; line-height: 1.05;
+}
+.v2 .band-claro .v2-canal-destaque .v2-canal-para { color: #fff; }
+.v2 .v2-canal-resumo { font-size: 15px; color: #4a5470; margin-bottom: 22px; }
+.v2 .band-claro .v2-canal-destaque .v2-canal-resumo { color: rgba(255,255,255,0.78); }
+.v2 .v2-canal-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.v2 .v2-canal-lista li { display: flex; flex-direction: column; gap: 3px; }
+.v2 .v2-canal-quando {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--marca-texto);
+}
+.v2 .band-claro .v2-canal-destaque .v2-canal-quando { color: var(--acento); }
+.v2 .v2-canal-oque { font-size: 15px; line-height: 1.45; color: #1a1b22; }
+.v2 .band-claro .v2-canal-destaque .v2-canal-oque { color: rgba(255,255,255,0.9); }
+
+.v2 .v2-ia {
+  margin-top: 2px; display: flex; gap: 20px; align-items: flex-start;
+  background: #fff; border: 2px solid var(--claro-linha); border-top: 0;
+  padding: 30px 28px;
+}
+.v2 .v2-ia svg { color: var(--marca-texto); flex-shrink: 0; margin-top: 2px; }
+.v2 .v2-ia-titulo {
+  font-family: var(--display); text-transform: uppercase; font-size: 20px;
+  color: var(--marca-texto); margin-bottom: 10px;
+}
+.v2 .v2-ia-texto { font-size: 15.5px; color: #4a5470; max-width: 78ch; }

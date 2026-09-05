@@ -3,6 +3,7 @@ import { Calculadora } from "./_parts/Calculadora";
 import { Ciclo } from "./_parts/Ciclo";
 import { Promessa } from "./_parts/Promessa";
 import { Modulos } from "./_parts/Modulos";
+import { Avisos } from "./_parts/Avisos";
 
 /**
  * Repaginada da landing, em preview. O que muda em relacao a "/":
@@ -154,6 +155,7 @@ export default function V2Page() {
           <nav className="v2-nav">
             <a href="#ciclo">O ciclo</a>
             <a href="#modulos">Módulos</a>
+            <a href="#avisos">Avisos</a>
             <a href="#conta">A conta</a>
             <a href="#precos">Preços</a>
             <a href="#faq">Dúvidas</a>
@@ -278,6 +280,18 @@ export default function V2Page() {
             aluno são apenas o vocabulário padrão. Cada cliente troca esses
             nomes na configuração, sem que nada mude por baixo.
           </p>
+        </div>
+      </section>
+
+      {/* ── AVISOS ── */}
+      <section id="avisos" className="band band-claro">
+        <div className="shell">
+          <h2 className="v2-h2 v2-centro">O sistema fala, você não precisa</h2>
+          <p className="v2-lead v2-centro v2-estreito">
+            Nada disso depende de alguém abrir uma tela. O aviso vai atrás da
+            pessoa, no WhatsApp que ela já usa o dia inteiro.
+          </p>
+          <Avisos />
         </div>
       </section>
 
