@@ -91,7 +91,7 @@ const PLANS = [
   },
   {
     name: "Performance",
-    price: "597",
+    price: "697",
     units: "3 unidades inclusas",
     hi: "Gestão do time com número, não com impressão.",
     items: [
@@ -104,7 +104,7 @@ const PLANS = [
   },
   {
     name: "Inteligência",
-    price: "997",
+    price: "1.297",
     units: "6 unidades inclusas",
     hi: "A IA acompanha cada tratativa e o dinheiro aparece no fim.",
     items: [

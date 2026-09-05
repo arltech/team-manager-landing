@@ -92,7 +92,7 @@ src/
 - [ ] Setar `NEXT_PUBLIC_DEMO_CALENDLY` (link Calendly do founder)
 - [ ] Verificar domínio Resend (DNS) pra usar `noreply@teammanager.app`
 - [ ] Revisar copy do case Minds (slide com placeholder — aguardando aprovação Felipe)
-- [x] Pricing publicado: Essencial 397 / Performance 597 / Inteligência 997 por mês, 20% off no anual.
+- [x] Pricing publicado: Essencial 397 / Performance 697 / Inteligência 1.297 por mês, 20% off no anual.
       Fonte da verdade e a tabela `planos_precos` do app (/admin/cobranca); a landing e espelho manual.
 - [ ] Apontar domínio próprio no Vercel
 - [ ] Configurar GA4 / Meta Pixel (não incluído nesta versão)

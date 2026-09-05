@@ -108,8 +108,8 @@ const STRUCTURED_DATA = {
       // page.tsx; mudou la, muda aqui, senao o rich result mente.
       offers: [
         { nome: "Essencial", preco: "397" },
-        { nome: "Performance", preco: "597" },
-        { nome: "Inteligência", preco: "997" },
+        { nome: "Performance", preco: "697" },
+        { nome: "Inteligência", preco: "1297" },
       ].map(({ nome, preco }) => ({
         "@type": "Offer",
         name: `Team Manager ${nome}`,

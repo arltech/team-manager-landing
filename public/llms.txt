@@ -19,7 +19,7 @@ Gestores e donos de redes de escolas e cursos com 1 a 15 unidades que hoje depen
 Três degraus, cada um acrescentando ao anterior. Preço por mês, com 20% de desconto no ciclo anual. O eixo de cobrança é a unidade, não o usuário: cada plano já inclui um número de unidades e as demais entram como unidade avulsa, com limite operacional de 15 usuários por unidade.
 
 - Essencial (R$ 397/mês, 1 unidade inclusa): CRM de candidatos, quadro de tarefas, diário de atividades, métricas diárias, análise de conversão do funil, gamificação com ranking, parcerias e e-mails automáticos.
-- Performance (R$ 597/mês, 3 unidades inclusas): tudo do Essencial, mais desempenho por assessor, fila de resgate de lead parado, objetivo x conversão, gestão do time (mapa de carga, pulse, distribuição de leads, auditoria de supervisão) e scripts de venda.
-- Inteligência (R$ 997/mês, 6 unidades inclusas): tudo do Performance, mais Sentinela Comercial com IA (temperatura, risco e próxima ação por ficha), busca de leads na web, financeiro com comissão, contratos assinados pelo WhatsApp, atividades externas e automações de WhatsApp.
+- Performance (R$ 697/mês, 3 unidades inclusas): tudo do Essencial, mais desempenho por assessor, fila de resgate de lead parado, objetivo x conversão, gestão do time (mapa de carga, pulse, distribuição de leads, auditoria de supervisão) e scripts de venda.
+- Inteligência (R$ 1.297/mês, 6 unidades inclusas): tudo do Performance, mais Sentinela Comercial com IA (temperatura, risco e próxima ação por ficha), busca de leads na web, financeiro com comissão, contratos assinados pelo WhatsApp, atividades externas e automações de WhatsApp.
 
 Garantia de 30 dias com devolução integral. Setup em até 72 horas. Sem fidelidade.
