@@ -1,0 +1,541 @@
+/*
+ * Direcao visual da landing. Nasceu da direcao "Placar" escolhida no canvas de
+ * direcoes e mudou de tese depois: o argumento nao e a gamificacao (que e uma
+ * parte), e a operacao COMPLETA, do QR na acao de rua ao contrato assinado no
+ * celular e ao dinheiro no financeiro. Nenhum concorrente cobre a volta toda.
+ *
+ * Da direcao original ficam a linguagem dura (Archivo Black em caixa alta,
+ * bloco de 4px, numero tabular grande) e o fundo escuro. Sai o laranja, que
+ * nao existia em lugar nenhum do design system: a paleta agora e a do produto.
+ */
+
+.tm {
+  /* Paleta do design system do produto, nao inventada aqui:
+     --primary #00288e (azul Minds) e --plano-topo #00288e (violeta), com o
+     violeta claro para funcionar sobre fundo escuro. O laranja da versao
+     anterior nao existia em lugar nenhum do sistema e saiu. */
+  --tinta: #070b24;
+  --tinta-2: #0f1440;
+  --tinta-3: #1b2059;
+
+  --claro: #f1f4fb;
+  --claro-2: #e3e8f2;
+  --claro-linha: #c4c5d5;
+
+  /* O #00288e do design system era azul demais como FUNDO chapado: destoava
+     do azul-noite do resto da pagina. Como fundo solido usa-se um marinho
+     profundo, na mesma familia do --tinta; como TEXTO em faixa clara o azul
+     da marca continua. */
+  --marca: #0d1b4b;
+  --marca-texto: #00288e;
+  --acento: #9db2ff;
+  --acento-forte: #00288e;
+  --acento-btn: #ffffff;
+  --acento-btn-hover: #e8eeff;
+
+  --texto-claro: rgba(255, 255, 255, 0.68);
+  --texto-fraco: rgba(255, 255, 255, 0.44);
+  --linha: rgba(255, 255, 255, 0.12);
+  --linha-forte: rgba(255, 255, 255, 0.22);
+
+  --verde: #19c37d;
+
+  --display: "Archivo Black", system-ui, sans-serif;
+  --corpo: "Archivo", system-ui, sans-serif;
+
+  --shell: 1180px;
+
+  background: var(--tinta);
+  color: #f2f4fa;
+  font-family: var(--corpo);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tm h1, .tm h2, .tm h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  text-transform: uppercase;
+  margin: 0;
+  text-wrap: balance;
+}
+.tm h4 { font-family: var(--corpo); font-weight: 700; margin: 0; }
+.tm p { margin: 0; }
+.tm a { color: var(--acento); text-decoration: none; }
+.tm a:hover { color: #c3d0ff; }
+
+.tm .shell { max-width: var(--shell); margin: 0 auto; padding-inline: 24px; }
+.tm .band { padding-block: clamp(64px, 8vw, 112px); }
+
+.tm .band-claro { background: var(--claro); color: #1a1b22; }
+.tm .band-claro h1, .tm .band-claro h2, .tm .band-claro h3 { color: var(--marca-texto); }
+.tm .band-claro a { color: var(--acento-forte); }
+
+.tm .num {
+  font-family: var(--display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+.tm .rotulo {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.tm .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding-inline: 28px;
+  border-radius: 4px;
+  font-family: var(--corpo);
+  font-weight: 700;
+  font-size: 16px;
+  transition: background-color 150ms ease, border-color 150ms ease, transform 120ms ease;
+}
+.tm .btn:active { transform: translateY(1px); }
+/* CTA branco no fundo escuro: o maior contraste possivel da paleta.
+   Todo botao repete a COR DO TEXTO no :hover de proposito. Os botoes sao <a>,
+   entao o `.tm a:hover` generico pintava o texto de azul claro e o rotulo
+   sumia dentro do botao branco. */
+.tm .btn-primary { background: #ffffff; color: var(--tinta); }
+.tm .btn-primary:hover { background: #e8eeff; color: var(--tinta); }
+.tm .btn-ghost { border: 1px solid var(--linha-forte); color: #fff; }
+.tm .btn-ghost:hover { border-color: #fff; color: #fff; }
+.tm .band-claro .btn-primary { background: var(--marca); color: #fff; }
+.tm .band-claro .btn-primary:hover { background: #16276b; color: #fff; }
+.tm .band-claro .btn-ghost { border-color: var(--claro-linha); color: #1a1b22; }
+.tm .band-claro .btn-ghost:hover { border-color: var(--marca); color: #1a1b22; }
+
+.tm :focus-visible { outline: 2px solid var(--acento); outline-offset: 3px; }
+.tm .band-claro :focus-visible { outline-color: var(--acento-forte); }
+.tm input[type="range"] { accent-color: var(--marca); }
+
+@media (prefers-reduced-motion: reduce) {
+  .tm *, .tm *::before, .tm *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── HEADER ───────────────────────────────────────────────── */
+.tm .tm-header {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(11, 16, 32, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--linha);
+}
+.tm .tm-header-in { display: flex; align-items: center; gap: 28px; height: 96px; }
+/* A marca traz o wordmark embaixo do simbolo num arquivo quase quadrado:
+   abaixo de ~60px o "TEAM MANAGER" fica ilegivel. O header cresce junto. */
+.tm .tm-logo { height: 60px; width: auto; }
+.tm .tm-nav { display: none; gap: 26px; margin-left: 12px; }
+.tm .tm-nav a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--texto-claro);
+}
+.tm .tm-nav a:hover { color: #fff; }
+.tm .tm-header-acoes { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.tm .tm-entrar {
+  display: inline-flex; align-items: center; min-height: 44px; padding-inline: 12px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--texto-claro);
+}
+.tm .tm-entrar:hover { color: #fff; }
+.tm .tm-btn-sm { min-height: 44px; padding-inline: 18px; font-size: 14.5px; }
+@media (min-width: 940px) { .tm .tm-nav { display: flex; } }
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.tm .tm-hero { padding-block: clamp(52px, 7vw, 96px) clamp(56px, 7vw, 88px); overflow: hidden; }
+.tm .tm-hero-grid { display: grid; gap: clamp(40px, 5vw, 60px); }
+@media (min-width: 1020px) { .tm .tm-hero-grid { grid-template-columns: 1.08fr 0.92fr; align-items: center; } }
+.tm .tm-sobre { color: var(--acento); margin-bottom: 20px; }
+.tm .tm-h1 { font-size: clamp(36px, 5vw, 62px); margin-bottom: 24px; max-width: 15ch; }
+.tm .tm-sub { font-size: clamp(17px, 1.4vw, 20px); color: var(--texto-claro); max-width: 52ch; margin-bottom: 30px; }
+.tm .tm-hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+.tm .tm-hero-nota { font-size: 14.5px; color: var(--texto-fraco); max-width: 48ch; }
+
+/* ── FLUXO VIVO ───────────────────────────────────────────── */
+.tm .fluxo { border: 2px solid var(--linha-forte); background: var(--tinta-2); padding: 22px; }
+.tm .fluxo-topo {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 16px; border-bottom: 1px solid var(--linha);
+}
+.tm .fluxo-dia { font-size: 14px; color: var(--texto-fraco); }
+.tm .fluxo-selo { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acento); }
+.tm .fluxo-selo i { width: 7px; height: 7px; background: var(--acento); animation: v2-pulso 1.8s ease-in-out infinite; }
+@keyframes v2-pulso { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
+.tm .fluxo-lista { list-style: none; margin: 8px 0 0; padding: 0; }
+.tm .fluxo-item button {
+  display: grid; grid-template-columns: 54px 1fr; gap: 14px;
+  width: 100%; text-align: left; padding: 13px 8px;
+  border: 0; background: none; cursor: pointer;
+  transition: background-color 180ms ease, opacity 300ms ease;
+}
+.tm .fluxo-item button:hover { background: rgba(255,255,255,0.05); }
+.tm .fluxo-hora { font-size: 13.5px; color: var(--texto-fraco); padding-top: 3px; }
+.tm .fluxo-corpo { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.tm .fluxo-ator { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--acento); }
+.tm .fluxo-titulo { font-family: var(--corpo); font-weight: 700; font-size: 17px; color: #fff; }
+.tm .fluxo-detalhe { font-size: 14.5px; color: var(--texto-claro); line-height: 1.45; }
+.tm .fluxo-item.espera { opacity: 0.3; }
+.tm .fluxo-item.feito { opacity: 0.55; }
+.tm .fluxo-item.ativo { opacity: 1; }
+.tm .fluxo-item.ativo button { background: rgba(255,122,26,0.1); border-left: 3px solid var(--acento); padding-left: 5px; }
+.tm .fluxo-rodape { font-size: 14px; color: var(--texto-fraco); padding: 14px 8px 2px; border-top: 1px solid var(--linha); margin-top: 8px; }
+
+/* ── PROVA (blocos duros) ─────────────────────────────────── */
+.tm .tm-prova { padding-block: 0 clamp(56px, 7vw, 88px); }
+.tm .tm-prova-titulo { color: var(--texto-fraco); text-align: center; margin-bottom: 26px; }
+.tm .tm-prova-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px; background: var(--linha); border: 2px solid var(--linha);
+}
+@media (min-width: 820px) { .tm .tm-prova-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.tm .tm-prova-item { background: var(--tinta); padding: 26px 22px; }
+.tm .tm-prova-item strong { display: block; font-size: clamp(38px, 4.6vw, 54px); color: var(--acento); line-height: 1; }
+.tm .tm-prova-rotulo { display: block; color: var(--texto-fraco); margin-top: 10px; }
+.tm .tm-parceiro { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.tm .tm-parceiro-band { padding-block: 46px; border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); }
+.tm .tm-parceiro span { color: var(--texto-fraco); }
+.tm .tm-parceiro img { height: 52px; width: auto; }
+
+/* ── TEXTO ────────────────────────────────────────────────── */
+.tm .tm-h2 { font-size: clamp(32px, 4.4vw, 52px); margin-bottom: 20px; }
+.tm .tm-lead { font-size: clamp(16.5px, 1.3vw, 19px); color: var(--texto-claro); }
+.tm .band-claro .tm-lead { color: #4a5470; }
+.tm .tm-centro { text-align: center; }
+.tm .tm-estreito { max-width: 60ch; margin-inline: auto; }
+
+/* ── DORES ────────────────────────────────────────────────── */
+/* Cada dor e uma PERGUNTA com a resposta logo abaixo: sem a resposta a secao
+   e uma lista de reclamacoes, e o leitor sai igual como entrou. */
+.tm .tm-dores-lista {
+  list-style: none; margin: 46px 0 0; padding: 0;
+  display: grid; gap: 2px; background: var(--linha); border: 2px solid var(--linha);
+}
+@media (min-width: 900px) { .tm .tm-dores-lista { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tm .tm-dor { background: var(--tinta-2); padding: 26px 24px; }
+.tm .tm-dor-p {
+  font-family: var(--corpo); font-weight: 700; font-size: 18px;
+  line-height: 1.35; color: #fff; margin-bottom: 12px;
+}
+.tm .tm-dor-r {
+  position: relative; padding-left: 26px;
+  font-size: 15.5px; line-height: 1.5; color: var(--texto-claro);
+}
+.tm .tm-dor-check {
+  position: absolute; left: 2px; top: 7px;
+  width: 10px; height: 6px;
+  border-left: 2px solid var(--verde); border-bottom: 2px solid var(--verde);
+  transform: rotate(-45deg);
+}
+
+/* ── PLACAR (o argumento da direcao) ──────────────────────── */
+.tm .tm-placar-lista { display: flex; flex-direction: column; gap: 2px; margin-top: 40px; }
+.tm .tm-linha {
+  display: grid; grid-template-columns: 56px 1fr auto; gap: 18px;
+  align-items: center; padding: 18px 22px; background: var(--claro-2);
+}
+.tm .tm-linha-1 { background: var(--tinta); color: #fff; }
+.tm .tm-pos { font-size: 28px; color: #7b849e; }
+.tm .tm-linha-1 .tm-pos { color: var(--acento); }
+.tm .tm-nome { font-weight: 700; font-size: 17.5px; }
+.tm .tm-xp { font-size: 22px; }
+.tm .tm-placar-nota { margin-top: 26px; font-size: 15px; color: #6b7488; max-width: 62ch; }
+
+/* ── SEMANA ───────────────────────────────────────────────── */
+.tm .tm-semana { display: grid; gap: 2px; margin-top: 46px; background: var(--linha); border: 2px solid var(--linha); }
+@media (min-width: 880px) { .tm .tm-semana { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.tm .tm-dia { background: var(--tinta); padding: 30px 26px; }
+.tm .tm-dia-rotulo { display: block; color: var(--acento); margin-bottom: 14px; }
+.tm .tm-dia-titulo { font-family: var(--corpo); font-weight: 700; font-size: 20px; margin-bottom: 10px; color: #fff; }
+.tm .tm-dia-texto { font-size: 15.5px; color: var(--texto-claro); }
+
+/* ── CALCULADORA ──────────────────────────────────────────── */
+.tm .calc { margin-top: 44px; display: grid; gap: 28px; border: 2px solid var(--claro-linha); padding: clamp(24px, 3vw, 38px); }
+@media (min-width: 920px) { .tm .calc { grid-template-columns: 1fr 1fr; align-items: start; } }
+.tm .calc-controles { display: flex; flex-direction: column; gap: 30px; }
+.tm .calc-campo { display: grid; gap: 8px; }
+.tm .calc-rotulo { font-size: 15px; color: #4a5470; }
+.tm .calc-valor { font-size: 32px; color: var(--tinta); }
+.tm .calc-campo input { width: 100%; min-height: 44px; }
+.tm .calc-saida { display: flex; flex-direction: column; gap: 8px; padding: 26px; background: var(--tinta); color: #fff; }
+.tm .calc-saida-rotulo { font-size: 14.5px; color: var(--texto-claro); }
+.tm .calc-saida-numero { font-size: clamp(38px, 5vw, 56px); color: var(--acento); line-height: 1.05; }
+.tm .calc-saida-nota { font-size: 15px; color: var(--texto-claro); margin-top: 4px; }
+.tm .calc-saida-nota strong { color: #fff; }
+.tm .calc-premissas { grid-column: 1 / -1; border-top: 1px solid var(--claro-linha); padding-top: 16px; }
+.tm .calc-premissas summary { cursor: pointer; font-size: 14.5px; color: #6b7488; min-height: 44px; display: flex; align-items: center; }
+.tm .calc-premissas summary:hover { color: var(--tinta); }
+.tm .calc-premissas ul { margin: 6px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+.tm .calc-premissas li { font-size: 14.5px; color: #6b7488; }
+.tm .calc-premissas strong { color: var(--tinta); }
+
+/* ── TABELA ───────────────────────────────────────────────── */
+.tm .tm-tabela { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 15.5px; }
+.tm .tm-tabela th, .tm .tm-tabela td { padding: 16px 18px; text-align: left; vertical-align: top; }
+.tm .tm-tabela thead th { font-family: var(--corpo); font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--texto-fraco); border-bottom: 2px solid var(--linha); }
+.tm .tm-tabela thead th.tm-col-depois { border-bottom-color: var(--verde); }
+.tm .tm-tabela tbody th { font-weight: 700; width: 30%; }
+.tm .tm-tabela tbody tr { border-bottom: 1px solid var(--linha); }
+.tm .tm-antes { color: var(--texto-fraco); }
+/* A coluna do produto e a razao da tabela existir: sem peso proprio ela le
+   igual a coluna do problema e o contraste do argumento se perde. */
+.tm .tm-col-depois { color: #fff !important; background: rgba(25, 195, 125, 0.12); }
+/* A regra generica de padding da tabela vem depois e vencia o padding-left
+   daqui, entao o check caia por cima da primeira letra: por isso o seletor
+   repete .tm-tabela td. */
+.tm .tm-tabela td.tm-depois {
+  position: relative; padding-left: 46px;
+  color: #fff; font-weight: 700;
+  font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase;
+  line-height: 1.35;
+  background: rgba(25, 195, 125, 0.12);
+  box-shadow: inset 3px 0 0 var(--verde);
+}
+.tm .tm-depois-check {
+  position: absolute; left: 20px; top: 21px;
+  width: 11px; height: 6px;
+  border-left: 2.5px solid var(--verde); border-bottom: 2.5px solid var(--verde);
+  transform: rotate(-45deg);
+}
+.tm .tm-tabela thead th.tm-col-depois { padding-left: 46px; }
+@media (max-width: 720px) { .tm .tm-tabela { display: block; overflow-x: auto; white-space: nowrap; } }
+
+/* ── PREÇOS ───────────────────────────────────────────────── */
+.tm .tm-planos { display: grid; gap: 2px; margin-top: 46px; background: var(--linha); border: 2px solid var(--linha); }
+@media (min-width: 920px) { .tm .tm-planos { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.tm .tm-plano { position: relative; display: flex; flex-direction: column; background: var(--tinta); padding: 34px 28px; }
+.tm .tm-plano-destaque { background: var(--tinta-2); }
+/* O selo ocupa lugar nos tres cards mesmo vazio: sem isso o card destacado
+   desce e os tres precos param de alinhar na horizontal. */
+.tm .tm-plano-selo {
+  display: inline-block; align-self: flex-start; min-height: 24px;
+  background: var(--acento); color: var(--tinta);
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 5px 10px; margin-bottom: 16px;
+}
+/* Mesmo texto, invisivel: reserva a altura exata em vez de adivinha-la. */
+.tm .tm-plano-selo-vazio { visibility: hidden; }
+.tm .tm-plano-nome { font-size: 27px; margin-bottom: 10px; }
+.tm .tm-plano-promessa { font-size: 15px; color: var(--texto-claro); min-height: 48px; margin-bottom: 22px; }
+.tm .tm-plano-preco { display: flex; align-items: baseline; gap: 6px; }
+.tm .tm-plano-preco span { font-size: 16px; color: var(--texto-fraco); }
+.tm .tm-plano-preco strong { font-size: 48px; line-height: 1; color: #fff; }
+.tm .tm-plano-unidades { font-size: 13.5px; color: var(--texto-fraco); margin: 10px 0 24px; }
+.tm .tm-plano-itens { list-style: none; margin: 0 0 26px; padding: 0; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+.tm .tm-plano-itens li { position: relative; padding-left: 24px; font-size: 15px; line-height: 1.45; color: var(--texto-claro); }
+.tm .tm-plano-itens li::before { content: ""; position: absolute; left: 2px; top: 7px; width: 9px; height: 5px; border-left: 2px solid var(--verde); border-bottom: 2px solid var(--verde); transform: rotate(-45deg); }
+.tm .tm-plano-btn { width: 100%; }
+.tm .tm-precos-nota { text-align: center; font-size: 14.5px; color: var(--texto-fraco); margin-top: 26px; max-width: 62ch; margin-inline: auto; }
+.tm .tm-garantia { margin: 40px auto 0; max-width: 720px; text-align: center; border: 2px solid var(--linha); padding: 30px; }
+.tm .tm-garantia h3 { font-size: 22px; margin-bottom: 10px; }
+.tm .tm-garantia p { font-size: 15.5px; color: var(--texto-claro); }
+
+/* ── FAQ ──────────────────────────────────────────────────── */
+.tm .tm-faq-shell { max-width: 790px; }
+.tm .tm-faq { margin-top: 34px; }
+.tm .tm-faq details { border-top: 1px solid var(--linha); }
+.tm .tm-faq details:last-child { border-bottom: 1px solid var(--linha); }
+.tm .tm-faq summary {
+  cursor: pointer; list-style: none; min-height: 62px;
+  display: flex; align-items: center; gap: 16px;
+  font-family: var(--corpo); font-weight: 700; font-size: 18px; padding-block: 8px;
+}
+.tm .tm-faq summary::-webkit-details-marker { display: none; }
+.tm .tm-faq summary::after { content: "+"; margin-left: auto; font-size: 26px; font-weight: 400; color: var(--acento); transition: transform 200ms ease; }
+.tm .tm-faq details[open] summary::after { transform: rotate(45deg); }
+.tm .tm-faq p { padding: 0 0 22px; font-size: 16px; color: var(--texto-claro); max-width: 66ch; }
+
+/* ── FINAL + RODAPÉ ───────────────────────────────────────── */
+.tm .tm-final-cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+.tm .tm-rodape { border-top: 1px solid var(--linha); padding-block: 30px; }
+.tm .tm-rodape-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.tm .tm-rodape p { font-size: 14px; color: var(--texto-fraco); }
+
+.tm .tm-unidade { font-size: 15px; color: #7b849e; }
+.tm .tm-linha-1 .tm-unidade { color: rgba(255,255,255,0.5); }
+
+/* ── CICLO (o argumento da pagina) ────────────────────────── */
+.tm .tm-ciclo {
+  list-style: none; margin: 46px 0 0; padding: 0;
+  display: grid; gap: 2px; background: var(--claro-linha); border: 2px solid var(--claro-linha);
+}
+@media (min-width: 780px) { .tm .tm-ciclo { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1080px) { .tm .tm-ciclo { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.tm .tm-elo { background: #fff; padding: 30px 26px; display: flex; flex-direction: column; }
+.tm .tm-elo-topo { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.tm .tm-elo-n { font-size: 30px; color: var(--marca-texto); line-height: 1; }
+.tm .tm-elo-nome { color: #6b7488; }
+.tm .tm-elo-titulo {
+  font-family: var(--corpo); font-weight: 700; font-size: 20px;
+  text-transform: none; letter-spacing: -0.01em; line-height: 1.25;
+  color: #1a1b22; margin-bottom: 10px;
+}
+.tm .tm-elo-texto { font-size: 15.5px; color: #4a5470; flex: 1; }
+.tm .tm-elo-prova {
+  margin-top: 18px; align-self: flex-start;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--acento-forte); background: #e8eeff; padding: 5px 10px;
+}
+/* Este bloco e escuro DENTRO da faixa clara, entao precisa da mesma
+   especificidade das regras de .band-claro, senao o titulo sai azul sobre azul
+   e o botao herda o fundo da marca. */
+.tm .band-claro .tm-elo-fecho { background: var(--marca); color: #fff; justify-content: center; }
+.tm .band-claro .tm-elo-fecho-titulo {
+  font-family: var(--display); text-transform: uppercase; font-size: 26px;
+  color: #fff; margin-bottom: 12px; line-height: 1;
+}
+.tm .band-claro .tm-elo-fecho-texto { font-size: 15.5px; color: rgba(255,255,255,0.78); margin-bottom: 22px; }
+.tm .band-claro .tm-elo-fecho-btn { align-self: flex-start; background: #fff; color: var(--marca-texto); }
+.tm .band-claro .tm-elo-fecho-btn:hover { background: #e8eeff; color: var(--marca-texto); }
+
+/* ── TELA REAL DO PRODUTO ─────────────────────────────────── */
+/* A tela e larga (quase 2:1) e encolhia demais dentro da coluna. No desktop
+   ela sangra para fora da grade e ganha a presenca que um print de produto
+   precisa ter; no celular volta para o fluxo normal. */
+.tm .tm-tela { margin: 0; }
+@media (min-width: 1020px) {
+  .tm .tm-tela { width: calc(100% + 120px); }
+}
+@media (min-width: 1300px) {
+  .tm .tm-tela { width: calc(100% + 220px); }
+}
+.tm .tm-tela img {
+  display: block; width: 100%; height: auto;
+  border: 2px solid var(--linha-forte);
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.75);
+}
+.tm .tm-tela figcaption {
+  margin-top: 14px; font-size: 13.5px; color: var(--texto-fraco);
+  border-left: 2px solid var(--acento); padding-left: 12px;
+}
+
+/* A secao de dores agora abre a pagina, logo depois do hero. Fundo um degrau
+   mais claro que o resto para ela se destacar sem virar outra faixa clara. */
+.tm .tm-dores-band { background: var(--tinta-2); }
+.tm .tm-dores-band .tm-dores-lista li { border-color: rgba(255, 255, 255, 0.14); }
+.tm .tm-logo-rodape { height: 36px; }
+
+/* ── HEADLINE ROTATIVA ────────────────────────────────────── */
+/* A altura reserva o PIOR caso (a frase mais longa, em quatro linhas), porque
+   igualar cinco frases de comprimentos diferentes nao se sustenta em toda
+   largura de tela. Sobra ar nas curtas, e melhor que o hero pular a cada
+   troca. */
+.tm .tm-promessa { min-height: 4em; }
+@media (max-width: 1019px) { .tm .tm-promessa { min-height: 4.2em; } }
+.tm .tm-promessa-frase {
+  display: block;
+  animation: v2-entra 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes v2-entra {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Sem deslize, mas o texto ainda aparece: some o transform, fica so o fade. */
+@media (prefers-reduced-motion: reduce) {
+  .tm .tm-promessa-frase { animation: v2-surge 300ms ease both; }
+}
+@keyframes v2-surge { from { opacity: 0; } to { opacity: 1; } }
+
+/* O summary nao parecia clicavel e ficava fechado: a premissa a vista e o que
+   sustenta o numero da calculadora, entao ele abre por padrao e ganha cara de
+   botao (moldura + seta que gira). */
+.tm .calc-premissas summary {
+  border: 1px solid var(--claro-linha); border-radius: 4px;
+  padding: 0 16px; font-weight: 600; color: #1a1b22;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+.tm .calc-premissas summary:hover { border-color: var(--marca-texto); background: #fff; }
+.tm .calc-seta {
+  width: 8px; height: 8px; margin-right: 12px; flex-shrink: 0;
+  border-right: 2px solid var(--marca-texto); border-bottom: 2px solid var(--marca-texto);
+  transform: rotate(45deg); transition: transform 200ms ease;
+}
+.tm .calc-premissas[open] .calc-seta { transform: rotate(-135deg); }
+
+/* ── MÓDULOS ──────────────────────────────────────────────── */
+.tm .tm-modulos { margin-top: 52px; display: flex; flex-direction: column; gap: 44px; }
+.tm .tm-mod-grupo-titulo {
+  font-family: var(--corpo); font-weight: 700; font-size: 12.5px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--acento);
+  padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid var(--linha);
+}
+.tm .tm-mod-lista {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 22px 28px;
+}
+@media (min-width: 700px) { .tm .tm-mod-lista { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1060px) { .tm .tm-mod-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.tm .tm-mod { display: flex; gap: 14px; align-items: flex-start; }
+.tm .tm-mod svg { color: var(--acento); flex-shrink: 0; margin-top: 2px; }
+.tm .tm-mod-texto { min-width: 0; }
+.tm .tm-mod-nome {
+  font-size: 16px; color: #fff; margin-bottom: 4px;
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+}
+.tm .tm-mod-plano {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 2px 6px; white-space: nowrap;
+}
+.tm .tm-mod-p1 { background: rgba(255,255,255,0.1); color: var(--texto-claro); }
+.tm .tm-mod-p2 { background: rgba(157,178,255,0.16); color: var(--acento); }
+.tm .tm-mod-p3 { background: rgba(25,195,125,0.16); color: var(--verde); }
+.tm .tm-mod-av { background: rgba(255,255,255,0.06); color: var(--texto-fraco); }
+.tm .tm-mod-desc { font-size: 14.5px; line-height: 1.45; color: var(--texto-claro); }
+.tm .tm-mod-nota {
+  margin: 40px auto 0; max-width: 64ch; text-align: center;
+  font-size: 15px; color: var(--texto-claro);
+  border-top: 1px solid var(--linha); padding-top: 26px;
+}
+
+/* ── AVISOS E AGENTES ─────────────────────────────────────── */
+.tm .tm-canais {
+  margin-top: 52px; display: grid; gap: 2px;
+  background: var(--claro-linha); border: 2px solid var(--claro-linha);
+}
+@media (min-width: 880px) { .tm .tm-canais { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.tm .tm-canal { background: #fff; padding: 32px 28px; display: flex; flex-direction: column; }
+.tm .tm-canal svg { color: var(--marca-texto); margin-bottom: 18px; }
+/* O grupo da diretoria e o que decide a compra: quem lidera quer saber sem
+   abrir o sistema. Por isso ele, e so ele, e o bloco escuro. */
+.tm .band-claro .tm-canal-destaque { background: var(--marca); color: #fff; }
+.tm .band-claro .tm-canal-destaque svg { color: var(--acento); }
+.tm .tm-canal-para {
+  font-family: var(--display); text-transform: uppercase; font-size: 20px;
+  color: var(--marca-texto); margin-bottom: 10px; line-height: 1.05;
+}
+.tm .band-claro .tm-canal-destaque .tm-canal-para { color: #fff; }
+.tm .tm-canal-resumo { font-size: 15px; color: #4a5470; margin-bottom: 22px; }
+.tm .band-claro .tm-canal-destaque .tm-canal-resumo { color: rgba(255,255,255,0.78); }
+.tm .tm-canal-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+.tm .tm-canal-lista li { display: flex; flex-direction: column; gap: 3px; }
+.tm .tm-canal-quando {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--marca-texto);
+}
+.tm .band-claro .tm-canal-destaque .tm-canal-quando { color: var(--acento); }
+.tm .tm-canal-oque { font-size: 15px; line-height: 1.45; color: #1a1b22; }
+.tm .band-claro .tm-canal-destaque .tm-canal-oque { color: rgba(255,255,255,0.9); }
+
+.tm .tm-ia {
+  margin-top: 2px; display: flex; gap: 20px; align-items: flex-start;
+  background: #fff; border: 2px solid var(--claro-linha); border-top: 0;
+  padding: 30px 28px;
+}
+.tm .tm-ia svg { color: var(--marca-texto); flex-shrink: 0; margin-top: 2px; }
+.tm .tm-ia-titulo {
+  font-family: var(--display); text-transform: uppercase; font-size: 20px;
+  color: var(--marca-texto); margin-bottom: 10px;
+}
+.tm .tm-ia-texto { font-size: 15.5px; color: #4a5470; max-width: 78ch; }

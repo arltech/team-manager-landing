@@ -38,9 +38,9 @@ export function Promessa() {
   const [antes, depois] = FRASES[i];
 
   return (
-    <h1 className="v2-h1 v2-promessa">
+    <h1 className="tm-h1 tm-promessa">
       {/* key força o remount a cada troca, que é o que dispara a animação. */}
-      <span key={i} className="v2-promessa-frase">
+      <span key={i} className="tm-promessa-frase">
         {antes}{" "}
         <br />
         {depois}

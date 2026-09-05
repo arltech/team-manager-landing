@@ -86,30 +86,30 @@ const GRUPOS: { titulo: string; itens: Modulo[] }[] = [
 ];
 
 const CLASSE_PLANO: Record<Plano, string> = {
-  Essencial: "v2-mod-p1",
-  Performance: "v2-mod-p2",
-  "Inteligência": "v2-mod-p3",
-  Avulso: "v2-mod-av",
+  Essencial: "tm-mod-p1",
+  Performance: "tm-mod-p2",
+  "Inteligência": "tm-mod-p3",
+  Avulso: "tm-mod-av",
 };
 
 export function Modulos() {
   return (
-    <div className="v2-modulos">
+    <div className="tm-modulos">
       {GRUPOS.map((g) => (
-        <section key={g.titulo} className="v2-mod-grupo">
-          <h3 className="v2-mod-grupo-titulo">{g.titulo}</h3>
-          <ul className="v2-mod-lista">
+        <section key={g.titulo} className="tm-mod-grupo">
+          <h3 className="tm-mod-grupo-titulo">{g.titulo}</h3>
+          <ul className="tm-mod-lista">
             {g.itens.map((m) => (
-              <li key={m.nome} className="v2-mod">
+              <li key={m.nome} className="tm-mod">
                 <m.Icon size={22} strokeWidth={1.75} aria-hidden="true" />
-                <div className="v2-mod-texto">
-                  <h4 className="v2-mod-nome">
+                <div className="tm-mod-texto">
+                  <h4 className="tm-mod-nome">
                     {m.nome}
-                    <span className={`v2-mod-plano ${CLASSE_PLANO[m.plano]}`}>
+                    <span className={`tm-mod-plano ${CLASSE_PLANO[m.plano]}`}>
                       {m.plano}
                     </span>
                   </h4>
-                  <p className="v2-mod-desc">{m.desc}</p>
+                  <p className="tm-mod-desc">{m.desc}</p>
                 </div>
               </li>
             ))}

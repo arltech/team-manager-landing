@@ -47,17 +47,17 @@ const CANAIS = [
 export function Avisos() {
   return (
     <>
-      <div className="v2-canais">
+      <div className="tm-canais">
         {CANAIS.map((c) => (
-          <article key={c.para} className={`v2-canal${c.destaque ? " v2-canal-destaque" : ""}`}>
+          <article key={c.para} className={`tm-canal${c.destaque ? " tm-canal-destaque" : ""}`}>
             <c.Icon size={24} strokeWidth={1.75} aria-hidden="true" />
-            <h3 className="v2-canal-para">{c.para}</h3>
-            <p className="v2-canal-resumo">{c.resumo}</p>
-            <ul className="v2-canal-lista">
+            <h3 className="tm-canal-para">{c.para}</h3>
+            <p className="tm-canal-resumo">{c.resumo}</p>
+            <ul className="tm-canal-lista">
               {c.itens.map(([quando, oque]) => (
                 <li key={oque}>
-                  <span className="v2-canal-quando">{quando}</span>
-                  <span className="v2-canal-oque">{oque}</span>
+                  <span className="tm-canal-quando">{quando}</span>
+                  <span className="tm-canal-oque">{oque}</span>
                 </li>
               ))}
             </ul>
@@ -65,11 +65,11 @@ export function Avisos() {
         ))}
       </div>
 
-      <div className="v2-ia">
+      <div className="tm-ia">
         <Bot size={26} strokeWidth={1.75} aria-hidden="true" />
         <div>
-          <h3 className="v2-ia-titulo">E três agentes trabalhando por baixo</h3>
-          <p className="v2-ia-texto">
+          <h3 className="tm-ia-titulo">E três agentes trabalhando por baixo</h3>
+          <p className="tm-ia-texto">
             Um lê cada conversa do funil e devolve temperatura, risco e a próxima
             ação, sem ninguém preencher campo. Outro fecha a semana com uma nota
             por pessoa, visível só para quem lidera. O terceiro responde no grupo

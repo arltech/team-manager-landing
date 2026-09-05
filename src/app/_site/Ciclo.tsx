@@ -50,27 +50,27 @@ const ELOS = [
 
 export function Ciclo() {
   return (
-    <ol className="v2-ciclo">
+    <ol className="tm-ciclo">
       {ELOS.map((e) => (
-        <li key={e.n} className="v2-elo">
-          <div className="v2-elo-topo">
-            <span className="num v2-elo-n">{e.n}</span>
-            <span className="rotulo v2-elo-nome">{e.nome}</span>
+        <li key={e.n} className="tm-elo">
+          <div className="tm-elo-topo">
+            <span className="num tm-elo-n">{e.n}</span>
+            <span className="rotulo tm-elo-nome">{e.nome}</span>
           </div>
-          <h3 className="v2-elo-titulo">{e.titulo}</h3>
-          <p className="v2-elo-texto">{e.texto}</p>
-          <span className="v2-elo-prova">{e.prova}</span>
+          <h3 className="tm-elo-titulo">{e.titulo}</h3>
+          <p className="tm-elo-texto">{e.texto}</p>
+          <span className="tm-elo-prova">{e.prova}</span>
         </li>
       ))}
       {/* Sexto slot da grade de tres colunas: cinco elos deixariam um buraco.
           Em vez de esticar um card, o espaco vira o arremate do argumento. */}
-      <li className="v2-elo v2-elo-fecho">
-        <h3 className="v2-elo-fecho-titulo">É a volta inteira</h3>
-        <p className="v2-elo-fecho-texto">
+      <li className="tm-elo tm-elo-fecho">
+        <h3 className="tm-elo-fecho-titulo">É a volta inteira</h3>
+        <p className="tm-elo-fecho-texto">
           Nenhum outro sistema do setor cobre os cinco. O que existe hoje é um
           pedaço em cada lugar, e o buraco entre eles é onde a venda some.
         </p>
-        <a href="/diagnostico" className="btn btn-primary v2-elo-fecho-btn">
+        <a href="/diagnostico" className="btn btn-primary tm-elo-fecho-btn">
           Ver onde a sua rede perde
         </a>
       </li>

@@ -1,742 +1,464 @@
-"use client";
-
-/**
- * Route /a — port of design-snapshots/.../v2-comando.html ("Comando").
- * Dark editorial hero, animated aurora, bento solution grid, dark "ledger"
- * comparison table, WhatsApp proof. Ported 1:1 for visual fidelity; every
- * CTA that called toast() in the source now links to /diagnostico.
- */
-
-import { useEffect, useState, type ReactNode } from "react";
 import Image from "next/image";
-import {
-  ArrowRight,
-  Bot,
-  Check,
-  Eye,
-  FileCheck,
-  GraduationCap,
-  Heart,
-  Shield,
-  Sparkles,
-  Target,
-  X,
-} from "lucide-react";
-import { Reveal } from "./_components/Reveal";
-import { AnimatedNumber } from "./_components/AnimatedNumber";
-import { Pill } from "./_components/Pill";
-import { Accordion } from "./_components/Accordion";
-import { Button } from "./_parts/Button";
-import { WhatsProof } from "./_parts/WhatsProof";
-
-const NAV = [
-  ["O problema", "problema"],
-  ["Solução", "solucao"],
-  ["Comparar", "comparar"],
-  ["Preços", "oferta"],
-  ["FAQ", "faq"],
-] as const;
-
-const SEGMENTS = [
-  "Escolas de idiomas",
-  "Cursos profissionalizantes",
-  "Educação infantil",
-  "Preparatórios / vestibular",
-];
-
-const NUMS = [
-  { to: 14, suffix: "", label: "componentes num só sistema", sub: "CRM · tarefas · rotinas · ranking · IA" },
-  { to: 72, suffix: "h", label: "do setup ao 1º insight", sub: "onboarding incluído" },
-  { to: 30, suffix: " dias", label: "de garantia integral", sub: "100% devolvido se a equipe não usar" },
-  { to: 100, suffix: "%", label: "da operação visível", sub: "sem precisar perguntar a ninguém" },
-];
-
-const FEATURES = [
-  { Icon: Bot, t: "Cobrança que acontece sem você", d: "Automação 24/7 monitora presença, follow-ups atrasados e prazos. Age antes de você pedir.", big: true },
-  { Icon: Heart, t: "Cultura via WhatsApp", d: "Matrículas e top performers anunciados automaticamente no grupo. Já foi celebrado antes de você saber." },
-  { Icon: Eye, t: "Visibilidade sem presença", d: "Funil, rotinas e ranking de cada unidade em tempo real, com filtro por unidade." },
-  { Icon: Target, t: "Do 1º contato à matrícula", d: "IA encontra leads em fontes públicas, distribui pra unidade certa e cobra follow-up." },
-  { Icon: FileCheck, t: "Operação auto-documentada", d: "A rotina semanal puxa dados do CRM sozinha. Scripts de venda gerados por IA por candidato." },
-];
-
-const LEDGER: [string, string, string][] = [
-  ["Resultado do mês", "Você só sabe quando o mês acabou", "Em tempo real, por unidade"],
-  ["Follow-up", "Depende do assessor lembrar", "Cobrado pelo sistema, automático"],
-  ["Reconhecimento", "Ninguém vê quem performou", "Celebrado no grupo, com ranking"],
-  ["Reunião de segunda", "Reconstruir a semana de memória", "Já está tudo no painel"],
-  ["Dados das unidades", "Uma planilha diferente em cada", "Uma fonte da verdade, auditável"],
-];
+import { Calculadora } from "@/app/_site/Calculadora";
+import { Ciclo } from "@/app/_site/Ciclo";
+import { Promessa } from "@/app/_site/Promessa";
+import { Modulos } from "@/app/_site/Modulos";
+import { Avisos } from "@/app/_site/Avisos";
 
 /**
- * Os tres degraus do produto. Nome, ordem, unidades inclusas e o que cada um
- * ACRESCENTA saem de src/lib/planos.ts no repo do app: mexer aqui sem olhar la
- * faz a landing vender o que o sistema nao entrega.
+ * A home.
  *
- * O preco e o de tabela (planos_precos, editavel em /admin/cobranca). Cliente
- * com valor negociado nao entra nesta conta.
+ * O argumento e a operacao COMPLETA, do QR na acao de rua ao contrato assinado
+ * e ao dinheiro no financeiro. A pagina anterior (git a partir de 8c2b82f)
+ * vendia gamificacao e planos por porte, com preco "sob diagnostico".
+ *
+ * Estilo em ./site.css, escopado em .tm. As fontes da direcao (Archivo Black e
+ * Archivo) sao carregadas aqui, e nao no layout raiz, porque /diagnostico e /b
+ * seguem em Inter mais Manrope.
  */
-const PLANS = [
+
+/**
+ * A dor vira PERGUNTA e a resposta mostra o que resolve. Cada resposta cita a
+ * capacidade que existe de verdade no sistema, nao uma promessa vaga: e o que
+ * separa isto de uma lista de reclamacoes.
+ */
+const DORES: { p: string; r: string }[] = [
   {
-    name: "Essencial",
-    price: "397",
-    units: "1 unidade inclusa",
-    hi: "A operação do funil inteira em um lugar só.",
-    items: [
-      "CRM de candidatos com dono, origem e histórico de cada pessoa",
-      "Quadro de tarefas, diário de atividades e meta individual",
-      "Conversão por etapa, por origem e por unidade",
-      "Ranking, níveis e feed do time: a cobrança vira disputa",
-    ],
-    feat: false,
+    p: "Você só sabe o resultado do mês quando ele já acabou?",
+    r: "O painel fecha sozinho, por unidade e em tempo real. A reunião de segunda vira decisão, não reconstrução.",
   },
   {
-    name: "Performance",
-    price: "697",
-    units: "3 unidades inclusas",
-    hi: "Gestão do time com número, não com impressão.",
-    items: [
+    p: "O follow-up depende de alguém lembrar?",
+    r: "Prazo vencendo, rotina em aberto e lead parado viram aviso automático para o responsável, no WhatsApp e no e-mail.",
+  },
+  {
+    p: "Cada unidade tem uma planilha, e nenhuma tem a mesma coluna?",
+    r: "Uma base só, com filtro por unidade. A diretoria vê o consolidado sem pedir arquivo para ninguém.",
+  },
+  {
+    p: "A ação de rua de sábado trouxe quantos clientes?",
+    r: "Cada pessoa leva o próprio QR para a ação. O lead entra já ligado ao evento que o trouxe e a quem captou.",
+  },
+  {
+    p: "Descobre que alguém do time parou só na reunião de sexta?",
+    r: "Mapa de Carga e Pulse do Time mostram quem parou e quem está afogado antes de virar problema.",
+  },
+  {
+    p: "O contrato foi impresso, assinado e fotografado?",
+    r: "Assinado no celular, com código de 6 dígitos, hash do PDF, IP e horário. A trilha existe se alguém contestar.",
+  },
+];
+
+
+/**
+ * A tabela nao repete as dores da secao de cima: ela cobre o que a pagina
+ * ainda nao tocou. Toda linha aponta para algo que existe no sistema
+ * (comissao no Financeiro, grade em course_prices, renovacao com lembrete,
+ * fila de resgate, automacao por idade, auditoria de supervisao).
+ */
+const LEDGER: [string, string, string][] = [
+  ["Comissão de quem vendeu", "Calculada na mão no fim do mês", "Sai junto com o fechamento, por pessoa"],
+  ["Preço e desconto", "Cada um negocia o que acha", "Tabela por produto, com teto de desconto"],
+  ["Renovação de contrato", "Lembra quem lembrar", "Avisa antes de vencer, com o contrato pronto"],
+  ["Lead que esfriou", "Só aparece se alguém for procurar", "Entra na fila de resgate sozinho"],
+  ["De onde veio cada venda", "Anotada quando alguém lembra", "Amarrada à campanha e à parceria que trouxe"],
+  ["O que foi tratado de verdade", "Confia no que cada um contou na reunião", "Trilha por lead: quem fez, o quê e quando"],
+];
+
+const PLANOS = [
+  {
+    nome: "Essencial",
+    preco: "397",
+    unidades: "1 unidade inclusa",
+    promessa: "A operação do funil inteira em um lugar só.",
+    itens: [
+      "CRM com dono, origem e histórico de cada pessoa",
+      "Tarefas, diário de atividades e meta individual",
+      "Conversão por etapa, origem e unidade",
+      "Ranking e feed: a cobrança vira disputa",
+    ],
+    destaque: false,
+  },
+  {
+    nome: "Performance",
+    preco: "697",
+    unidades: "3 unidades inclusas",
+    promessa: "Gestão do time com número, não com impressão.",
+    itens: [
       "Tudo do Essencial",
-      "Desempenho por assessor: quem treinar e quem acelerar",
-      "Fila de Resgate para lead parado e follow-up vencido",
-      "Mapa de carga, distribuição de leads e scripts de venda",
+      "Quem treinar e quem acelerar, pessoa a pessoa",
+      "Fila de resgate de lead parado",
+      "Mapa de carga, distribuição e scripts",
     ],
-    feat: true,
+    destaque: true,
   },
   {
-    name: "Inteligência",
-    price: "1.297",
-    units: "6 unidades inclusas",
-    hi: "A IA acompanha cada tratativa e o dinheiro aparece no fim.",
-    items: [
+    nome: "Inteligência",
+    preco: "1.297",
+    unidades: "6 unidades inclusas",
+    promessa: "A IA acompanha cada tratativa e o dinheiro aparece no fim.",
+    itens: [
       "Tudo do Performance",
-      "Sentinela: temperatura, risco e próxima ação em cada ficha",
-      "Financeiro, comissão e contrato assinado pelo WhatsApp",
-      "Busca de leads na web e automações no WhatsApp da unidade",
+      "Temperatura, risco e próxima ação em cada ficha",
+      "Financeiro, comissão e contrato pelo WhatsApp",
+      "Busca de leads e automações de WhatsApp",
     ],
-    feat: false,
+    destaque: false,
   },
 ];
 
-const FAQS: [string, string][] = [
-  ["Minha equipe não vai usar.", "A gamificação resolve adoção: quem aparece no ranking não para de usar, e o sistema tira XP de quem some. Registro em 30s, alerta no WhatsApp. Você não cobra: o sistema cobra."],
-  ["É caro, planilha funciona.", "Planilha tem custo de lead perdido. Ticket R$ 500 × 3 unidades × 15 pontos extras = R$ 6.750/mês recuperados. Payback em menos de 9 dias de uso ativo."],
-  ["Minha rede é pequena, faz sentido?", "O melhor momento de criar o hábito certo é quando a rede ainda é pequena. Com 2 ou 3 unidades você corrige o processo antes de multiplicar o problema, e o Essencial já cobre uma unidade."],
-  ["Integram com meu ERP?", "Em vez de integrar, substituímos a operação (CRM + tarefas + rotinas + ranking). Seu ERP financeiro continua sendo financeiro."],
-  ["E se minha rede tiver mais unidades que o plano inclui?", "Cada plano já vem com um número de unidades incluso (1, 3 e 6). Acima disso você adiciona unidade avulsa por um valor fixo, sem trocar de plano. O limite operacional é de 15 usuários por unidade."],
-  ["Quanto tempo pra implantar?", "72 horas. Setup técnico em 2h, templates por segmento e suporte dedicado nos primeiros 7 dias."],
+const FAQ: [string, string][] = [
+  [
+    "Minha equipe não vai usar.",
+    "É a objeção mais comum e a que o produto foi desenhado para resolver. Registro leva 30 segundos, o ranking expõe quem produz e o XP cai sozinho para quem some. Você para de cobrar porque o sistema cobra.",
+  ],
+  [
+    "Meu negócio não é escola. Serve?",
+    "Serve. O vocabulário do sistema é configurável: o que aqui chamamos de lead, contrato e produto recebe o nome que a sua operação usa, e só o rótulo muda. O que não muda é o funil: alguém pede informação, alguém precisa dar retorno, alguém fecha e alguém recebe.",
+  ],
+  [
+    "Já tenho um ERP de gestão.",
+    "Ele cuida de quem já é cliente: cadastro, financeiro, operação do dia. O Team Manager cuida do que acontece antes disso, de quem ainda é lead. Os dois convivem, e o seu ERP continua sendo o ERP.",
+  ],
+  [
+    "É caro.",
+    "O contrato médio de um cliente na nossa base é de R$ 5.438. O Performance custa R$ 697 por mês. Se o sistema salvar duas matrículas por ano na rede inteira, ele já se pagou com folga.",
+  ],
+  [
+    "Minha rede é pequena, faz sentido?",
+    "O melhor momento de acertar o processo é antes de multiplicá-lo. Com duas ou três unidades você corrige o hábito; com dez, você corrige dez vezes.",
+  ],
+  [
+    "E se eu tiver mais unidades que o plano inclui?",
+    "Cada plano já vem com um número de unidades. Acima disso entra unidade avulsa por um valor fixo, sem trocar de degrau. O limite operacional é de 15 usuários por unidade.",
+  ],
+  [
+    "Quanto tempo leva para implantar?",
+    "72 horas. Setup técnico em duas horas, templates prontos por segmento e acompanhamento nos primeiros sete dias.",
+  ],
 ];
 
-const PROBLEMS = [
-  "Você sabe o resultado do mês só quando o mês acabou.",
-  "Assessor some por dois dias e você descobre na reunião de sexta.",
-  "Segunda de manhã é reconstruir a semana de memória, com números errados.",
-  "Cada unidade tem uma planilha diferente. Nenhuma tem a mesma coluna.",
-  "O follow-up depende de o assessor lembrar. O assessor esquece. O lead some.",
-  "Seu melhor assessor pediu demissão porque nunca foi reconhecido.",
-];
-
-function Eyebrow({ children, tone = "#9bb0ff" }: { children: ReactNode; tone?: string }) {
+export default function Home() {
   return (
-    <span
-      className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.14em] uppercase"
-      style={{ color: tone }}
-    >
-      <span className="w-5 h-px bg-current opacity-60" />
-      {children}
-    </span>
-  );
-}
-
-/** Blurred animated blob field. Same `.aurora`/`span` markup as the source. */
-function Aurora({
-  blobs,
-  style,
-}: {
-  blobs: { top?: string; bottom?: string; left?: string; right?: string; w: number; h: number; bg: string; delay?: string }[];
-  style?: React.CSSProperties;
-}) {
-  return (
-    <div className="aurora" style={style}>
-      {blobs.map((b, i) => (
-        <span
-          key={i}
-          style={{
-            top: b.top,
-            bottom: b.bottom,
-            left: b.left,
-            right: b.right,
-            width: b.w,
-            height: b.h,
-            background: b.bg,
-            animationDelay: b.delay,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-export default function ComandoPage() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  return (
-    <div className="relative overflow-hidden">
-      {/* keyframes + decorative utility classes, scoped to this route by styled-jsx */}
-      <style jsx global>{`
-        .aurora {
-          position: absolute;
-          inset: -20% -10% auto -10%;
-          height: 130%;
-          pointer-events: none;
-          z-index: 0;
-        }
-        .aurora span {
-          position: absolute;
-          border-radius: 9999px;
-          filter: blur(70px);
-          opacity: 0.55;
-          animation: a-drift 18s ease-in-out infinite;
-        }
-        @keyframes a-drift {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(40px, 30px) scale(1.15); }
-        }
-        .gridlines {
-          background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-          background-size: 64px 64px;
-        }
-        .floatcard {
-          animation: a-bob 6s ease-in-out infinite;
-        }
-        @keyframes a-bob {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .aurora span, .floatcard { animation: none; }
-        }
-      `}</style>
-
+    <div className="tm">
+      <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+      <main>
       {/* ── HEADER ── */}
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-[#070a1c]/80 backdrop-blur-md border-b border-white/[0.08]"
-            : "bg-transparent border-b border-transparent"
-        }`}
-      >
-        <div className="max-w-[1200px] mx-auto px-7 h-[76px] flex items-center justify-between gap-6">
+      <header className="tm-header">
+        <div className="shell tm-header-in">
           <Image
             src="/ds/logo-mark.png"
             alt="Team Manager"
             width={575}
             height={507}
-            className="h-12 w-auto"
-            style={{ filter: "drop-shadow(0 2px 10px rgba(99,102,241,.3))" }}
+            className="tm-logo"
             priority
           />
-          <nav className="hidden md:flex gap-8">
-            {NAV.map(([label, hash]) => (
-              <a
-                key={hash}
-                href={`#${hash}`}
-                className="inline-flex items-center min-h-11 text-sm font-medium text-white/80 hover:text-white transition-colors"
-              >
-                {label}
-              </a>
-            ))}
+          <nav className="tm-nav">
+            <a href="#ciclo">O ciclo</a>
+            <a href="#modulos">Módulos</a>
+            <a href="#avisos">Avisos</a>
+            <a href="#conta">A conta</a>
+            <a href="#precos">Preços</a>
+            <a href="#faq">Dúvidas</a>
           </nav>
-          <div className="flex items-center gap-2">
-            {/* Quem ja e cliente entra por aqui: o sistema mora em https://app.teammanager.tech. */}
-            <Button href="https://app.teammanager.tech" variant="ghost" size="sm">
+          <div className="tm-header-acoes">
+            <a href="https://app.teammanager.tech" className="tm-entrar">
               Entrar
-            </Button>
-            <Button variant="white" size="sm">
-              Fazer diagnóstico grátis
-            </Button>
+            </a>
+            <a href="#precos" className="btn btn-primary tm-btn-sm">
+              Ver planos
+            </a>
           </div>
         </div>
       </header>
 
       {/* ── HERO ── */}
-      <section className="relative pt-[150px] pb-[90px] bg-[linear-gradient(180deg,#070a1c_0%,#0d1130_55%,#141a44_100%)]">
-        <Aurora
-          blobs={[
-            { top: "4%", left: "8%", w: 480, h: 480, bg: "rgba(99,102,241,.5)" },
-            { top: "30%", right: "4%", w: 420, h: 420, bg: "rgba(59,130,246,.4)", delay: "-6s" },
-            { bottom: "-8%", left: "38%", w: 380, h: 380, bg: "rgba(244,114,182,.22)", delay: "-11s" },
-          ]}
-        />
-        <div
-          className="gridlines absolute inset-0 z-0"
-          style={{ maskImage: "radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%)" }}
-        />
-        <div className="relative z-[2] max-w-[1200px] mx-auto px-7 grid grid-cols-1 md:grid-cols-[1.05fr_.95fr] gap-14 items-center">
+      <section className="tm-hero">
+        <div className="shell tm-hero-grid">
           <div>
-            <Reveal>
-              <div className="mb-6">
-                <Pill tone="dark-glass" className="whitespace-nowrap">
-                  Para redes de 1 a 15 unidades
-                </Pill>
-              </div>
-            </Reveal>
-            <Reveal delay={0.08}>
-              {/* As quebras sao do desenho de desktop. No celular a linha nao cabe
-                  e o <br> parte a frase no meio ("que se importa / com"), entao
-                  la o navegador quebra sozinho, com text-balance. */}
-              <h1 className="font-[var(--font-heading)] font-extrabold tracking-[-0.03em] leading-[1.04] text-[40px] md:text-[clamp(40px,5vw,62px)] mb-6 text-balance text-white">
-                Pare de ser o único{" "}
-                <br className="hidden md:inline" />
-                que se importa com{" "}
-                <br className="hidden md:inline" />
-                <span className="bg-[linear-gradient(120deg,#a5b8ff,#6366f1_60%,#3b82f6)] bg-clip-text text-transparent">
-                  a meta de matrícula.
-                </span>
-              </h1>
-            </Reveal>
-            <Reveal delay={0.16}>
-              <p className="text-[19px] text-white/75 leading-relaxed max-w-[520px] mb-3.5">
-                CRM de candidatos, follow-up automático, ranking de equipe e rotinas
-                semanais, num só sistema que{" "}
-                <strong className="text-white font-bold">
-                  cobra, lembra, reconhece e reporta por você.
-                </strong>
-              </p>
-            </Reveal>
-            <Reveal delay={0.22}>
-              <div className="flex flex-wrap gap-3.5 my-7 mb-5.5">
-                <Button variant="primary" iconRight={<ArrowRight size={18} />}>
-                  Fazer diagnóstico grátis
-                </Button>
-                <Button variant="ghost" iconRight={<ArrowRight size={16} />}>
-                  Diagnóstico em 2 min
-                </Button>
-              </div>
-            </Reveal>
-            <Reveal delay={0.28}>
-              <div className="flex items-center gap-2.5 text-[13px] text-white/55">
-                <Shield size={15} className="text-[#34d399]" />
-                Garantia de 30 dias · Setup em 72h · Sem fidelidade
-              </div>
-            </Reveal>
-          </div>
-
-          {/* floating product preview */}
-          <Reveal delay={0.18} y={36}>
-            <div className="relative">
-              <div className="rounded-[20px] overflow-hidden border border-white/[0.12] shadow-[0_40px_90px_rgba(0,0,0,0.6)] bg-[#0a0e27]">
-                <Image
-                  src="/ds/dashboard/slide-1.png"
-                  alt="Painel Team Manager"
-                  width={3064}
-                  height={1766}
-                  className="w-full block"
-                  priority
-                />
-              </div>
-              <div className="floatcard absolute -top-[22px] -right-[18px] bg-[#0d1130]/90 backdrop-blur-md border border-white/[0.12] rounded-2xl px-[18px] py-3.5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[3]">
-                <div className="text-[11px] text-white/55 uppercase tracking-[0.1em] font-bold">Conversão</div>
-                <div className="font-[var(--font-heading)] font-extrabold text-[26px] text-white leading-none">
-                  <AnimatedNumber value={8} suffix="%" />
-                </div>
-              </div>
-              <div
-                className="floatcard absolute -bottom-5 -left-[22px] bg-[#0d1130]/90 backdrop-blur-md border border-[#34d399]/30 rounded-2xl px-[18px] py-3.5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[3]"
-                style={{ animationDelay: "-3s" }}
-              >
-                <div className="text-[11px] text-[#34d399] uppercase tracking-[0.1em] font-bold whitespace-nowrap">
-                  Matrículas · mês
-                </div>
-                <div className="font-[var(--font-heading)] font-extrabold text-[26px] text-white leading-none">
-                  +<AnimatedNumber value={29} />
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* segments strip */}
-        <div className="relative z-[2] max-w-[1200px] mx-auto px-7 mt-[72px]">
-          <Reveal>
-            <div className="text-xs font-bold tracking-[0.14em] uppercase text-white/40 mb-4 text-center">
-              Operando hoje em redes de
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              {SEGMENTS.map((s) => (
-                <span
-                  key={s}
-                  className="inline-flex items-center gap-2 px-4 py-[9px] rounded-full border border-white/[0.12] bg-white/[0.04] text-sm font-semibold text-white/80"
-                >
-                  <GraduationCap size={15} className="text-[#9bb0ff]" />
-                  {s}
-                </span>
-              ))}
-            </div>
-          </Reveal>
-          {/* Parceiro. Versao branca da marca porque a faixa e sobre fundo escuro;
-              a colorida tem azul-marinho que some no gradiente do hero. */}
-          <Reveal delay={0.1}>
-            <div className="mt-12 flex flex-col items-center gap-4">
-              <span className="text-xs font-bold tracking-[0.14em] uppercase text-white/35">
-                Parceiro
-              </span>
-              <Image
-                src="/parceiros/minds-english-school.png"
-                alt="Minds English School"
-                width={700}
-                height={316}
-                className="h-16 md:h-20 w-auto opacity-95"
-              />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── PROBLEM ── */}
-      <section id="problema" className="bg-[#fbf8ff] text-[#1a1b22] py-28 scroll-mt-28">
-        <div className="max-w-[980px] mx-auto px-7">
-          <Reveal className="mb-4.5">
-            <Eyebrow tone="#dc2626">O problema</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="font-[var(--font-heading)] font-extrabold tracking-[-0.025em] text-[clamp(30px,4vw,46px)] leading-[1.1] mb-3">
-              Você não está gerenciando. <span className="text-[#dc2626]">Está investigando.</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-lg text-[var(--muted-foreground)] max-w-[640px] mb-12 leading-relaxed">
-              Se você precisa perguntar pra saber o que aconteceu na semana, o problema
-              não é a sua equipe. É a falta de um sistema.
+            <Promessa />
+            <p className="tm-sub">
+              A operação comercial inteira da sua rede em um sistema: captura na
+              rua, CRM, cobrança automática do follow-up, contrato assinado no
+              celular e a receita no fim. Sem planilha em cada unidade.
             </p>
-          </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4.5">
-            {PROBLEMS.map((t, i) => (
-              <Reveal key={t} delay={(i % 2) * 0.06}>
-                <div className="flex gap-4 p-[22px_24px] rounded-[18px] bg-white border border-[var(--border)] h-full box-border">
-                  <X size={20} strokeWidth={2.4} className="text-[#dc2626] mt-0.5 flex-shrink-0" />
-                  <span className="text-base leading-relaxed">{t}</span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── NÚMEROS band ── */}
-      <section
-        className="relative overflow-hidden py-[84px]"
-        style={{ background: "linear-gradient(135deg,var(--hero-from),var(--hero-to))" }}
-      >
-        <div className="gridlines absolute inset-0 opacity-50" />
-        <div className="relative max-w-[1100px] mx-auto px-7 grid grid-cols-2 md:grid-cols-4 gap-7">
-          {NUMS.map((n, i) => (
-            <Reveal key={n.label} delay={i * 0.08}>
-              <div className="text-left">
-                <div className="font-[var(--font-heading)] font-extrabold text-[clamp(36px,4.5vw,54px)] leading-none bg-[linear-gradient(120deg,#fff,#a5b8ff)] bg-clip-text text-transparent">
-                  <AnimatedNumber value={n.to} suffix={n.suffix} />
-                </div>
-                <div className="text-sm font-bold text-white mt-2.5">{n.label}</div>
-                <div className="text-[12.5px] text-white/55 mt-1 leading-relaxed">{n.sub}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ── SOLUTION (bento) ── */}
-      <section id="solucao" className="bg-[#f4f2fc] text-[#1a1b22] py-28 scroll-mt-28">
-        <div className="max-w-[1180px] mx-auto px-7">
-          <Reveal className="text-center mb-4.5">
-            <Eyebrow>A solução</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="font-[var(--font-heading)] font-extrabold tracking-[-0.025em] text-[clamp(30px,4vw,46px)] text-center mb-[54px]">
-              Team Manager foi construído pra isso.
-            </h2>
-          </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-fr gap-5">
-            {FEATURES.map((f, i) => (
-              <Reveal key={f.t} delay={(i % 3) * 0.06} className={f.big ? "md:col-span-2" : ""}>
-                <div
-                  className={`bg-white border border-[var(--border)] rounded-[22px] p-[30px] h-full box-border shadow-[var(--shadow-card)] flex ${
-                    f.big ? "flex-row items-center gap-7" : "flex-col items-stretch"
-                  }`}
-                >
-                  <div className={f.big ? "flex-shrink-0" : ""}>
-                    <span
-                      className={`inline-flex items-center justify-center w-[54px] h-[54px] rounded-2xl bg-[color-mix(in_srgb,var(--primary)_10%,transparent)] text-[var(--primary)] ${
-                        f.big ? "" : "mb-[22px]"
-                      }`}
-                    >
-                      <f.Icon size={26} />
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className={`font-[var(--font-heading)] font-bold tracking-[-0.02em] mb-2.5 ${f.big ? "text-[26px]" : "text-xl"}`}>
-                      {f.t}
-                    </h3>
-                    <p className="text-[15px] text-[var(--muted-foreground)] leading-relaxed m-0">{f.d}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── COMPARISON ledger ── */}
-      <section id="comparar" className="relative overflow-hidden bg-[#0a0e27] text-[#f5f5fa] py-28 scroll-mt-28">
-        <Aurora
-          style={{ height: "100%", inset: "auto -10% -30% -10%" }}
-          blobs={[{ bottom: "-20%", left: "30%", w: 520, h: 520, bg: "rgba(99,102,241,.3)" }]}
-        />
-        <div className="relative max-w-[1000px] mx-auto px-7">
-          <Reveal className="text-center mb-4.5">
-            <Eyebrow tone="#9bb0ff">Antes e depois</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="font-[var(--font-heading)] font-extrabold tracking-[-0.025em] text-[clamp(30px,4vw,46px)] text-center mb-[54px]">
-              O que muda no dia 1.
-            </h2>
-          </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr_1fr] rounded-[22px] overflow-hidden border border-white/10">
-            <div className="hidden md:block px-6 py-[22px] bg-white/[0.03] font-bold text-[13px] uppercase tracking-[0.1em] text-white/50">
-              &nbsp;
+            <div className="tm-hero-ctas">
+              <a href="/diagnostico" className="btn btn-primary">
+                Fazer o diagnóstico da minha rede
+              </a>
+              <a href="#precos" className="btn btn-ghost">
+                Ver planos e preços
+              </a>
             </div>
-            <div className="px-6 py-[22px] bg-[rgba(220,38,38,0.08)] font-bold text-[#fca5a5] flex items-center gap-2">
-              <X size={16} />
-              Hoje (planilha + WhatsApp)
-            </div>
-            <div className="px-6 py-[22px] bg-[rgba(52,211,153,0.1)] font-bold text-[#6ee7b7] flex items-center gap-2">
-              <Sparkles size={16} />
-              Com Team Manager
-            </div>
-            {LEDGER.map((row) => (
-              <div key={row[0]} className="contents">
-                <div className="px-6 py-5 border-t border-white/[0.07] font-semibold text-[15px]">{row[0]}</div>
-                <div className="px-6 py-5 border-t border-white/[0.07] text-[14.5px] text-white/60 bg-[rgba(220,38,38,0.04)]">
-                  {row[1]}
-                </div>
-                <div className="px-6 py-5 border-t border-white/[0.07] text-[14.5px] text-white bg-[rgba(52,211,153,0.05)] flex gap-2.5">
-                  <Check size={17} strokeWidth={2.6} className="text-[#34d399] flex-shrink-0 mt-0.5" />
-                  {row[2]}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── TESTIMONIAL ── */}
-      <section className="bg-[#fbf8ff] text-[#1a1b22] py-[100px]">
-        <div className="max-w-[880px] mx-auto px-7">
-          <Reveal>
-            <div className="bg-white border border-[var(--border)] rounded-[26px] p-12 md:p-[52px_48px] shadow-[var(--shadow-card)] relative">
-              <p className="font-[var(--font-heading)] font-bold text-[clamp(22px,2.8vw,30px)] leading-[1.3] tracking-[-0.02em] mb-7">
-                &ldquo;Antes eu ligava toda segunda perguntando &lsquo;cadê as matrículas?&rsquo;. Hoje eu só
-                abro o Team Manager e{" "}
-                <span className="text-[var(--primary)]">já sei de tudo, sem ligar pra ninguém.</span>&rdquo;
-              </p>
-              <div className="flex items-center gap-3.5">
-                <Image
-                  src="/testimonial-avatar.jpg"
-                  alt=""
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 rounded-full object-cover"
-                  style={{ boxShadow: "0 0 0 2px color-mix(in srgb,var(--primary) 15%,transparent)" }}
-                />
-                <div>
-                  <div className="font-bold text-sm">Rodrigo Ferreira · Gerente Comercial</div>
-                  <div className="text-[13px] text-[var(--muted-foreground)]">
-                    3 unidades · Escola de idiomas · Piloto Team Manager
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <WhatsProof />
-
-      {/* ── OFFER ── */}
-      <section id="oferta" className="bg-[#f4f2fc] text-[#1a1b22] py-28 scroll-mt-28">
-        <div className="max-w-[1140px] mx-auto px-7">
-          <Reveal className="text-center mb-4.5">
-            <Eyebrow>A oferta</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="font-[var(--font-heading)] font-extrabold tracking-[-0.025em] text-[clamp(30px,4vw,46px)] text-center mb-3">
-              Você paga por um sistema. Recebe a operação inteira.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="text-center text-[var(--muted-foreground)] text-[17px] max-w-[600px] mx-auto mb-[76px] leading-relaxed">
-              Comprar cada peça separada custa cerca de R$ 12.390 por mês.{" "}
-              <strong className="text-[#1a1b22]">
-                Aqui vem tudo junto, com 20% de desconto no plano anual.
-              </strong>
+            <p className="tm-hero-nota">
+              Diagnóstico leva 2 minutos e não pede cadastro. Garantia de 30 dias.
+              Setup em 72 horas.
             </p>
-          </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-            {PLANS.map((p, i) => (
-              <Reveal key={p.name} delay={i * 0.07}>
-                <div
-                  className={`relative bg-white rounded-[24px] p-9 ${
-                    p.feat
-                      ? "border-2 border-[var(--primary)] shadow-[var(--shadow-glow-primary)] md:scale-[1.03]"
-                      : "border border-[var(--border)] shadow-[var(--shadow-card)]"
-                  }`}
-                >
-                  {p.feat && (
-                    <div className="absolute -top-[13px] left-1/2 -translate-x-1/2">
-                      <Pill tone="primary" className="!bg-[var(--primary)] !text-white !border-0">
-                        <Sparkles size={13} fill="currentColor" strokeWidth={0} /> Recomendado
-                      </Pill>
-                    </div>
-                  )}
-                  <h3 className="font-[var(--font-heading)] font-extrabold text-[28px] mb-1.5">{p.name}</h3>
-                  <p className="text-sm text-[#1a1b22]/[0.82] leading-relaxed mb-6 min-h-[44px]">{p.hi}</p>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-lg text-[var(--muted-foreground)]">R$</span>
-                    <span className="font-[var(--font-heading)] font-extrabold text-[42px] leading-none tracking-[-0.03em]">
-                      {p.price}
-                    </span>
-                    <span className="text-[15px] text-[var(--muted-foreground)]">/mês</span>
-                  </div>
-                  <p className="text-[13px] text-[var(--muted-foreground)] mt-2 mb-6">
-                    {p.units} · 20% off no anual
-                  </p>
-                  <ul className="flex flex-col gap-2.5 mb-7 min-h-[168px]">
-                    {p.items.map((it) => (
-                      <li key={it} className="flex gap-2.5 text-[14.5px] leading-snug">
-                        <Check size={17} strokeWidth={2.6} className="text-[var(--success)] flex-shrink-0 mt-0.5" />
-                        <span>{it}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button variant={p.feat ? "primary" : "outline"} fullWidth>
-                    Fazer diagnóstico grátis
-                  </Button>
-                </div>
-              </Reveal>
-            ))}
           </div>
-          <Reveal delay={0.12}>
-            <p className="text-center text-[13.5px] text-[var(--muted-foreground)] mt-8 leading-relaxed">
-              Precisa de mais unidades do que o plano inclui? Adiciona unidade avulsa
-              por um valor fixo, sem trocar de degrau. Até 15 usuários por unidade.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1} className="max-w-[760px] mx-auto mt-10">
-            <div className="flex gap-5 items-start p-9 rounded-[22px] border border-[color-mix(in_srgb,var(--success)_40%,transparent)] bg-[var(--success-subtle)]">
-              <span className="inline-flex items-center justify-center w-[54px] h-[54px] rounded-[18px] bg-[color-mix(in_srgb,var(--success)_15%,transparent)] text-[var(--success)] flex-shrink-0">
-                <Shield size={24} />
-              </span>
-              <div>
-                <h3 className="font-[var(--font-heading)] font-bold text-xl mb-2.5">Garantia de 30 dias</h3>
-                <p className="text-[#1a1b22]/85 leading-relaxed m-0">
-                  Se em 30 dias você não conseguir ver o funil de todas as unidades sem
-                  perguntar a ninguém, devolvemos 100%, sem perguntas.
+          {/* Tela real do produto, nao uma simulacao desenhada. Escolhida entre
+              os prints disponiveis por ser a unica que mostra o funil inteiro
+              SEM nome ou rosto de pessoa: o painel executivo traz o ranking com
+              o time da rede identificado. */}
+          <figure className="tm-tela">
+            <Image
+              src="/dashboard/slide-2.png"
+              alt="Tela do Team Manager: 363 leads novos no mês, 29 fechamentos, 8% de conversão e o funil com 356 contatos ativos"
+              width={3022}
+              height={1560}
+              priority
+              sizes="(max-width: 1020px) 100vw, 52vw"
+            />
+            <figcaption>
+              Tela real do sistema. O funil da rede inteira, com filtro por
+              unidade.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {/* ── PROBLEMA ── */}
+      <section className="band tm-dores-band">
+        <div className="shell">
+          <h2 className="tm-h2 tm-centro">
+            Alguma dessas é a sua segunda-feira?
+          </h2>
+          <p className="tm-lead tm-centro tm-estreito">
+            Se você precisa perguntar para saber o que aconteceu na semana, o
+            problema não é a sua equipe. É que a resposta não mora em lugar
+            nenhum.
+          </p>
+          <ul className="tm-dores-lista">
+            {DORES.map((d) => (
+              <li key={d.p} className="tm-dor">
+                <p className="tm-dor-p">{d.p}</p>
+                <p className="tm-dor-r">
+                  <span aria-hidden="true" className="tm-dor-check" />
+                  {d.r}
                 </p>
-              </div>
-            </div>
-          </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── PARCEIRO ── */}
+      <section className="tm-parceiro-band">
+        <div className="shell tm-parceiro">
+          <span className="rotulo">Parceiro</span>
+          <Image
+            src="/parceiros/minds-english-school.png"
+            alt="Minds English School"
+            width={700}
+            height={316}
+          />
+        </div>
+      </section>
+
+      {/* ── CICLO ── */}
+      <section id="ciclo" className="band band-claro">
+        <div className="shell">
+          <h2 className="tm-h2 tm-centro">Os cinco elos que ninguém liga</h2>
+          <p className="tm-lead tm-centro tm-estreito">
+            A captura vive num formulário, o funil numa planilha, o contrato no
+            Word e a comissão numa terceira aba. Aqui é uma coisa só, e cada elo
+            passa o bastão para o seguinte sozinho.
+          </p>
+          <Ciclo />
+        </div>
+      </section>
+
+      {/* ── MÓDULOS ── */}
+      <section id="modulos" className="band">
+        <div className="shell">
+          <h2 className="tm-h2 tm-centro">Tudo o que entra junto</h2>
+          <p className="tm-lead tm-centro tm-estreito">
+            Não é um CRM com puxadinho. São 26 telas que já conversam entre si,
+            e a etiqueta diz em qual plano cada uma entra.
+          </p>
+          <Modulos />
+          <p className="tm-mod-nota">
+            O sistema fala a língua do seu negócio: lead, matrícula, curso e
+            aluno são apenas o vocabulário padrão. Cada cliente troca esses
+            nomes na configuração, sem que nada mude por baixo.
+          </p>
+        </div>
+      </section>
+
+      {/* ── AVISOS ── */}
+      <section id="avisos" className="band band-claro">
+        <div className="shell">
+          <h2 className="tm-h2 tm-centro">O sistema fala, você não precisa</h2>
+          <p className="tm-lead tm-centro tm-estreito">
+            Nada disso depende de alguém abrir uma tela. O aviso vai atrás da
+            pessoa, no WhatsApp que ela já usa o dia inteiro.
+          </p>
+          <Avisos />
+        </div>
+      </section>
+
+      {/* ── CALCULADORA ── */}
+      <section id="conta" className="band band-claro">
+        <div className="shell">
+          <h2 className="tm-h2 tm-centro">
+            A conta que ninguém faz
+          </h2>
+          <p className="tm-lead tm-centro tm-estreito">
+            Lead que pede informação e nunca recebe um segundo contato não aparece
+            em relatório nenhum. Ele só some. Mexa nos dois campos e veja o
+            tamanho disso na sua rede.
+          </p>
+          <Calculadora />
+        </div>
+      </section>
+
+      {/* ── COMPARAÇÃO ── */}
+      <section className="band">
+        <div className="shell">
+          <h2 className="tm-h2 tm-centro">E o que ninguém te conta que dá trabalho</h2>
+          <p className="tm-lead tm-centro tm-estreito">
+            As dores acima são as que doem na hora. Estas são as que corroem a
+            margem devagar, e são as que nenhuma planilha resolve.
+          </p>
+          <table className="tm-tabela">
+            <thead>
+              <tr>
+                <th />
+                <th>Hoje, na planilha</th>
+                <th className="tm-col-depois">Com Team Manager</th>
+              </tr>
+            </thead>
+            <tbody>
+              {LEDGER.map(([o, antes, depois]) => (
+                <tr key={o}>
+                  <th scope="row">{o}</th>
+                  <td className="tm-antes">{antes}</td>
+                  <td className="tm-depois">
+                    <span aria-hidden="true" className="tm-depois-check" />
+                    {depois}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* ── PREÇOS ── */}
+      <section id="precos" className="band tm-precos">
+        <div className="shell">
+          <h2 className="tm-h2 tm-centro">Você paga por unidade, não por pessoa</h2>
+          <p className="tm-lead tm-centro tm-estreito">
+            Um CRM cobrado por assento custaria mais de R$ 2.300 por mês para uma
+            equipe de 18 pessoas, e entregaria só o funil. Aqui a equipe inteira
+            entra no preço da unidade.
+          </p>
+          <div className="tm-planos">
+            {PLANOS.map((p) => (
+              <article
+                key={p.nome}
+                className={`tm-plano${p.destaque ? " tm-plano-destaque" : ""}`}
+              >
+                <span
+                  className={`tm-plano-selo${p.destaque ? "" : " tm-plano-selo-vazio"}`}
+                  aria-hidden={!p.destaque}
+                >
+                  Mais escolhido
+                </span>
+                <h3 className="tm-plano-nome">{p.nome}</h3>
+                <p className="tm-plano-promessa">{p.promessa}</p>
+                <p className="tm-plano-preco">
+                  <span>R$</span>
+                  <strong className="tabular">{p.preco}</strong>
+                  <span>/mês</span>
+                </p>
+                <p className="tm-plano-unidades">{p.unidades} · 20% off no anual</p>
+                <ul className="tm-plano-itens">
+                  {p.itens.map((i) => (
+                    <li key={i}>{i}</li>
+                  ))}
+                </ul>
+                <a
+                  href="/diagnostico"
+                  className={`btn ${p.destaque ? "btn-primary" : "btn-ghost"} tm-plano-btn`}
+                >
+                  Começar pelo diagnóstico
+                </a>
+              </article>
+            ))}
+          </div>
+          <p className="tm-precos-nota">
+            Precisa de mais unidades do que o plano inclui? Entra unidade avulsa
+            por valor fixo, sem trocar de degrau. Até 15 usuários por unidade.
+          </p>
+          <div className="tm-garantia">
+            <h3>Garantia de 30 dias</h3>
+            <p>
+              Se em 30 dias você não conseguir ver o funil de todas as unidades sem
+              perguntar a ninguém, devolvemos tudo. Sem perguntas.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="bg-[#fbf8ff] text-[#1a1b22] py-28 scroll-mt-28">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: FAQS.map(([q, a]) => ({
-                "@type": "Question",
-                name: q,
-                acceptedAnswer: { "@type": "Answer", text: a },
-              })),
-            }),
-          }}
-        />
-        <div className="max-w-[760px] mx-auto px-7">
-          <Reveal className="mb-4.5">
-            <Eyebrow tone="#757684">Perguntas frequentes</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="font-[var(--font-heading)] font-extrabold tracking-[-0.025em] text-[clamp(28px,3.5vw,42px)] mb-10">
-              As 6 que mais aparecem.
-            </h2>
-          </Reveal>
-          <div className="flex flex-col gap-3.5">
-            {FAQS.map(([q, a], i) => (
-              <Reveal key={q} delay={i * 0.04}>
-                <Accordion variant="card" summary={<span className="font-bold text-[17px]">{q}</span>}>
-                  <p className="text-[var(--muted-foreground)] leading-relaxed m-0 text-[15px]">{a}</p>
-                </Accordion>
-              </Reveal>
+      <section id="faq" className="band">
+        <div className="shell tm-faq-shell">
+          <h2 className="tm-h2">As sete que mais aparecem</h2>
+          <div className="tm-faq">
+            {FAQ.map(([q, a]) => (
+              <details key={q}>
+                <summary>{q}</summary>
+                <p>{a}</p>
+              </details>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA FINAL ── */}
-      <section
-        className="relative overflow-hidden text-[#f5f5fa] py-[120px]"
-        style={{ background: "linear-gradient(135deg,var(--hero-from),var(--hero-to))" }}
-      >
-        <Aurora blobs={[{ top: "10%", left: "40%", w: 520, h: 520, bg: "rgba(99,102,241,.35)" }]} />
-        <div className="relative max-w-[760px] mx-auto px-7 text-center">
-          <Reveal>
-            <h2 className="font-[var(--font-heading)] font-extrabold tracking-[-0.025em] text-[clamp(32px,4.5vw,52px)] leading-[1.1] mb-7">
-              Não é uma escolha de software.
-              <br />
-              <span className="text-white/50">É sobre o tipo de gestor que você quer ser.</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <p className="text-lg text-white/[0.78] max-w-[560px] mx-auto mb-9 leading-relaxed">
-              Seja o gestor que não precisa cobrar porque o sistema cobra. Que não
-              precisa investigar porque já sabe.
-            </p>
-          </Reveal>
-          <Reveal delay={0.14}>
-            <Button variant="primary" size="lg" iconRight={<ArrowRight size={18} />}>
-              Ativar o Team Manager · garantia de 30 dias
-            </Button>
-            <p className="mt-6 text-[13.5px] text-white/55 flex items-center justify-center gap-2">
-              <Shield size={14} /> Devolução integral em 30 dias. Sem perguntas.
-            </p>
-          </Reveal>
+      <section className="band tm-final">
+        <div className="shell">
+          <h2 className="tm-h2 tm-centro">
+            Cinco perguntas. Dois minutos.
+            <br />
+            Sem cadastro.
+          </h2>
+          <p className="tm-lead tm-centro tm-estreito">
+            O diagnóstico devolve onde a sua rede está perdendo visibilidade e um
+            plano de ação em três passos. Se fizer sentido, a gente conversa
+            depois disso.
+          </p>
+          <div className="tm-final-cta">
+            <a href="/diagnostico" className="btn btn-primary">
+              Fazer o diagnóstico agora
+            </a>
+            <a href="#precos" className="btn btn-ghost">
+              Antes, ver os planos
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="bg-[#070a1c] text-white/50 py-11">
-        <div className="max-w-[1200px] mx-auto px-7 flex justify-between items-center flex-wrap gap-4">
+      <footer className="tm-rodape">
+        <div className="shell tm-rodape-in">
           <Image
             src="/ds/logo-mark.png"
             alt="Team Manager"
             width={575}
             height={507}
-            className="h-9 w-auto opacity-85"
+            className="tm-logo tm-logo-rodape"
           />
-          <span className="text-[13px]">
-            © Team Manager · ARLTech · Sistema de operação para redes de escolas e cursos
-          </span>
+          <p>
+            © Team Manager · ARLTech · Sistema de operação para redes com várias
+            unidades
+          </p>
         </div>
       </footer>
+    </main>
     </div>
   );
 }
