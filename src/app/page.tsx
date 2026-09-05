@@ -301,7 +301,7 @@ export default function Home() {
       </section>
 
       {/* ── CALCULADORA ── */}
-      <section id="conta" className="band band-claro">
+      <section id="conta" className="band band-claro tm-conta-band">
         <div className="shell">
           <h2 className="tm-h2 tm-centro">
             A conta que ninguém faz

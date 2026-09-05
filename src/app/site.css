@@ -263,11 +263,15 @@
 
 /* ── CALCULADORA ──────────────────────────────────────────── */
 .tm .calc { margin-top: 44px; display: grid; gap: 28px; border: 2px solid var(--claro-linha); padding: clamp(24px, 3vw, 38px); }
-@media (min-width: 920px) { .tm .calc { grid-template-columns: 1fr 1fr; align-items: start; } }
-.tm .calc-controles { display: flex; flex-direction: column; gap: 30px; }
-.tm .calc-campo { display: grid; gap: 8px; }
-.tm .calc-rotulo { font-size: 15px; color: #4a5470; }
-.tm .calc-valor { font-size: 32px; color: var(--tinta); }
+@media (min-width: 920px) { .tm .calc { grid-template-columns: 1.15fr 0.85fr; align-items: start; } }
+/* Dois por dois, com rotulo e valor na mesma linha: em coluna unica os quatro
+   controles faziam a secao nao caber numa tela. */
+.tm .calc-controles { display: grid; gap: 24px 28px; }
+@media (min-width: 560px) { .tm .calc-controles { grid-template-columns: 1fr 1fr; } }
+.tm .calc-campo { display: grid; gap: 6px; align-content: start; }
+.tm .calc-linha { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.tm .calc-rotulo { font-size: 14px; color: #4a5470; }
+.tm .calc-valor { font-size: 22px; color: var(--tinta); white-space: nowrap; }
 .tm .calc-campo input { width: 100%; min-height: 44px; }
 .tm .calc-saida { display: flex; flex-direction: column; gap: 8px; padding: 26px; background: var(--tinta); color: #fff; }
 .tm .calc-saida-rotulo { font-size: 14.5px; color: var(--texto-claro); }
@@ -598,3 +602,11 @@
 .tm .calc-cenario-atual .calc-cenario-perda { color: #fff; }
 .tm .calc-cenario-por { font-size: 12px; color: #6b7488; }
 .tm .calc-cenario-atual .calc-cenario-por { color: rgba(255,255,255,0.6); }
+
+/* A secao da conta e a mais alta da pagina (titulo, quatro controles,
+   resultado, cenarios e premissas). Ela respira menos que as outras para
+   caber em uma tela de notebook. */
+.tm .tm-conta-band { padding-block: clamp(48px, 5vw, 72px); }
+.tm .tm-conta-band .calc { margin-top: 30px; padding: clamp(20px, 2.4vw, 30px); }
+.tm .tm-conta-band .calc-cenarios { padding-top: 20px; }
+.tm .tm-conta-band .calc-premissas { padding-top: 12px; }

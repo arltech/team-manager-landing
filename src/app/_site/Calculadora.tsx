@@ -52,8 +52,10 @@ export function Calculadora() {
     <div className="calc">
       <div className="calc-controles">
         <label className="calc-campo">
-          <span className="calc-rotulo">Leads que entram por mês, na rede toda</span>
-          <output className="calc-valor num">{leads}</output>
+          <span className="calc-linha">
+            <span className="calc-rotulo">Leads por mês, na rede toda</span>
+            <output className="calc-valor num">{leads}</output>
+          </span>
           <input
             type="range" min={20} max={600} step={10} value={leads}
             onChange={(e) => setLeads(Number(e.target.value))}
@@ -62,8 +64,10 @@ export function Calculadora() {
         </label>
 
         <label className="calc-campo">
-          <span className="calc-rotulo">Sua conversão de lead em venda</span>
-          <output className="calc-valor num">{conversao}%</output>
+          <span className="calc-linha">
+            <span className="calc-rotulo">Conversão de lead em venda</span>
+            <output className="calc-valor num">{conversao}%</output>
+          </span>
           <input
             type="range" min={2} max={25} step={1} value={conversao}
             onChange={(e) => setConversao(Number(e.target.value))}
@@ -72,8 +76,10 @@ export function Calculadora() {
         </label>
 
         <label className="calc-campo">
-          <span className="calc-rotulo">Quanto vale um contrato fechado, em média</span>
-          <output className="calc-valor num">{brl(ticket)}</output>
+          <span className="calc-linha">
+            <span className="calc-rotulo">Valor médio do contrato</span>
+            <output className="calc-valor num">{brl(ticket)}</output>
+          </span>
           <input
             type="range" min={500} max={20000} step={100} value={ticket}
             onChange={(e) => setTicket(Number(e.target.value))}
@@ -82,8 +88,10 @@ export function Calculadora() {
         </label>
 
         <label className="calc-campo">
-          <span className="calc-rotulo">Quantas unidades a sua rede tem</span>
-          <output className="calc-valor num">{unidades}</output>
+          <span className="calc-linha">
+            <span className="calc-rotulo">Unidades na rede</span>
+            <output className="calc-valor num">{unidades}</output>
+          </span>
           <input
             type="range" min={1} max={15} step={1} value={unidades}
             onChange={(e) => setUnidades(Number(e.target.value))}
@@ -100,7 +108,18 @@ export function Calculadora() {
         <p className="calc-saida-nota">
           São {perdidosAno.toLocaleString("pt-BR")} pessoas por ano que pedem
           informação e nunca recebem um segundo contato.{" "}
-          {multiplo >= 1 ? (
+          {multiplo >= 20 ? (
+            <>
+              O {plano.nome}, que cobre {plano.ate}{" "}
+              {plano.ate === 1 ? "unidade" : "unidades"}, custa {brl(custoAno)} no
+              mesmo período:{" "}
+              <strong>
+                {(100 / multiplo).toFixed(1).replace(".", ",")}% do que está indo
+                embora
+              </strong>
+              .
+            </>
+          ) : multiplo >= 1 ? (
             <>
               O {plano.nome}, que cobre {plano.ate}{" "}
               {plano.ate === 1 ? "unidade" : "unidades"}, custa {brl(custoAno)} no
@@ -136,7 +155,7 @@ export function Calculadora() {
         </ul>
       </div>
 
-      <details className="calc-premissas" open>
+      <details className="calc-premissas">
         <summary>
           <span aria-hidden="true" className="calc-seta" />
           De onde saem esses números
