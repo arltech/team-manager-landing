@@ -10,9 +10,10 @@ const VARIANT_WRAPPER: Record<Variant, string> = {
 };
 
 const VARIANT_SUMMARY: Record<Variant, string> = {
-  card: "list-none [&::-webkit-details-marker]:hidden flex items-center justify-between gap-4",
+  // min-h-11: o summary e o alvo de toque do FAQ e sozinho media 27px.
+  card: "list-none [&::-webkit-details-marker]:hidden flex items-center justify-between gap-4 min-h-11",
   subtle:
-    "list-none [&::-webkit-details-marker]:hidden flex items-center justify-between gap-4 p-5 md:p-6",
+    "list-none [&::-webkit-details-marker]:hidden flex items-center justify-between gap-4 p-5 md:p-6 min-h-11",
 };
 
 const VARIANT_BODY: Record<Variant, string> = {

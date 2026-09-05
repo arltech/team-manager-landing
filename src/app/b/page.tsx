@@ -159,9 +159,15 @@ export default function Page() {
               </a>
             ))}
           </nav>
-          <Button variant="primary" size="sm">
-            Fazer diagnóstico grátis
-          </Button>
+          <div className="flex items-center gap-2">
+            {/* Quem ja e cliente entra por aqui: o sistema mora em https://app.teammanager.tech. */}
+            <Button href="https://app.teammanager.tech" variant="secondary" size="sm">
+              Entrar
+            </Button>
+            <Button variant="primary" size="sm">
+              Fazer diagnóstico grátis
+            </Button>
+          </div>
         </div>
       </header>
 

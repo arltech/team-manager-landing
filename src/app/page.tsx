@@ -67,18 +67,63 @@ const LEDGER: [string, string, string][] = [
   ["Dados das unidades", "Uma planilha diferente em cada", "Uma fonte da verdade, auditável"],
 ];
 
+/**
+ * Os tres degraus do produto. Nome, ordem, unidades inclusas e o que cada um
+ * ACRESCENTA saem de src/lib/planos.ts no repo do app: mexer aqui sem olhar la
+ * faz a landing vender o que o sistema nao entrega.
+ *
+ * O preco e o de tabela (planos_precos, editavel em /admin/cobranca). Cliente
+ * com valor negociado nao entra nesta conta.
+ */
 const PLANS = [
-  { name: "Starter", units: "1–2 unidades", users: "Até 15 usuários", hi: "Para começar a sair da planilha", feat: false },
-  { name: "Rede", units: "3–6 unidades", users: "Até 30 usuários", hi: "Mais escolhido. Inclui Setup WhatsApp + Diagnóstico Fundador", feat: true },
-  { name: "Regional", units: "7–15 unidades", users: "Ilimitado", hi: "ROI dominante para redes que já escalam", feat: false },
+  {
+    name: "Essencial",
+    price: "397",
+    units: "1 unidade inclusa",
+    hi: "A operação do funil inteira em um lugar só.",
+    items: [
+      "CRM de candidatos com dono, origem e histórico de cada pessoa",
+      "Quadro de tarefas, diário de atividades e meta individual",
+      "Conversão por etapa, por origem e por unidade",
+      "Ranking, níveis e feed do time: a cobrança vira disputa",
+    ],
+    feat: false,
+  },
+  {
+    name: "Performance",
+    price: "697",
+    units: "3 unidades inclusas",
+    hi: "Gestão do time com número, não com impressão.",
+    items: [
+      "Tudo do Essencial",
+      "Desempenho por assessor: quem treinar e quem acelerar",
+      "Fila de Resgate para lead parado e follow-up vencido",
+      "Mapa de carga, distribuição de leads e scripts de venda",
+    ],
+    feat: true,
+  },
+  {
+    name: "Inteligência",
+    price: "1.297",
+    units: "6 unidades inclusas",
+    hi: "A IA acompanha cada tratativa e o dinheiro aparece no fim.",
+    items: [
+      "Tudo do Performance",
+      "Sentinela: temperatura, risco e próxima ação em cada ficha",
+      "Financeiro, comissão e contrato assinado pelo WhatsApp",
+      "Busca de leads na web e automações no WhatsApp da unidade",
+    ],
+    feat: false,
+  },
 ];
 
 const FAQS: [string, string][] = [
   ["Minha equipe não vai usar.", "A gamificação resolve adoção: quem aparece no ranking não para de usar, e o sistema tira XP de quem some. Registro em 30s, alerta no WhatsApp. Você não cobra: o sistema cobra."],
   ["É caro, planilha funciona.", "Planilha tem custo de lead perdido. Ticket R$ 500 × 3 unidades × 15 pontos extras = R$ 6.750/mês recuperados. Payback em menos de 9 dias de uso ativo."],
-  ["Minha rede é pequena, faz sentido?", "O melhor momento de criar o hábito certo é quando a rede ainda é pequena. Com 2–3 unidades você corrige o processo antes de multiplicar o problema."],
+  ["Minha rede é pequena, faz sentido?", "O melhor momento de criar o hábito certo é quando a rede ainda é pequena. Com 2 ou 3 unidades você corrige o processo antes de multiplicar o problema, e o Essencial já cobre uma unidade."],
   ["Integram com meu ERP?", "Em vez de integrar, substituímos a operação (CRM + tarefas + rotinas + ranking). Seu ERP financeiro continua sendo financeiro."],
-  ["Quanto tempo pra implantar?", "72 horas. Setup técnico em 2h (incluso em Rede e Regional), templates por segmento e suporte dedicado nos primeiros 7 dias."],
+  ["E se minha rede tiver mais unidades que o plano inclui?", "Cada plano já vem com um número de unidades incluso (1, 3 e 6). Acima disso você adiciona unidade avulsa por um valor fixo, sem trocar de plano. O limite operacional é de 15 usuários por unidade."],
+  ["Quanto tempo pra implantar?", "72 horas. Setup técnico em 2h, templates por segmento e suporte dedicado nos primeiros 7 dias."],
 ];
 
 const PROBLEMS = [
@@ -200,14 +245,24 @@ export default function ComandoPage() {
           />
           <nav className="hidden md:flex gap-8">
             {NAV.map(([label, hash]) => (
-              <a key={hash} href={`#${hash}`} className="text-sm font-medium text-white/80 hover:text-white transition-colors">
+              <a
+                key={hash}
+                href={`#${hash}`}
+                className="inline-flex items-center min-h-11 text-sm font-medium text-white/80 hover:text-white transition-colors"
+              >
                 {label}
               </a>
             ))}
           </nav>
-          <Button variant="white" size="sm">
-            Fazer diagnóstico grátis
-          </Button>
+          <div className="flex items-center gap-2">
+            {/* Quem ja e cliente entra por aqui: o sistema mora em https://app.teammanager.tech. */}
+            <Button href="https://app.teammanager.tech" variant="ghost" size="sm">
+              Entrar
+            </Button>
+            <Button variant="white" size="sm">
+              Fazer diagnóstico grátis
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -234,11 +289,14 @@ export default function ComandoPage() {
               </div>
             </Reveal>
             <Reveal delay={0.08}>
+              {/* As quebras sao do desenho de desktop. No celular a linha nao cabe
+                  e o <br> parte a frase no meio ("que se importa / com"), entao
+                  la o navegador quebra sozinho, com text-balance. */}
               <h1 className="font-[var(--font-heading)] font-extrabold tracking-[-0.03em] leading-[1.04] text-[40px] md:text-[clamp(40px,5vw,62px)] mb-6 text-balance text-white">
-                Pare de ser o único
-                <br />
-                que se importa com
-                <br />
+                Pare de ser o único{" "}
+                <br className="hidden md:inline" />
+                que se importa com{" "}
+                <br className="hidden md:inline" />
                 <span className="bg-[linear-gradient(120deg,#a5b8ff,#6366f1_60%,#3b82f6)] bg-clip-text text-transparent">
                   a meta de matrícula.
                 </span>
@@ -323,11 +381,27 @@ export default function ComandoPage() {
               ))}
             </div>
           </Reveal>
+          {/* Parceiro. Versao branca da marca porque a faixa e sobre fundo escuro;
+              a colorida tem azul-marinho que some no gradiente do hero. */}
+          <Reveal delay={0.1}>
+            <div className="mt-12 flex flex-col items-center gap-4">
+              <span className="text-xs font-bold tracking-[0.14em] uppercase text-white/35">
+                Parceiro
+              </span>
+              <Image
+                src="/parceiros/minds-english-school.png"
+                alt="Minds English School"
+                width={700}
+                height={316}
+                className="h-16 md:h-20 w-auto opacity-95"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── PROBLEM ── */}
-      <section id="problema" className="bg-[#fbf8ff] text-[#1a1b22] py-28 scroll-mt-20">
+      <section id="problema" className="bg-[#fbf8ff] text-[#1a1b22] py-28 scroll-mt-28">
         <div className="max-w-[980px] mx-auto px-7">
           <Reveal className="mb-4.5">
             <Eyebrow tone="#dc2626">O problema</Eyebrow>
@@ -378,7 +452,7 @@ export default function ComandoPage() {
       </section>
 
       {/* ── SOLUTION (bento) ── */}
-      <section id="solucao" className="bg-[#f4f2fc] text-[#1a1b22] py-28 scroll-mt-20">
+      <section id="solucao" className="bg-[#f4f2fc] text-[#1a1b22] py-28 scroll-mt-28">
         <div className="max-w-[1180px] mx-auto px-7">
           <Reveal className="text-center mb-4.5">
             <Eyebrow>A solução</Eyebrow>
@@ -419,7 +493,7 @@ export default function ComandoPage() {
       </section>
 
       {/* ── COMPARISON ledger ── */}
-      <section id="comparar" className="relative overflow-hidden bg-[#0a0e27] text-[#f5f5fa] py-28 scroll-mt-20">
+      <section id="comparar" className="relative overflow-hidden bg-[#0a0e27] text-[#f5f5fa] py-28 scroll-mt-28">
         <Aurora
           style={{ height: "100%", inset: "auto -10% -30% -10%" }}
           blobs={[{ bottom: "-20%", left: "30%", w: 520, h: 520, bg: "rgba(99,102,241,.3)" }]}
@@ -495,7 +569,7 @@ export default function ComandoPage() {
       <WhatsProof />
 
       {/* ── OFFER ── */}
-      <section id="oferta" className="bg-[#f4f2fc] text-[#1a1b22] py-28 scroll-mt-20">
+      <section id="oferta" className="bg-[#f4f2fc] text-[#1a1b22] py-28 scroll-mt-28">
         <div className="max-w-[1140px] mx-auto px-7">
           <Reveal className="text-center mb-4.5">
             <Eyebrow>A oferta</Eyebrow>
@@ -507,8 +581,10 @@ export default function ComandoPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-center text-[var(--muted-foreground)] text-[17px] max-w-[600px] mx-auto mb-[76px] leading-relaxed">
-              Equivalente de mercado: R$ 12.390/mês.{" "}
-              <strong className="text-[#1a1b22]">Seu investimento sai no diagnóstico gratuito.</strong>
+              Comprar cada peça separada custa cerca de R$ 12.390 por mês.{" "}
+              <strong className="text-[#1a1b22]">
+                Aqui vem tudo junto, com 20% de desconto no plano anual.
+              </strong>
             </p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
@@ -529,13 +605,25 @@ export default function ComandoPage() {
                     </div>
                   )}
                   <h3 className="font-[var(--font-heading)] font-extrabold text-[28px] mb-1.5">{p.name}</h3>
-                  <div className="text-[13.5px] text-[var(--muted-foreground)]">{p.units}</div>
-                  <div className="text-[13.5px] text-[var(--muted-foreground)] mb-[26px]">{p.users}</div>
-                  <div className="font-[var(--font-heading)] font-extrabold text-[26px]">Sob diagnóstico</div>
-                  <p className="text-xs text-[var(--muted-foreground)] mt-1.5 mb-6 leading-relaxed">
-                    Definido pelo porte da sua rede, no diagnóstico gratuito.
+                  <p className="text-sm text-[#1a1b22]/[0.82] leading-relaxed mb-6 min-h-[44px]">{p.hi}</p>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-lg text-[var(--muted-foreground)]">R$</span>
+                    <span className="font-[var(--font-heading)] font-extrabold text-[42px] leading-none tracking-[-0.03em]">
+                      {p.price}
+                    </span>
+                    <span className="text-[15px] text-[var(--muted-foreground)]">/mês</span>
+                  </div>
+                  <p className="text-[13px] text-[var(--muted-foreground)] mt-2 mb-6">
+                    {p.units} · 20% off no anual
                   </p>
-                  <p className="text-sm text-[#1a1b22]/[0.82] leading-relaxed mb-[26px] min-h-[62px]">{p.hi}</p>
+                  <ul className="flex flex-col gap-2.5 mb-7 min-h-[168px]">
+                    {p.items.map((it) => (
+                      <li key={it} className="flex gap-2.5 text-[14.5px] leading-snug">
+                        <Check size={17} strokeWidth={2.6} className="text-[var(--success)] flex-shrink-0 mt-0.5" />
+                        <span>{it}</span>
+                      </li>
+                    ))}
+                  </ul>
                   <Button variant={p.feat ? "primary" : "outline"} fullWidth>
                     Fazer diagnóstico grátis
                   </Button>
@@ -543,6 +631,12 @@ export default function ComandoPage() {
               </Reveal>
             ))}
           </div>
+          <Reveal delay={0.12}>
+            <p className="text-center text-[13.5px] text-[var(--muted-foreground)] mt-8 leading-relaxed">
+              Precisa de mais unidades do que o plano inclui? Adiciona unidade avulsa
+              por um valor fixo, sem trocar de degrau. Até 15 usuários por unidade.
+            </p>
+          </Reveal>
           <Reveal delay={0.1} className="max-w-[760px] mx-auto mt-10">
             <div className="flex gap-5 items-start p-9 rounded-[22px] border border-[color-mix(in_srgb,var(--success)_40%,transparent)] bg-[var(--success-subtle)]">
               <span className="inline-flex items-center justify-center w-[54px] h-[54px] rounded-[18px] bg-[color-mix(in_srgb,var(--success)_15%,transparent)] text-[var(--success)] flex-shrink-0">
@@ -561,7 +655,7 @@ export default function ComandoPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="bg-[#fbf8ff] text-[#1a1b22] py-28 scroll-mt-20">
+      <section id="faq" className="bg-[#fbf8ff] text-[#1a1b22] py-28 scroll-mt-28">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -582,7 +676,7 @@ export default function ComandoPage() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="font-[var(--font-heading)] font-extrabold tracking-[-0.025em] text-[clamp(28px,3.5vw,42px)] mb-10">
-              As 5 que mais aparecem.
+              As 6 que mais aparecem.
             </h2>
           </Reveal>
           <div className="flex flex-col gap-3.5">

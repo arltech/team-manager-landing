@@ -243,7 +243,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
+  /* 12px e o piso de leitura; abaixo disso o uppercase com tracking fica ilegivel no celular. */
+  font-size: 12px;
   font-weight: 700;
   padding: 6px 12px;
   border-radius: 999px;
