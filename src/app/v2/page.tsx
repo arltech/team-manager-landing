@@ -38,7 +38,7 @@ const DORES: { p: string; r: string }[] = [
     r: "Cada pessoa leva o próprio QR para a ação. O lead entra já ligado ao evento que o trouxe e a quem captou.",
   },
   {
-    p: "Descobre que o assessor sumiu só na reunião de sexta?",
+    p: "Descobre que alguém do time parou só na reunião de sexta?",
     r: "Mapa de Carga e Pulse do Time mostram quem parou e quem está afogado antes de virar problema.",
   },
   {
@@ -55,12 +55,12 @@ const DORES: { p: string; r: string }[] = [
  * fila de resgate, automacao por idade, auditoria de supervisao).
  */
 const LEDGER: [string, string, string][] = [
-  ["Comissão do assessor", "Calculada na mão no fim do mês", "Sai junto com a matrícula, por pessoa"],
+  ["Comissão de quem vendeu", "Calculada na mão no fim do mês", "Sai junto com a matrícula, por pessoa"],
   ["Preço e desconto", "Cada um negocia o que acha", "Grade por curso, com teto de desconto"],
   ["Renovação de contrato", "Lembra quem lembrar", "Avisa antes de vencer, com o contrato pronto"],
   ["Lead que esfriou", "Só aparece se alguém for procurar", "Entra na fila de resgate sozinho"],
-  ["Aluno na idade de mudar de curso", "Ninguém cruza a base", "Vira mensagem no WhatsApp da unidade"],
-  ["O que foi tratado de verdade", "Confia no que o assessor contou", "Trilha por lead: quem fez, o quê e quando"],
+  ["De onde veio cada matrícula", "Anotada quando alguém lembra", "Amarrada à campanha e à parceria que trouxe"],
+  ["O que foi tratado de verdade", "Confia no que cada um contou na reunião", "Trilha por lead: quem fez, o quê e quando"],
 ];
 
 const PLANOS = [
@@ -84,7 +84,7 @@ const PLANOS = [
     promessa: "Gestão do time com número, não com impressão.",
     itens: [
       "Tudo do Essencial",
-      "Quem treinar e quem acelerar, por assessor",
+      "Quem treinar e quem acelerar, pessoa a pessoa",
       "Fila de resgate de lead parado",
       "Mapa de carga, distribuição e scripts",
     ],
@@ -287,7 +287,7 @@ export default function V2Page() {
               <tr>
                 <th />
                 <th>Hoje, na planilha</th>
-                <th>Com Team Manager</th>
+                <th className="v2-col-depois">Com Team Manager</th>
               </tr>
             </thead>
             <tbody>
@@ -295,7 +295,10 @@ export default function V2Page() {
                 <tr key={o}>
                   <th scope="row">{o}</th>
                   <td className="v2-antes">{antes}</td>
-                  <td className="v2-depois">{depois}</td>
+                  <td className="v2-depois">
+                    <span aria-hidden="true" className="v2-depois-check" />
+                    {depois}
+                  </td>
                 </tr>
               ))}
             </tbody>

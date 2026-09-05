@@ -285,10 +285,31 @@
 .v2 .v2-tabela { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 15.5px; }
 .v2 .v2-tabela th, .v2 .v2-tabela td { padding: 16px 18px; text-align: left; vertical-align: top; }
 .v2 .v2-tabela thead th { font-family: var(--corpo); font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--texto-fraco); border-bottom: 2px solid var(--linha); }
+.v2 .v2-tabela thead th.v2-col-depois { border-bottom-color: var(--verde); }
 .v2 .v2-tabela tbody th { font-weight: 700; width: 30%; }
 .v2 .v2-tabela tbody tr { border-bottom: 1px solid var(--linha); }
 .v2 .v2-antes { color: var(--texto-fraco); }
-.v2 .v2-depois { color: #fff; }
+/* A coluna do produto e a razao da tabela existir: sem peso proprio ela le
+   igual a coluna do problema e o contraste do argumento se perde. */
+.v2 .v2-col-depois { color: #fff !important; background: rgba(25, 195, 125, 0.12); }
+/* A regra generica de padding da tabela vem depois e vencia o padding-left
+   daqui, entao o check caia por cima da primeira letra: por isso o seletor
+   repete .v2-tabela td. */
+.v2 .v2-tabela td.v2-depois {
+  position: relative; padding-left: 46px;
+  color: #fff; font-weight: 700;
+  font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase;
+  line-height: 1.35;
+  background: rgba(25, 195, 125, 0.12);
+  box-shadow: inset 3px 0 0 var(--verde);
+}
+.v2 .v2-depois-check {
+  position: absolute; left: 20px; top: 21px;
+  width: 11px; height: 6px;
+  border-left: 2.5px solid var(--verde); border-bottom: 2.5px solid var(--verde);
+  transform: rotate(-45deg);
+}
+.v2 .v2-tabela thead th.v2-col-depois { padding-left: 46px; }
 @media (max-width: 720px) { .v2 .v2-tabela { display: block; overflow-x: auto; white-space: nowrap; } }
 
 /* ── PREÇOS ───────────────────────────────────────────────── */

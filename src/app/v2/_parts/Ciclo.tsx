@@ -43,7 +43,7 @@ const ELOS = [
     nome: "Dinheiro",
     titulo: "A receita aparece sem planilha",
     texto:
-      "Receita contratada, previsão do pipeline, perda em reais e comissão por assessor. A entrada da matrícula pode ser cobrada por PIX ou cartão na mesma tela.",
+      "Receita contratada, previsão do pipeline, perda em reais e comissão por pessoa do time. A entrada da matrícula pode ser cobrada por PIX ou cartão na mesma tela.",
     prova: "Financeiro e Cobrança",
   },
 ];
