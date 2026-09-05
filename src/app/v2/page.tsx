@@ -22,9 +22,11 @@ const PROVA = [
 
 const DORES = [
   "Você descobre o resultado do mês quando o mês já acabou.",
-  "O assessor some por dois dias e isso aparece na reunião de sexta.",
-  "Cada unidade tem uma planilha, e nenhuma tem a mesma coluna.",
   "O follow-up depende de alguém lembrar. Ninguém lembra.",
+  "Cada unidade tem uma planilha, e nenhuma tem a mesma coluna.",
+  "A panfletagem de sábado trouxe quantas matrículas? Ninguém sabe dizer.",
+  "O assessor sumiu por dois dias e isso só apareceu na reunião de sexta.",
+  "O contrato foi impresso, assinado, fotografado e está em alguma pasta.",
 ];
 
 
@@ -181,6 +183,29 @@ export default function V2Page() {
         </div>
       </section>
 
+      {/* ── PROBLEMA ── */}
+      <section className="band v2-dores-band">
+        <div className="shell v2-dores">
+          <div>
+            <h2 className="v2-h2">
+              Você não está gerenciando.
+              <br />
+              Está investigando.
+            </h2>
+            <p className="v2-lead">
+              Se para saber o que aconteceu na semana você precisa perguntar, o
+              problema não é a sua equipe. É que a resposta não mora em lugar
+              nenhum.
+            </p>
+          </div>
+          <ul className="v2-dores-lista">
+            {DORES.map((d) => (
+              <li key={d}>{d}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* ── PROVA ── */}
       <section className="v2-prova">
         <div className="shell">
@@ -205,29 +230,6 @@ export default function V2Page() {
               height={316}
             />
           </div>
-        </div>
-      </section>
-
-      {/* ── PROBLEMA ── */}
-      <section className="band">
-        <div className="shell v2-dores">
-          <div>
-            <h2 className="v2-h2">
-              Você não está gerenciando.
-              <br />
-              Está investigando.
-            </h2>
-            <p className="v2-lead">
-              Se você precisa perguntar para saber o que aconteceu na semana, o
-              problema não é a sua equipe. É a falta de um lugar onde a resposta
-              já esteja.
-            </p>
-          </div>
-          <ul className="v2-dores-lista">
-            {DORES.map((d) => (
-              <li key={d}>{d}</li>
-            ))}
-          </ul>
         </div>
       </section>
 
@@ -387,7 +389,7 @@ export default function V2Page() {
             alt="Team Manager"
             width={575}
             height={507}
-            className="v2-logo"
+            className="v2-logo v2-logo-rodape"
           />
           <p>
             © Team Manager · ARLTech · Sistema de operação para redes de escolas e
