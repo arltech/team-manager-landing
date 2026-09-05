@@ -5,7 +5,8 @@ type Variant = "primary" | "outline" | "white" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const SIZE_CLASS: Record<Size, string> = {
-  sm: "px-4 py-[9px] text-[13px] gap-1.5 rounded-[var(--radius-md)]",
+  // min-h-11 = 44px: alvo de toque minimo (WCAG 2.5.5). py sozinho dava 39px.
+  sm: "px-4 min-h-11 text-[13px] gap-1.5 rounded-[var(--radius-md)]",
   md: "px-7 py-3.5 text-[15px] gap-2 rounded-[var(--radius-lg)]",
   lg: "px-9 py-[18px] text-[17px] gap-2.5 rounded-[var(--radius-lg)]",
 };

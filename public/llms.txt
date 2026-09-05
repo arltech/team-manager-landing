@@ -6,17 +6,20 @@ Team Manager substitui a combinação de planilha + WhatsApp usada por redes de 
 
 ## Para quem é
 
-Gestores e donos de redes de escolas e cursos com 2 a 15 unidades que hoje dependem de planilhas manuais e mensagens de WhatsApp para acompanhar matrículas, follow-up de candidatos e desempenho da equipe comercial.
+Gestores e donos de redes de escolas e cursos com 1 a 15 unidades que hoje dependem de planilhas manuais e mensagens de WhatsApp para acompanhar matrículas, follow-up de candidatos e desempenho da equipe comercial.
 
 ## Principais páginas
 
-- [Página inicial](https://teammanager.arltech.emp.br/): proposta de valor completa, comparação antes/depois, planos e FAQ.
-- [Diagnóstico gratuito](https://teammanager.arltech.emp.br/diagnostico): quiz de 2 minutos que avalia a maturidade operacional da rede e recomenda o plano.
+- [Página inicial](https://www.teammanager.tech/): proposta de valor completa, comparação antes/depois, planos e FAQ.
+- [Diagnóstico gratuito](https://www.teammanager.tech/diagnostico): quiz de 2 minutos que avalia a maturidade operacional da rede e devolve um plano de ação em 3 passos.
+- [Acesso ao sistema](https://app.teammanager.tech): login dos clientes. O produto roda em app.teammanager.tech; www.teammanager.tech e o site de vendas.
 
 ## Planos
 
-- Starter (1–2 unidades, até 15 usuários)
-- Rede (3–6 unidades, até 30 usuários, inclui setup WhatsApp e diagnóstico fundador)
-- Regional (7–15 unidades, usuários ilimitados)
+Três degraus, cada um acrescentando ao anterior. Preço por mês, com 20% de desconto no ciclo anual. O eixo de cobrança é a unidade, não o usuário: cada plano já inclui um número de unidades e as demais entram como unidade avulsa, com limite operacional de 15 usuários por unidade.
 
-Preço definido no diagnóstico gratuito, conforme o porte da rede. Garantia de 30 dias com devolução integral. Setup em até 72 horas.
+- Essencial (R$ 397/mês, 1 unidade inclusa): CRM de candidatos, quadro de tarefas, diário de atividades, métricas diárias, análise de conversão do funil, gamificação com ranking, parcerias e e-mails automáticos.
+- Performance (R$ 597/mês, 3 unidades inclusas): tudo do Essencial, mais desempenho por assessor, fila de resgate de lead parado, objetivo x conversão, gestão do time (mapa de carga, pulse, distribuição de leads, auditoria de supervisão) e scripts de venda.
+- Inteligência (R$ 997/mês, 6 unidades inclusas): tudo do Performance, mais Sentinela Comercial com IA (temperatura, risco e próxima ação por ficha), busca de leads na web, financeiro com comissão, contratos assinados pelo WhatsApp, atividades externas e automações de WhatsApp.
+
+Garantia de 30 dias com devolução integral. Setup em até 72 horas. Sem fidelidade.

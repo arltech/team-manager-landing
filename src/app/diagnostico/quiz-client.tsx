@@ -174,7 +174,7 @@ export function QuizClient() {
               <button
                 onClick={goBack}
                 disabled={step === 0}
-                className="text-sm text-white/55 hover:text-white flex items-center gap-1.5 font-medium transition-colors disabled:opacity-0 disabled:pointer-events-none"
+                className="text-sm text-white/55 hover:text-white flex items-center gap-1.5 font-medium transition-colors disabled:opacity-0 disabled:pointer-events-none min-h-11 -ml-2 px-2"
               >
                 <ArrowLeft size={14} /> Voltar
               </button>
@@ -351,7 +351,7 @@ function ResultView({ result }: { result: SubmitResult }) {
           <Logo size="lg" variant="badge" />
           <Link
             href="/"
-            className="text-xs text-[var(--muted-foreground)] hover:text-[var(--primary)] flex items-center gap-1.5 font-medium transition-colors"
+            className="text-xs text-[var(--muted-foreground)] hover:text-[var(--primary)] flex items-center gap-1.5 font-medium transition-colors min-h-11 -mr-2 px-2"
           >
             <ArrowLeft size={12} /> Voltar à landing
           </Link>

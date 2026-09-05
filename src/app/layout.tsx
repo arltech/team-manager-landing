@@ -3,15 +3,18 @@ import { Toaster } from "sonner";
 import Script from "next/script";
 import "./globals.css";
 
+// Na landing esta variavel significa a URL DELA MESMA, nao a do app (o sistema
+// mora em app.teammanager.tech). O fallback e o dominio atual: quando faltava a
+// env, canonical, OpenGraph e sitemap apontavam todos para o endereco antigo.
 const SITE_URL =
-  process.env.NEXT_PUBLIC_APP_URL ?? "https://teammanager.arltech.emp.br";
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://www.teammanager.tech";
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 const SITE_NAME = "Team Manager";
 const TITLE =
-  "Team Manager — Sistema de operação para redes de escolas e cursos";
+  "Team Manager: sistema de operação para redes de escolas e cursos";
 const DESCRIPTION =
-  "CRM de candidatos, follow-up automático, ranking de equipe e rotinas semanais para redes de escolas e cursos com 2 a 15 unidades. Pare de cobrar matrícula: o sistema cobra por você.";
+  "CRM de candidatos, follow-up automático, ranking de equipe e rotinas semanais para redes de escolas e cursos de 1 a 15 unidades. Pare de cobrar matrícula: o sistema cobra por você.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -65,7 +68,12 @@ export const metadata: Metadata = {
     telephone: false,
   },
   verification: {
-    google: "mOPSwdt7gy7bknScqwK5YMbp5K6xEfUEplU9dZe-8Os",
+    // Dois tokens: o primeiro verifica a propriedade antiga (teammanager.arltech.emp.br),
+    // o segundo verifica https://www.teammanager.tech/ no Search Console.
+    google: [
+      "mOPSwdt7gy7bknScqwK5YMbp5K6xEfUEplU9dZe-8Os",
+      "4tb5HAo1r8aQlXUMIlBwqs5T3_ErwXwg39-OAd12-Iw",
+    ],
   },
 };
 
@@ -96,14 +104,30 @@ const STRUCTURED_DATA = {
       operatingSystem: "Web",
       description: DESCRIPTION,
       url: SITE_URL,
-      offers: {
+      // Preco de tabela dos tres degraus. Mesma fonte da secao de planos em
+      // page.tsx; mudou la, muda aqui, senao o rich result mente.
+      offers: [
+        { nome: "Essencial", preco: "397" },
+        { nome: "Performance", preco: "597" },
+        { nome: "Inteligência", preco: "997" },
+      ].map(({ nome, preco }) => ({
         "@type": "Offer",
+        name: `Team Manager ${nome}`,
+        price: preco,
         priceCurrency: "BRL",
+        url: `${SITE_URL}/#oferta`,
+        availability: "https://schema.org/InStock",
         priceSpecification: {
-          "@type": "PriceSpecification",
-          description: "Preço definido no diagnóstico gratuito, conforme o porte da rede.",
+          "@type": "UnitPriceSpecification",
+          price: preco,
+          priceCurrency: "BRL",
+          referenceQuantity: {
+            "@type": "QuantitativeValue",
+            value: 1,
+            unitCode: "MON",
+          },
         },
-      },
+      })),
       audience: {
         "@type": "Audience",
         audienceType: "Redes de escolas e cursos com 1 a 15 unidades",
