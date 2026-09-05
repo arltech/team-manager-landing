@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 import Script from "next/script";
 import "./globals.css";
+import "./site.css";
 
 // Na landing esta variavel significa a URL DELA MESMA, nao a do app (o sistema
 // mora em app.teammanager.tech). O fallback e o dominio atual: quando faltava a
@@ -12,9 +13,9 @@ const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 const SITE_NAME = "Team Manager";
 const TITLE =
-  "Team Manager: sistema de operação para redes de escolas e cursos";
+  "Team Manager: do primeiro contato ao contrato assinado";
 const DESCRIPTION =
-  "CRM de candidatos, follow-up automático, ranking de equipe e rotinas semanais para redes de escolas e cursos de 1 a 15 unidades. Pare de cobrar matrícula: o sistema cobra por você.";
+  "A operação comercial da sua rede em um sistema: captura na rua com QR, CRM, cobrança automática do follow-up, contrato assinado no celular e a receita no fim. De 1 a 15 unidades.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -130,7 +131,7 @@ const STRUCTURED_DATA = {
       })),
       audience: {
         "@type": "Audience",
-        audienceType: "Redes de escolas e cursos com 1 a 15 unidades",
+        audienceType: "Redes com 1 a 15 unidades",
       },
     },
   ],

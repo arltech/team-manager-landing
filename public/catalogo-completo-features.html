@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo Completo de Features · Team Manager</title>
+  <meta name="description" content="Tudo que o Team Manager tem hoje: CRM de candidatos, gamificação, automação de WhatsApp com IA, multi-unidade e infraestrutura." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            heading: ['Manrope', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --background: #fbf8ff;
+      --foreground: #1a1b22;
+      --primary: #1e3a8a;
+      --primary-container: #3b82f6;
+      --primary-vibrant: #6366f1;
+      --muted-foreground: #444653;
+      --border: #c4c5d5;
+      --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+    }
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; letter-spacing: -0.025em; }
+
+    .aurora { position: absolute; inset: -20% -10% auto -10%; height: 130%; pointer-events: none; z-index: 0; }
+    .aurora span { position: absolute; border-radius: 9999px; filter: blur(70px); opacity: 0.55; animation: a-drift 18s ease-in-out infinite; }
+    @keyframes a-drift { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, 30px) scale(1.15); } }
+    .gridlines {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    @media (prefers-reduced-motion: reduce) { .aurora span { animation: none; } }
+
+    .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .pill-dark-glass { background: rgb(255 255 255 / 0.1); color: rgb(255 255 255 / 0.85); border: 1px solid rgb(255 255 255 / 0.15); backdrop-filter: blur(4px); }
+
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+    .eyebrow-line { width: 20px; height: 1px; background: currentColor; opacity: 0.6; }
+
+    .bento-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--shadow-card);
+      transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+    }
+    .bento-card:hover { border-color: var(--primary-vibrant); box-shadow: 0 4px 14px rgb(0 0 0 / 0.08); transform: translateY(-2px); }
+    .bento-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 54px; height: 54px; border-radius: 16px;
+      background: color-mix(in srgb, var(--primary) 10%, transparent);
+      color: var(--primary);
+      margin-bottom: 22px;
+    }
+    .bento-card-dark {
+      background: rgb(255 255 255 / 0.04);
+      border: 1px solid rgb(255 255 255 / 0.1);
+      border-radius: 22px;
+      padding: 30px;
+      transition: border-color 200ms ease, transform 200ms ease;
+    }
+    .bento-card-dark:hover { border-color: rgb(255 255 255 / 0.25); transform: translateY(-2px); }
+    .bento-icon-dark {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 54px; height: 54px; border-radius: 16px;
+      background: rgb(99 102 241 / 0.18);
+      color: #a5b4fc;
+      margin-bottom: 22px;
+    }
+    .gradient-text {
+      background: linear-gradient(120deg, #a5b8ff, #6366f1 60%, #3b82f6);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      color: #ffffff; font-weight: 600; padding: 12px 24px; border-radius: 12px;
+      transition: transform 150ms ease, box-shadow 200ms ease;
+      box-shadow: 0 8px 24px rgba(0, 40, 142, 0.18);
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(0, 40, 142, 0.28); }
+  </style>
+</head>
+
+<body class="relative">
+
+  <!-- ============================================================ -->
+  <!-- HEADER -->
+  <!-- ============================================================ -->
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent border-b border-transparent">
+    <div class="max-w-[1200px] mx-auto px-7 h-[76px] flex items-center justify-between gap-6">
+      <img src="assets/logo-mark.png" alt="Team Manager" class="h-11 w-auto" style="filter: drop-shadow(0 2px 10px rgba(99,102,241,.3))" />
+      <nav class="hidden md:flex gap-8">
+        <a href="#vendas" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Vendas</a>
+        <a href="#produtividade" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Produtividade</a>
+        <a href="#gamificacao" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Gamificação</a>
+        <a href="#whatsapp" class="text-sm font-medium text-white/80 hover:text-white transition-colors">WhatsApp IA</a>
+        <a href="#infraestrutura" class="text-sm font-medium text-white/80 hover:text-white transition-colors">Infraestrutura</a>
+      </nav>
+      <span class="pill pill-dark-glass whitespace-nowrap">Catálogo completo</span>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- HERO -->
+  <!-- ============================================================ -->
+  <section class="relative pt-[150px] pb-[90px] bg-[linear-gradient(180deg,#070a1c_0%,#0d1130_55%,#141a44_100%)] text-white">
+    <div class="aurora">
+      <span style="top:4%; left:8%; width:480px; height:480px; background:rgba(99,102,241,.5)"></span>
+      <span style="top:30%; right:4%; width:420px; height:420px; background:rgba(59,130,246,.4); animation-delay:-6s"></span>
+      <span style="bottom:-8%; left:38%; width:380px; height:380px; background:rgba(244,114,182,.22); animation-delay:-11s"></span>
+    </div>
+    <div class="gridlines absolute inset-0 z-0" style="mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%)"></div>
+    <div class="relative z-[2] max-w-[1200px] mx-auto px-7">
+      <div class="mb-6">
+        <span class="pill pill-dark-glass">Levantamento direto do código em produção</span>
+      </div>
+      <h1 class="font-extrabold leading-[1.05] text-[40px] md:text-[clamp(40px,5vw,58px)] mb-6 max-w-[820px]">
+        Tudo que o <span class="gradient-text">Team Manager</span> tem hoje.
+      </h1>
+      <p class="text-[19px] text-white/75 leading-relaxed max-w-[600px] mb-12">
+        36 features, organizadas em 6 áreas: motor de vendas, produtividade, gamificação, automação de WhatsApp com IA, administração multi-unidade e infraestrutura. Sem promessa de roadmap, só o que já está rodando.
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-white/10 pt-10">
+        <div>
+          <div class="font-heading text-3xl font-bold text-white">36</div>
+          <div class="mt-1 text-xs text-white/55">features documentadas</div>
+        </div>
+        <div>
+          <div class="font-heading text-3xl font-bold text-white">6</div>
+          <div class="mt-1 text-xs text-white/55">áreas do produto</div>
+        </div>
+        <div>
+          <div class="font-heading text-3xl font-bold text-white">18</div>
+          <div class="mt-1 text-xs text-white/55">automações rodando sozinhas</div>
+        </div>
+        <div>
+          <div class="font-heading text-3xl font-bold text-white">0</div>
+          <div class="mt-1 text-xs text-white/55">Zapier ou n8n pra manter</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- GRUPO 1 · VENDAS (claro) -->
+  <!-- ============================================================ -->
+  <section id="vendas" class="bg-[#f4f2fc] text-[#1a1b22] py-24 scroll-mt-20">
+    <div class="max-w-[1180px] mx-auto px-7">
+      <div class="text-center mb-4">
+        <span class="eyebrow" style="color:#4338ca"><span class="eyebrow-line"></span>01 · Motor de vendas</span>
+      </div>
+      <h2 class="font-extrabold text-[clamp(28px,4vw,42px)] text-center mb-14">CRM & Vendas</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 100-8 4 4 0 000 8zm6 4v-1a4 4 0 00-3-3.87m-9-.13a4 4 0 100-8 4 4 0 000 8z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">CRM de candidatos completo</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Timeline unificada de status, notas datadas, tags de situação configuráveis, motivo de perda e vínculo com o parceiro de origem. Filtros por curso, período, responsável e unidade.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm6 0V9a2 2 0 00-2-2h-2a2 2 0 00-2 2v10m10 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v14"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Funil de conversão & analytics</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Funil por etapa com o gargalo destacado sozinho, comparação mês a mês, conversão por curso e por situação.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Busca de leads com IA</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Encontra empresas e pessoas no Google e no Google Maps, lê as páginas e extrai nome, telefone e contato estruturado. Sistema de créditos controla o custo por usuário.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Scripts de vendas com IA</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Biblioteca de roteiros de abordagem, com curtidas e "usei", mais um gerador de script sob medida via IA pra cada situação de venda.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Gestão de parceiros</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Rastreia escolas, agências e indicações que trazem candidatos, com compartilhamento entre unidades quando faz sentido.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Inteligência de distribuição regional</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Painel de origem cruzada com qualificação de leads por regional, alertas automáticos e cruzamento de matrículas por telefone. Recurso de gerência regional e diretoria.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- GRUPO 2 · PRODUTIVIDADE (claro) -->
+  <!-- ============================================================ -->
+  <section id="produtividade" class="bg-[#fbf8ff] text-[#1a1b22] py-24 scroll-mt-20">
+    <div class="max-w-[1180px] mx-auto px-7">
+      <div class="text-center mb-4">
+        <span class="eyebrow" style="color:#4338ca"><span class="eyebrow-line"></span>02 · Gestão de time</span>
+      </div>
+      <h2 class="font-extrabold text-[clamp(28px,4vw,42px)] text-center mb-14">Produtividade & Acompanhamento</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Quadro de tarefas (Kanban)</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Board de tarefas do time com prazos, responsáveis e um painel de ideias que pode virar tarefa com um clique.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Diário de atividades</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Cada pessoa registra o dia; o gestor vê a timeline consolidada da equipe dos últimos 14 dias sem perguntar a ninguém.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm6 0V9a2 2 0 00-2-2h-2a2 2 0 00-2 2v10m10 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v14"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Rotina comercial diária/semanal</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Indicadores de atividade (mensagens, ligações, prospecção) alimentam um dashboard de equipe com detalhe por pessoa.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Mapa de carga</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Mostra quem está sobrecarregado de tarefas e o ritmo real de conclusão de cada pessoa. Visão de gerência sênior.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Pulse do time</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Humor agregado da equipe nos últimos 30 dias, extraído do próprio diário de atividades. Visão de gerência sênior.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Auditoria de supervisão</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Mostra quem está há dias sem receber feedback de um gestor, fechando o ciclo de acompanhamento. Visão de diretoria.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- GRUPO 3 · GAMIFICAÇÃO (escuro, aurora) -->
+  <!-- ============================================================ -->
+  <section id="gamificacao" class="relative overflow-hidden bg-[#0a0e27] text-[#f5f5fa] py-24 scroll-mt-20">
+    <div class="aurora" style="height:100%; inset:auto -10% -30% -10%">
+      <span style="bottom:-20%; left:30%; width:520px; height:520px; background:rgba(99,102,241,.3)"></span>
+    </div>
+    <div class="relative max-w-[1180px] mx-auto px-7">
+      <div class="text-center mb-4">
+        <span class="eyebrow" style="color:#9bb0ff"><span class="eyebrow-line"></span>03 · Cultura</span>
+      </div>
+      <h2 class="font-extrabold text-[clamp(28px,4vw,42px)] text-center mb-14">Gamificação & Reconhecimento</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8m-4-4v4M6 4h12v3a6 6 0 01-12 0V4zM6 4H3v1a4 4 0 003 3.87M18 4h3v1a4 4 0 01-3 3.87"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">XP e níveis</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">8 níveis de progressão, de Bronze até Lenda, com XP ganho por ações reais do trabalho: tarefa criada, matrícula fechada, rotina preenchida, login diário.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15a4 4 0 100-8 4 4 0 000 8zm0 0v6m-4-2.5l-2 3M16 18.5l2 3"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Conquistas & badges</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Achievements por categoria (consistência, resultado, colaboração, especial), incluindo raridades e conquistas ocultas pra descobrir.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 100-8 4 4 0 000 8zm6 4v-1a4 4 0 00-3-3.87m-9-.13a4 4 0 100-8 4 4 0 000 8z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Feed de conquistas</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Mural social que anuncia sozinho level-ups e conquistas da equipe, em tempo real.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 21h8m-4-4v4M6 4h12v3a6 6 0 01-12 0V4z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Ranking & Hall da Fama</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Ranking mensal por setor e por unidade, com histórico de períodos anteriores e um hall da fama pra quem mais se destacou.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Premiações com prazo</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Campanhas com meta de matrícula, prazo definido e prêmio concreto. Disputa em tempo real por posição, mais histórico de vencedores.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Stickers com IA</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Biblioteca de figurinhas customizadas, com um classificador de IA que decide na hora certa de reagir com sticker no grupo do WhatsApp.</p>
+        </div>
+      </div>
+      <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bento-card-dark md:col-span-3">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Mural de motivação</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Frase do dia rotativa mais posts do time com curtidas, que o gestor pode fixar no topo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- GRUPO 4 · WHATSAPP IA (claro) -->
+  <!-- ============================================================ -->
+  <section id="whatsapp" class="bg-[#f4f2fc] text-[#1a1b22] py-24 scroll-mt-20">
+    <div class="max-w-[1180px] mx-auto px-7">
+      <div class="text-center mb-4">
+        <span class="eyebrow" style="color:#4338ca"><span class="eyebrow-line"></span>04 · Automação</span>
+      </div>
+      <h2 class="font-extrabold text-[clamp(28px,4vw,42px)] text-center mb-14">WhatsApp com IA</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Bot de perguntas e respostas</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Responde dúvidas do time direto no grupo, com base de conhecimento própria e cadência humana: digita, demora, às vezes se desculpa por estar ocupado.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">AI Coach proativo</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Duas vezes por dia útil: mensagem motivacional de manhã, reconhecimento de quem matriculou à tarde. Tom de voz configurável pela gestão.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Eventos automáticos no grupo</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Matrícula fechada, conquista desbloqueada, level up, top performer da semana e vencedor de premiação são anunciados sozinhos.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Anúncios gerados por IA</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Gestor escreve um briefing curto, a IA escreve o texto no tom certo, gestor revisa e envia.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Fila com retentativa</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Mensagens ficam numa fila com nova tentativa automática em caso de falha, e respeitam blackout noturno e silêncio de fim de semana.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Painel de controle completo</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Conexão por QR code, logs de todas as mensagens, estatísticas de uso e custo de IA, tudo num painel dedicado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- GRUPO 5 · ADMINISTRAÇÃO (claro) -->
+  <!-- ============================================================ -->
+  <section id="administracao" class="bg-[#fbf8ff] text-[#1a1b22] py-24 scroll-mt-20">
+    <div class="max-w-[1180px] mx-auto px-7">
+      <div class="text-center mb-4">
+        <span class="eyebrow" style="color:#4338ca"><span class="eyebrow-line"></span>05 · Governança</span>
+      </div>
+      <h2 class="font-extrabold text-[clamp(28px,4vw,42px)] text-center mb-14">Administração & Multi-Unidade</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Hierarquia de papéis</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">5 níveis de acesso, do time operacional até a diretoria, cada um enxergando exatamente o que precisa.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2M19 21H5m0 0H3m8-14h.01M11 11h.01M11 15h.01M15 7h.01M15 11h.01M15 15h.01"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Multi-unidade nativo</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Cada usuário pertence a uma unidade; gerência regional e diretoria alternam entre unidades sem sair do sistema.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Configurações em camadas</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Cursos, origens, tags de situação, metas, fechamento de período e feriados locais, configuráveis por quem tem permissão.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Controle de acesso</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Fluxo de solicitação e aprovação de acesso ao sistema, sem senha circulando por WhatsApp.</p>
+        </div>
+        <div class="bento-card">
+          <span class="bento-icon"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5">Chaves de API próprias</h3>
+          <p class="text-[15px] text-[var(--muted-foreground)] leading-relaxed">Diretoria configura suas próprias chaves de integração e IA direto no painel, sem depender de um novo deploy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- GRUPO 6 · INFRAESTRUTURA (escuro, aurora) -->
+  <!-- ============================================================ -->
+  <section id="infraestrutura" class="relative overflow-hidden bg-[#0a0e27] text-[#f5f5fa] py-24 scroll-mt-20">
+    <div class="aurora" style="height:100%; inset:auto -10% -30% -10%">
+      <span style="bottom:-15%; right:20%; width:480px; height:480px; background:rgba(59,130,246,.28)"></span>
+    </div>
+    <div class="relative max-w-[1180px] mx-auto px-7">
+      <div class="text-center mb-4">
+        <span class="eyebrow" style="color:#9bb0ff"><span class="eyebrow-line"></span>06 · Base técnica</span>
+      </div>
+      <h2 class="font-extrabold text-[clamp(28px,4vw,42px)] text-center mb-14">Infraestrutura & Segurança</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Isolamento real por unidade</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Regra de segurança dentro do próprio banco de dados, não só na tela: impossível um gestor ver dados de outra unidade sem permissão.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Automação sem ferramenta externa</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Rotinas automáticas rodam direto no banco de dados, sem Zapier, n8n ou cron externo, reduzindo ponto de falha e custo mensal.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Segredos protegidos</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Chaves e senhas de automação ficam num cofre dedicado, nunca expostas no código-fonte.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Proteção de dados no WhatsApp</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Filtro automático remove dados pessoais sensíveis antes de qualquer resposta gerada por IA.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">E-mails transacionais</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Lembrete de prazo, resumo semanal e alerta de follow-up chegam por e-mail automaticamente.</p>
+        </div>
+        <div class="bento-card-dark">
+          <span class="bento-icon-dark"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg></span>
+          <h3 class="font-bold text-xl mb-2.5 text-white">Histórico auditável</h3>
+          <p class="text-[15px] text-white/65 leading-relaxed">Cada mudança de estrutura do sistema é versionada e documentada, com rastreabilidade total da evolução da plataforma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER CTA -->
+  <!-- ============================================================ -->
+  <section class="bg-[#070a1c] text-white py-20 text-center">
+    <div class="max-w-[600px] mx-auto px-7">
+      <img src="assets/logo-mark.png" alt="Team Manager" class="h-10 w-auto mx-auto mb-8 opacity-90" />
+      <h2 class="font-extrabold text-[clamp(24px,3vw,34px)] mb-3">Isso é o que já roda hoje.</h2>
+      <p class="text-white/60 mb-2">Levantamento gerado a partir do código em produção, não de um roadmap ou de uma promessa comercial.</p>
+      <p class="mt-10 text-xs text-white/35">© 2026 Team Manager. Catálogo interno de features, gerado a partir de auditoria de código.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- JS: header on scroll + smooth scroll -->
+  <!-- ============================================================ -->
+  <script>
+    (function () {
+      const header = document.getElementById('site-header');
+      function onScroll() {
+        const scrolled = window.scrollY > 20;
+        header.classList.toggle('bg-[#070a1c]/80', scrolled);
+        header.classList.toggle('backdrop-blur-md', scrolled);
+        header.classList.toggle('border-white/[0.08]', scrolled);
+        header.classList.toggle('bg-transparent', !scrolled);
+        header.classList.toggle('border-transparent', !scrolled);
+      }
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          if (href && href.length > 1) {
+            const el = document.querySelector(href);
+            if (el) {
+              e.preventDefault();
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
