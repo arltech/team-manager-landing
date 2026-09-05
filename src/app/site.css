@@ -610,3 +610,18 @@
 .tm .tm-conta-band .calc { margin-top: 30px; padding: clamp(20px, 2.4vw, 30px); }
 .tm .tm-conta-band .calc-cenarios { padding-top: 20px; }
 .tm .tm-conta-band .calc-premissas { padding-top: 12px; }
+
+/* WhatsApp comercial. Fica em tres pontos e nao em todos: header (quem chega
+   decidido), depois dos precos (quem decidiu ali) e no fechamento. Espalhar
+   mais roubaria do diagnostico, que e o caminho principal. */
+.tm .tm-fale {
+  text-align: center; margin-top: 26px;
+  font-size: 15.5px; color: var(--texto-claro);
+}
+.tm .tm-fale a {
+  color: #fff; font-weight: 700;
+  border-bottom: 2px solid var(--verde); padding-bottom: 1px;
+}
+.tm .tm-fale a:hover { color: var(--verde); }
+.tm .tm-zap { display: none; }
+@media (min-width: 620px) { .tm .tm-zap { display: inline-flex; } }

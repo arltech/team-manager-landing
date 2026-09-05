@@ -22,6 +22,22 @@ import { Avisos } from "@/app/_site/Avisos";
  * capacidade que existe de verdade no sistema, nao uma promessa vaga: e o que
  * separa isto de uma lista de reclamacoes.
  */
+/**
+ * WhatsApp comercial: +55 81 98214-9605.
+ *
+ * O PDF do diagnostico (src/lib/diagnostic-pdf.tsx) trazia este numero SEM o 9
+ * do celular, o que provavelmente derrubou todo mundo que clicou ali. Corrigido
+ * nos dois lugares no mesmo commit.
+ *
+ * O texto vai pre-preenchido: quem atende sabe de onde a conversa veio sem
+ * perguntar, e quem escreve nao precisa pensar na primeira frase.
+ */
+const WHATSAPP =
+  "https://wa.me/5581982149605?text=" +
+  encodeURIComponent(
+    "Olá! Vim pelo site do Team Manager e queria falar sobre os planos.",
+  );
+
 const DORES: { p: string; r: string }[] = [
   {
     p: "Você só sabe o resultado do mês quando ele já acabou?",
@@ -166,6 +182,14 @@ export default function Home() {
             <a href="#faq">Dúvidas</a>
           </nav>
           <div className="tm-header-acoes">
+            <a
+              href={WHATSAPP}
+              className="tm-entrar tm-zap"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </a>
             <a href="https://app.teammanager.tech" className="tm-entrar">
               Entrar
             </a>
@@ -390,6 +414,13 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <p className="tm-fale">
+            Prefere falar com uma pessoa antes?{" "}
+            <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">
+              Chame no WhatsApp
+            </a>{" "}
+            e a gente responde em até uma hora útil, em horário comercial.
+          </p>
           <p className="tm-precos-nota">
             Precisa de mais unidades do que o plano inclui? Entra unidade avulsa
             por valor fixo, sem trocar de degrau. Até 15 usuários por unidade.
@@ -436,8 +467,13 @@ export default function Home() {
             <a href="/diagnostico" className="btn btn-primary">
               Fazer o diagnóstico agora
             </a>
-            <a href="#precos" className="btn btn-ghost">
-              Antes, ver os planos
+            <a
+              href={WHATSAPP}
+              className="btn btn-ghost"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ou falar no WhatsApp
             </a>
           </div>
         </div>
