@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { FluxoVivo } from "./_parts/FluxoVivo";
 import { Calculadora } from "./_parts/Calculadora";
-import { Placar } from "./_parts/Placar";
+import { Ciclo } from "./_parts/Ciclo";
 
 /**
  * Repaginada da landing, em preview. O que muda em relacao a "/":
@@ -28,23 +27,6 @@ const DORES = [
   "O follow-up depende de alguém lembrar. Ninguém lembra.",
 ];
 
-const SEMANA = [
-  {
-    dia: "Segunda",
-    t: "A semana começa lida",
-    d: "O painel já tem o fechamento da semana anterior por unidade. A reunião deixa de ser reconstrução e vira decisão.",
-  },
-  {
-    dia: "Terça a quinta",
-    t: "A cobrança acontece sem você",
-    d: "Prazo vencendo, rotina em aberto e lead parado viram aviso no WhatsApp e no e-mail de quem é responsável.",
-  },
-  {
-    dia: "Sexta",
-    t: "O placar fecha sozinho",
-    d: "Ranking, XP e conquistas do time são publicados no grupo. Quem produziu foi visto sem você precisar comentar.",
-  },
-];
 
 const LEDGER: [string, string, string][] = [
   ["Resultado do mês", "Você só sabe quando acabou", "Em tempo real, por unidade"],
@@ -138,7 +120,7 @@ export default function V2Page() {
             priority
           />
           <nav className="v2-nav">
-            <a href="#como">Como funciona</a>
+            <a href="#ciclo">O ciclo</a>
             <a href="#conta">A conta</a>
             <a href="#precos">Preços</a>
             <a href="#faq">Dúvidas</a>
@@ -159,11 +141,11 @@ export default function V2Page() {
         <div className="shell v2-hero-grid">
           <div>
             <p className="v2-sobre">Para redes de escolas e cursos, de 1 a 15 unidades</p>
-            <h1 className="v2-h1">O painel que cobra a matrícula por você.</h1>
+            <h1 className="v2-h1">Do QR na rua ao contrato assinado.</h1>
             <p className="v2-sub">
-              Sua rede inteira em um lugar: CRM de candidatos, follow-up
-              automático, rotina semanal e ranking do time. No lugar da planilha
-              de cada unidade e do grupo de WhatsApp que ninguém lê.
+              A operação comercial inteira da sua rede em um sistema: captura na
+              rua, CRM, cobrança automática do follow-up, contrato assinado no
+              celular e a receita no fim. Sem planilha em cada unidade.
             </p>
             <div className="v2-hero-ctas">
               <a href="/diagnostico" className="btn btn-primary">
@@ -178,7 +160,24 @@ export default function V2Page() {
               Setup em 72 horas.
             </p>
           </div>
-          <FluxoVivo />
+          {/* Tela real do produto, nao uma simulacao desenhada. Escolhida entre
+              os prints disponiveis por ser a unica que mostra o funil inteiro
+              SEM nome ou rosto de pessoa: o painel executivo traz o ranking com
+              o time da rede identificado. */}
+          <figure className="v2-tela">
+            <Image
+              src="/dashboard/slide-2.png"
+              alt="CRM de Candidatos do Team Manager: 363 leads novos no mês, 29 matrículas, 8% de conversão e o funil do pipeline com 356 candidatos ativos"
+              width={3022}
+              height={1560}
+              priority
+              sizes="(max-width: 1020px) 100vw, 52vw"
+            />
+            <figcaption>
+              CRM de Candidatos, tela real. O funil da rede inteira, com filtro
+              por unidade.
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -232,41 +231,16 @@ export default function V2Page() {
         </div>
       </section>
 
-      {/* ── PLACAR ── */}
-      <section className="band band-claro">
+      {/* ── CICLO ── */}
+      <section id="ciclo" className="band band-claro">
         <div className="shell">
-          <h2 className="v2-h2 v2-centro">O placar da semana</h2>
+          <h2 className="v2-h2 v2-centro">Os cinco elos que ninguém liga</h2>
           <p className="v2-lead v2-centro v2-estreito">
-            Quem produziu aparece. Quem sumiu também. Publicado no grupo toda
-            sexta, sem você precisar comentar nada.
+            A captura vive num formulário, o funil numa planilha, o contrato no
+            Word e a comissão numa terceira aba. Aqui é uma coisa só, e cada elo
+            passa o bastão para o seguinte sozinho.
           </p>
-          <Placar />
-          <p className="v2-placar-nota">
-            É a resposta para a objeção que todo gestor tem: a equipe não usa o
-            sistema porque foi mandada, usa porque o placar é público. Pontos
-            saem de ação real, como matrícula fechada e follow-up feito no
-            prazo, e caem sozinhos para quem some.
-          </p>
-        </div>
-      </section>
-
-      {/* ── COMO FUNCIONA ── */}
-      <section id="como" className="band v2-como">
-        <div className="shell">
-          <h2 className="v2-h2 v2-centro">A semana da sua rede, sem você puxar</h2>
-          <p className="v2-lead v2-centro v2-estreito">
-            O produto não é um relatório que alguém precisa montar. Ele é a rotina
-            acontecendo, de segunda a sexta.
-          </p>
-          <div className="v2-semana">
-            {SEMANA.map((s) => (
-              <article key={s.dia} className="v2-dia">
-                <span className="v2-dia-rotulo">{s.dia}</span>
-                <h3 className="v2-dia-titulo">{s.t}</h3>
-                <p className="v2-dia-texto">{s.d}</p>
-              </article>
-            ))}
-          </div>
+          <Ciclo />
         </div>
       </section>
 
@@ -288,7 +262,7 @@ export default function V2Page() {
       {/* ── COMPARAÇÃO ── */}
       <section className="band">
         <div className="shell">
-          <h2 className="v2-h2 v2-centro">O que muda já no primeiro dia</h2>
+          <h2 className="v2-h2 v2-centro">O que muda na segunda-feira</h2>
           <table className="v2-tabela">
             <thead>
               <tr>
