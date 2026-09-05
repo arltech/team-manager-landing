@@ -308,8 +308,8 @@ export default function Home() {
           </h2>
           <p className="tm-lead tm-centro tm-estreito">
             Lead que pede informação e nunca recebe um segundo contato não aparece
-            em relatório nenhum. Ele só some. Mexa nos dois campos e veja o
-            tamanho disso na sua rede.
+            em relatório nenhum. Ele só some. Ajuste os controles com os números da
+            sua operação e veja o tamanho disso.
           </p>
           <Calculadora />
         </div>

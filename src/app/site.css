@@ -310,7 +310,34 @@
   transform: rotate(-45deg);
 }
 .tm .tm-tabela thead th.tm-col-depois { padding-left: 46px; }
-@media (max-width: 720px) { .tm .tm-tabela { display: block; overflow-x: auto; white-space: nowrap; } }
+/* No celular a tabela de tres colunas cortava a coluna do produto, que e
+   justamente o argumento. Rolagem lateral so esconde o problema: cada linha
+   vira um cartao empilhado, com o "hoje" e o "com" um debaixo do outro. */
+@media (max-width: 760px) {
+  .tm .tm-tabela, .tm .tm-tabela tbody, .tm .tm-tabela tr, .tm .tm-tabela td, .tm .tm-tabela th {
+    display: block; width: auto;
+  }
+  .tm .tm-tabela thead { display: none; }
+  .tm .tm-tabela tbody tr {
+    border: 2px solid var(--linha); margin-bottom: 14px; padding: 4px 0;
+  }
+  .tm .tm-tabela tbody th {
+    width: auto; font-size: 17px; color: #fff; padding-bottom: 6px;
+  }
+  .tm .tm-tabela td { padding-block: 8px; }
+  .tm .tm-antes::before {
+    content: "Hoje"; display: block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--texto-fraco); margin-bottom: 2px;
+  }
+  .tm .tm-tabela td.tm-depois { padding-left: 46px; margin-inline: 18px 18px; }
+  .tm .tm-tabela td.tm-depois::before {
+    content: "Com Team Manager"; display: block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--verde); margin-bottom: 3px;
+  }
+  .tm .tm-depois-check { top: 30px; }
+}
 
 /* ── PREÇOS ───────────────────────────────────────────────── */
 .tm .tm-planos { display: grid; gap: 2px; margin-top: 46px; background: var(--linha); border: 2px solid var(--linha); }
@@ -539,3 +566,35 @@
   color: var(--marca-texto); margin-bottom: 10px;
 }
 .tm .tm-ia-texto { font-size: 15.5px; color: #4a5470; max-width: 78ch; }
+
+/* Cenarios por valor de contrato. As premissas em texto explicam o METODO; a
+   faixa de cenarios da a ESCALA, que e o que faz o visitante reconhecer o
+   proprio caso sem ter que mexer no controle. */
+.tm .calc-cenarios { grid-column: 1 / -1; border-top: 1px solid var(--claro-linha); padding-top: 24px; }
+.tm .calc-cenarios-titulo {
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #6b7488; margin-bottom: 16px;
+}
+.tm .calc-cenarios-lista {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 2px; background: var(--claro-linha);
+  border: 1px solid var(--claro-linha);
+}
+@media (min-width: 700px) { .tm .calc-cenarios-lista { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.tm .calc-cenario {
+  background: #fff; padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.tm .calc-cenario-atual { background: var(--marca); }
+.tm .calc-cenario-ticket { font-size: 13px; color: #6b7488; }
+.tm .calc-cenario-atual .calc-cenario-ticket { color: rgba(255,255,255,0.7); }
+.tm .calc-cenario-seta {
+  width: 8px; height: 8px; margin: 4px 0;
+  border-right: 2px solid var(--claro-linha); border-bottom: 2px solid var(--claro-linha);
+  transform: rotate(45deg);
+}
+.tm .calc-cenario-atual .calc-cenario-seta { border-color: rgba(255,255,255,0.4); }
+.tm .calc-cenario-perda { font-size: 22px; color: var(--marca-texto); line-height: 1.1; }
+.tm .calc-cenario-atual .calc-cenario-perda { color: #fff; }
+.tm .calc-cenario-por { font-size: 12px; color: #6b7488; }
+.tm .calc-cenario-atual .calc-cenario-por { color: rgba(255,255,255,0.6); }

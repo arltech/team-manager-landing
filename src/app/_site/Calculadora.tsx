@@ -116,6 +116,26 @@ export function Calculadora() {
         </p>
       </div>
 
+      <div className="calc-cenarios">
+        <p className="calc-cenarios-titulo">
+          A mesma conta, se o seu contrato valer outro número
+        </p>
+        <ul className="calc-cenarios-lista">
+          {[1000, 3000, 6000, 12000].map((t) => {
+            const perda = Math.round(matriculasPerdidas * RECUPERAVEL * t);
+            const atual = Math.abs(t - ticket) < 1500;
+            return (
+              <li key={t} className={atual ? "calc-cenario calc-cenario-atual" : "calc-cenario"}>
+                <span className="calc-cenario-ticket">{brl(t)}</span>
+                <span className="calc-cenario-seta" aria-hidden="true" />
+                <span className="calc-cenario-perda num">{brl(perda)}</span>
+                <span className="calc-cenario-por">por ano</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
       <details className="calc-premissas" open>
         <summary>
           <span aria-hidden="true" className="calc-seta" />
