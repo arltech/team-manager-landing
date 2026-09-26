@@ -39,6 +39,11 @@
   --linha-forte: rgba(255, 255, 255, 0.22);
 
   --verde: #19c37d;
+  /* Amarelo da enfase do video e das capas. Destaque pontual, no maximo um por
+     dobra; o CTA principal continua branco. Documentado na secao 22 do design
+     system do produto (docs/design-system.html). */
+  --destaque: #ffd60a;
+  --destaque-hover: #ffe14d;
 
   --display: "Archivo Black", system-ui, sans-serif;
   --corpo: "Archivo", system-ui, sans-serif;
@@ -640,9 +645,9 @@
 .tm .tm-video-ouvir {
   position: absolute; right: 12px; top: 12px; min-height: 44px;
   display: inline-flex; align-items: center; gap: 8px;
-  background: #ffd60a; color: var(--tinta); /* o amarelo da enfase do video */
+  background: var(--destaque); color: var(--tinta);
 }
-.tm .tm-video-ouvir:hover { background: #ffe14d; color: var(--tinta); }
+.tm .tm-video-ouvir:hover { background: var(--destaque-hover); color: var(--tinta); }
 .tm .tm-video-dialog {
   width: 100vw; height: 100dvh; max-width: none; max-height: none;
   margin: 0; padding: 0; border: 0; background: #000;
