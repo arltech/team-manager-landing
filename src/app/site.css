@@ -640,7 +640,9 @@
 .tm .tm-video-ouvir {
   position: absolute; right: 12px; top: 12px; min-height: 44px;
   display: inline-flex; align-items: center; gap: 8px;
+  background: #ffd60a; color: var(--tinta); /* o amarelo da enfase do video */
 }
+.tm .tm-video-ouvir:hover { background: #ffe14d; color: var(--tinta); }
 .tm .tm-video-dialog {
   width: 100vw; height: 100dvh; max-width: none; max-height: none;
   margin: 0; padding: 0; border: 0; background: #000;

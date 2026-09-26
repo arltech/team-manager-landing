@@ -9,7 +9,8 @@ import { Volume2, X } from "lucide-react";
  * Duas fontes de proposito: o loop mudo (720p, sem audio, ~6 MB) toca sozinho
  * no hero, e o completo (1080p com som, ~22 MB) so baixa quando a pessoa pede
  * para ouvir. As legendas estao gravadas no video, entao o loop se entende
- * sem som. Com prefers-reduced-motion o loop nao toca: fica o poster.
+ * sem som. Sem poster de proposito: abre direto no video. Com
+ * prefers-reduced-motion o loop nao toca e fica o primeiro quadro.
  *
  * "Ouvir" abre um dialog de tela inteira e pede fullscreen do navegador. Sair
  * do fullscreen (Esc) fecha o dialog junto; no iPhone, que nao faz fullscreen
@@ -55,14 +56,13 @@ export function VideoInstitucional() {
         <video
           ref={loop}
           src="/video/institucional-loop.mp4"
-          poster="/video/institucional-poster.jpg"
           muted
           loop
           playsInline
           preload="metadata"
           aria-label="Vídeo institucional do Team Manager, sem som"
         />
-        <button type="button" className="btn btn-primary tm-btn-sm tm-video-ouvir" onClick={abrir}>
+        <button type="button" className="btn tm-btn-sm tm-video-ouvir" onClick={abrir}>
           <Volume2 size={18} aria-hidden />
           Ouvir o vídeo
         </button>
@@ -86,7 +86,6 @@ export function VideoInstitucional() {
         <video
           ref={player}
           src="/video/institucional.mp4"
-          poster="/video/institucional-capa.jpg"
           controls
           playsInline
           preload="none"
