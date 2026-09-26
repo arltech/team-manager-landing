@@ -4,6 +4,7 @@ import { Ciclo } from "@/app/_site/Ciclo";
 import { Promessa } from "@/app/_site/Promessa";
 import { Modulos } from "@/app/_site/Modulos";
 import { Avisos } from "@/app/_site/Avisos";
+import { VideoInstitucional } from "@/app/_site/VideoInstitucional";
 
 /**
  * A home.
@@ -224,24 +225,7 @@ export default function Home() {
               Setup em 72 horas.
             </p>
           </div>
-          {/* Tela real do produto, nao uma simulacao desenhada. Escolhida entre
-              os prints disponiveis por ser a unica que mostra o funil inteiro
-              SEM nome ou rosto de pessoa: o painel executivo traz o ranking com
-              o time da rede identificado. */}
-          <figure className="tm-tela">
-            <Image
-              src="/dashboard/slide-2.png"
-              alt="Tela do Team Manager: 363 leads novos no mês, 29 fechamentos, 8% de conversão e o funil com 356 contatos ativos"
-              width={3022}
-              height={1560}
-              priority
-              sizes="(max-width: 1020px) 100vw, 52vw"
-            />
-            <figcaption>
-              Tela real do sistema. O funil da rede inteira, com filtro por
-              unidade.
-            </figcaption>
-          </figure>
+          <VideoInstitucional />
         </div>
       </section>
 

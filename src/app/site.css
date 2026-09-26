@@ -625,3 +625,32 @@
 .tm .tm-fale a:hover { color: var(--verde); }
 .tm .tm-zap { display: none; }
 @media (min-width: 620px) { .tm .tm-zap { display: inline-flex; } }
+
+/* ── VIDEO DO HERO ────────────────────────────────────────── */
+/* Herda a legenda de .tm-tela, mas nao o vazamento pela borda direita: no
+   print ele era enfeite, no video corta a imagem e o botao. O quadro reserva
+   16:9 antes do video carregar para o hero nao pular. */
+.tm .tm-tela.tm-video { width: 100%; }
+.tm .tm-video-quadro {
+  position: relative; aspect-ratio: 16 / 9; background: var(--tinta-2);
+  border: 2px solid var(--linha-forte);
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.75);
+}
+.tm .tm-video-quadro video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tm .tm-video-ouvir {
+  position: absolute; right: 12px; top: 12px; min-height: 44px;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.tm .tm-video-dialog {
+  width: 100vw; height: 100dvh; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0; background: #000;
+}
+.tm .tm-video-dialog::backdrop { background: #000; }
+.tm .tm-video-dialog video { width: 100%; height: 100%; object-fit: contain; }
+.tm .tm-video-fechar {
+  position: absolute; top: 16px; right: 16px; z-index: 1;
+  width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.16); color: #fff;
+}
+.tm .tm-video-fechar:hover { background: rgba(255, 255, 255, 0.28); }
