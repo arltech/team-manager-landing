@@ -9,8 +9,9 @@ import { Volume2, X } from "lucide-react";
  * Duas fontes de proposito: o loop mudo (720p, sem audio, ~6 MB) toca sozinho
  * no hero, e o completo (1080p com som, ~22 MB) so baixa quando a pessoa pede
  * para ouvir. As legendas estao gravadas no video, entao o loop se entende
- * sem som. Sem poster de proposito: abre direto no video. Com
- * prefers-reduced-motion o loop nao toca e fica o primeiro quadro.
+ * sem som. Sem poster de proposito: abre direto no video. O loop toca mesmo
+ * com prefers-reduced-motion, por decisao do Lucas (26/09): o hero parado
+ * parecia quebrado no Mac com "Reduzir movimento" ligado.
  *
  * Os arquivos moram no bucket publico "site" do Supabase do Team Manager, fora
  * do repo e do deploy: trocar o video e subir por cima, com o mesmo nome.
@@ -27,12 +28,8 @@ export function VideoInstitucional() {
   const player = useRef<HTMLVideoElement>(null);
 
   function tocarLoop() {
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      loop.current?.play().catch(() => {});
-    }
+    loop.current?.play().catch(() => {});
   }
-
-  useEffect(tocarLoop, []);
 
   function abrir() {
     dialog.current?.showModal();
@@ -61,6 +58,7 @@ export function VideoInstitucional() {
         <video
           ref={loop}
           src={`${VIDEOS}/institucional-loop.mp4`}
+          autoPlay
           muted
           loop
           playsInline
