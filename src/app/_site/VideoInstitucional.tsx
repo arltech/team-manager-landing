@@ -12,10 +12,15 @@ import { Volume2, X } from "lucide-react";
  * sem som. Sem poster de proposito: abre direto no video. Com
  * prefers-reduced-motion o loop nao toca e fica o primeiro quadro.
  *
+ * Os arquivos moram no bucket publico "site" do Supabase do Team Manager, fora
+ * do repo e do deploy: trocar o video e subir por cima, com o mesmo nome.
+ *
  * "Ouvir" abre um dialog de tela inteira e pede fullscreen do navegador. Sair
  * do fullscreen (Esc) fecha o dialog junto; no iPhone, que nao faz fullscreen
  * de elemento, o dialog ja ocupa a tela e o X fecha.
  */
+const VIDEOS = "https://mticvezbaxllzbwkeskc.supabase.co/storage/v1/object/public/site/video";
+
 export function VideoInstitucional() {
   const loop = useRef<HTMLVideoElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -55,7 +60,7 @@ export function VideoInstitucional() {
       <div className="tm-video-quadro">
         <video
           ref={loop}
-          src="/video/institucional-loop.mp4"
+          src={`${VIDEOS}/institucional-loop.mp4`}
           muted
           loop
           playsInline
@@ -85,7 +90,7 @@ export function VideoInstitucional() {
         </button>
         <video
           ref={player}
-          src="/video/institucional.mp4"
+          src={`${VIDEOS}/institucional.mp4`}
           controls
           playsInline
           preload="none"
