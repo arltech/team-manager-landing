@@ -398,6 +398,8 @@
 .tm .tm-rodape { border-top: 1px solid var(--linha); padding-block: 30px; }
 .tm .tm-rodape-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
 .tm .tm-rodape p { font-size: 14px; color: var(--texto-fraco); }
+.tm .tm-rodape-textos { display: grid; gap: 6px; }
+.tm .tm-rodape a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 
 .tm .tm-unidade { font-size: 15px; color: #7b849e; }
 .tm .tm-linha-1 .tm-unidade { color: rgba(255,255,255,0.5); }
