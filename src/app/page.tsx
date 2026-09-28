@@ -473,10 +473,21 @@ export default function Home() {
             height={507}
             className="tm-logo tm-logo-rodape"
           />
-          <p>
-            © Team Manager · ARLTech · Sistema de operação para redes com várias
-            unidades
-          </p>
+          <div className="tm-rodape-textos">
+            <p>
+              © Team Manager · ARLTech · Sistema de operação para redes com várias
+              unidades
+            </p>
+            {/* Dados da empresa e links legais: a verificação de Provedor de
+                Tecnologia da Meta pede um site que mostre quem fornece o serviço. */}
+            <p>
+              36.023.244 LUCAS RODRIGUES ALVES (ARLTech) · CNPJ 36.023.244/0001-37 ·
+              Recife/PE ·{" "}
+              <a href="mailto:lucas@arltech.emp.br">lucas@arltech.emp.br</a> ·{" "}
+              <a href="https://app.teammanager.tech/privacidade">Privacidade</a> ·{" "}
+              <a href="https://app.teammanager.tech/termos">Termos de uso</a>
+            </p>
+          </div>
         </div>
       </footer>
     </main>
