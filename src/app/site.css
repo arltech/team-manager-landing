@@ -158,7 +158,16 @@
 @media (min-width: 940px) { .tm .tm-nav { display: flex; } }
 
 /* ── HERO ─────────────────────────────────────────────────── */
-.tm .tm-hero { padding-block: clamp(52px, 7vw, 96px) clamp(56px, 7vw, 88px); overflow: hidden; }
+/* Fundo do hero: o mesmo chao de pontos dos cards (gerado por tm-cards/fundos.py,
+   receita "pontos", base --tinta). O degrade de baixo entrega o hero na cor da
+   faixa seguinte, para o chao nao terminar em corte seco. */
+.tm .tm-hero {
+  padding-block: clamp(52px, 7vw, 96px) clamp(56px, 7vw, 88px);
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, transparent 78%, var(--tinta-2) 100%),
+    var(--tinta) url("/hero-pontos.webp") center bottom / cover no-repeat;
+}
 .tm .tm-hero-grid { display: grid; gap: clamp(40px, 5vw, 60px); }
 @media (min-width: 1020px) { .tm .tm-hero-grid { grid-template-columns: 1.08fr 0.92fr; align-items: center; } }
 .tm .tm-sobre { color: var(--acento); margin-bottom: 20px; }
