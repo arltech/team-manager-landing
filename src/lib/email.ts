@@ -58,7 +58,7 @@ export function buildDiagnosticEmail(
   const copy = DIAGNOSTIC_COPY[diagnostic];
   const greeting = name ? `Olá, ${name}.` : "Olá.";
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "";
-  const demoUrl = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? `${appUrl}/#oferta`;
+  const demoUrl = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? `${appUrl}/#precos`;
 
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1b22;">

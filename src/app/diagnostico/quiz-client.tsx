@@ -17,6 +17,7 @@ import {
 } from "@/lib/quiz-types";
 import { trackMeta, trackMetaCustom, newEventId } from "@/lib/meta-pixel";
 import { trackClarityEvent, setClarityTag, identifyClarityLead } from "@/lib/clarity";
+import { readUtm } from "@/app/_components/Tracking";
 
 type SubmitResult = {
   id: string;
@@ -47,7 +48,7 @@ export function QuizClient() {
       const res = await fetch("/api/quiz/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers: final }),
+        body: JSON.stringify({ answers: final, utm: readUtm() }),
       });
       if (!res.ok) throw new Error("submit failed");
       const data = (await res.json()) as SubmitResult;
@@ -61,6 +62,8 @@ export function QuizClient() {
 
   function selectOption(value: string) {
     const q = QUESTIONS[step];
+    // Primeira resposta: mede quem começou e alimenta o público de remarketing.
+    if (Object.keys(answers).length === 0) trackMetaCustom("QuizStarted");
     const next = { ...answers, [q.key]: value } as Partial<QuizAnswers>;
     setAnswers(next);
     // auto-advance with a short delay so the user sees the selected state
@@ -250,7 +253,7 @@ function ResultView({ result }: { result: SubmitResult }) {
     trackClarityEvent(`quiz_completed_${diagnostic}`);
   }, [diagnostic]);
 
-  const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "/#oferta";
+  const calendly = process.env.NEXT_PUBLIC_DEMO_CALENDLY ?? "/#precos";
 
   const [whatsapp, setWhatsapp] = useState("");
   const [name, setName] = useState("");
