@@ -403,11 +403,26 @@
 
 /* ── FINAL + RODAPÉ ───────────────────────────────────────── */
 .tm .tm-final-cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
-.tm .tm-rodape { border-top: 1px solid var(--linha); padding-block: 30px; }
-.tm .tm-rodape-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
-.tm .tm-rodape p { font-size: 14px; color: var(--texto-fraco); }
-.tm .tm-rodape-textos { display: grid; gap: 6px; }
-.tm .tm-rodape a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.tm .tm-rodape { border-top: 1px solid var(--linha); padding-block: 56px 28px; }
+.tm .tm-rodape-grade { display: grid; gap: 36px 28px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tm .tm-rodape-marca { grid-column: 1 / -1; }
+.tm .tm-rodape-marca p { margin-top: 14px; font-size: 15px; color: var(--texto-claro); max-width: 30ch; }
+@media (min-width: 860px) {
+  .tm .tm-rodape-grade { grid-template-columns: 1.6fr repeat(3, minmax(0, 1fr)); }
+  .tm .tm-rodape-marca { grid-column: auto; }
+}
+.tm .tm-rodape nav { display: flex; flex-direction: column; align-items: flex-start; }
+.tm .tm-rodape nav .rotulo { margin-bottom: 8px; }
+.tm .tm-rodape nav a { padding-block: 7px; font-size: 15px; color: var(--texto-claro); }
+.tm .tm-rodape nav a:hover { color: #fff; }
+.tm .tm-rodape-legal {
+  margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--linha);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px;
+}
+.tm .tm-rodape-legal p { font-size: 13.5px; color: var(--texto-fraco); }
+.tm .tm-rodape-legal a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.tm .tm-rodape-legal a + a { margin-left: 18px; }
+.tm .tm-rodape-legal a:hover { color: #fff; }
 
 .tm .tm-unidade { font-size: 15px; color: #7b849e; }
 .tm .tm-linha-1 .tm-unidade { color: rgba(255,255,255,0.5); }
@@ -479,7 +494,7 @@
     var(--tinta) url("/modulos-feixes.webp") right top / cover no-repeat;
 }
 .tm .tm-dores-band .tm-dores-lista li { border-color: rgba(255, 255, 255, 0.14); }
-.tm .tm-logo-rodape { height: 36px; }
+.tm .tm-logo-rodape { height: 48px; }
 
 /* ── HEADLINE ROTATIVA ────────────────────────────────────── */
 /* A altura reserva o PIOR caso (a frase mais longa, em quatro linhas), porque
