@@ -482,24 +482,49 @@ export function Landing({ t: variante }: { t?: Partial<Texto> }) {
         </div>
       </section>
 
-      <footer className="tm-rodape">
-        <div className="shell tm-rodape-in">
-          <Image
-            src="/ds/logo-mark.png"
-            alt="Team Manager"
-            width={575}
-            height={507}
-            className="tm-logo tm-logo-rodape"
-          />
-          <div className="tm-rodape-textos">
-            <p>© Team Manager · ARLTech · {t.rodape}</p>
-            {/* Dados da empresa e links legais: a verificação de Provedor de
-                Tecnologia da Meta pede um site que mostre quem fornece o serviço. */}
+      <footer id="rodape" className="tm-rodape">
+        <div className="shell">
+          <div className="tm-rodape-grade">
+            <div className="tm-rodape-marca">
+              <Image
+                src="/ds/logo-mark.png"
+                alt="Team Manager"
+                width={575}
+                height={507}
+                className="tm-logo tm-logo-rodape"
+              />
+              <p>{t.rodape}</p>
+            </div>
+            <nav aria-label="Produto">
+              <span className="rotulo">Produto</span>
+              <a href="#ciclo">O ciclo</a>
+              <a href="#modulos">Módulos</a>
+              <a href="#precos">Preços</a>
+              <a href="#faq">Dúvidas</a>
+            </nav>
+            <nav aria-label="Comece">
+              <span className="rotulo">Comece</span>
+              <a href="/diagnostico">Diagnóstico gratuito</a>
+              <a href="/escolas-de-idiomas">Para escolas de idiomas</a>
+              <a href="https://app.teammanager.tech">Entrar no sistema</a>
+            </nav>
+            <nav aria-label="Contato">
+              <span className="rotulo">Contato</span>
+              <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">
+                WhatsApp
+              </a>
+              <a href="mailto:lucas@arltech.emp.br">lucas@arltech.emp.br</a>
+            </nav>
+          </div>
+          {/* Dados da empresa e links legais: a verificação de Provedor de
+              Tecnologia da Meta pede um site que mostre quem fornece o serviço. */}
+          <div className="tm-rodape-legal">
             <p>
-              ARLTECH TECNOLOGIA LTDA · CNPJ 36.023.244/0001-37 · Jaboatão dos
-              Guararapes/PE ·{" "}
-              <a href="mailto:lucas@arltech.emp.br">lucas@arltech.emp.br</a> ·{" "}
-              <a href="https://app.teammanager.tech/privacidade">Privacidade</a> ·{" "}
+              © {new Date().getFullYear()} Team Manager · ARLTECH TECNOLOGIA LTDA ·
+              CNPJ 36.023.244/0001-37 · Jaboatão dos Guararapes/PE
+            </p>
+            <p>
+              <a href="https://app.teammanager.tech/privacidade">Privacidade</a>
               <a href="https://app.teammanager.tech/termos">Termos de uso</a>
             </p>
           </div>
