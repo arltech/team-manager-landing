@@ -64,7 +64,7 @@ export function buildDiagnosticEmail(
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1b22;">
       <div style="background: #102b81; padding: 24px; border-radius: 8px 8px 0 0;">
         <h2 style="color: white; margin: 0; font-size: 22px;">Team Manager</h2>
-        <p style="color: rgba(255,255,255,0.75); margin: 6px 0 0; font-size: 13px;">Diagnóstico personalizado para sua rede</p>
+        <p style="color: rgba(255,255,255,0.75); margin: 6px 0 0; font-size: 13px;">Diagnóstico personalizado para a sua operação</p>
       </div>
       <div style="padding: 28px; border: 1px solid #e5e5e5; border-top: none; border-radius: 0 0 8px 8px;">
         <p style="font-size: 14px; color: #525c87; margin: 0 0 16px;">${greeting}</p>

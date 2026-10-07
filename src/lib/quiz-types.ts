@@ -178,92 +178,92 @@ export interface DiagnosticCopy {
 export const DIAGNOSTIC_COPY: Record<Diagnostic, DiagnosticCopy> = {
   visibility_compromised: {
     badge: "Visibilidade comprometida",
-    title: "Sua rede opera em loop fechado de informação",
+    title: "Sua operação só se enxerga na reunião",
     summary:
-      "Você descobre o que aconteceu na semana só na reunião de segunda — e geralmente os números chegam errados ou incompletos. A consequência: decisões são tomadas tarde demais, sempre reativas. Quem ganha são as unidades que sabem se vender. Quem perde são as que precisariam de intervenção.",
+      "Você descobre o que aconteceu na semana só na reunião de segunda, e geralmente os números chegam errados ou incompletos. A consequência: as decisões saem tarde demais, sempre reativas. Aparece quem sabe se vender. Fica sem ajuda quem mais precisava de intervenção.",
     actionSteps: [
-      "Centralize candidatos, tarefas e rotinas semanais em uma única plataforma — sem planilha paralela.",
-      "Substitua a reunião de segunda por dashboard em tempo real: o que deveria ser puxado já chega antes da pauta.",
-      "Configure alertas automáticos para tarefas vencendo e candidatos sem follow-up — nada depende da memória do gestor.",
+      "Centralize leads, tarefas e rotinas semanais em um lugar só, sem planilha paralela.",
+      "Troque a reunião de segunda por um painel em tempo real: o que seria perguntado já chega antes da pauta.",
+      "Configure alertas automáticos para tarefa vencendo e lead sem retorno. Nada depende da memória de quem gerencia.",
     ],
-    emailSubject: "Seu diagnóstico: Visibilidade comprometida — plano em 3 passos",
+    emailSubject: "Seu diagnóstico: Visibilidade comprometida. Plano em 3 passos",
     emailIntro:
-      "Você marcou que descobre o resultado da rede tarde demais. Esse é o diagnóstico mais comum entre gestores de redes de escolas e cursos — e o de maior impacto financeiro.",
+      "Você marcou que descobre o resultado da operação tarde demais. É um dos diagnósticos mais comuns em escolas e cursos, e um dos que mais pesam no caixa.",
     accentColor: "#ef4444",
   },
   turnover_risk: {
     badge: "Risco de turnover comercial",
     title: "Seu time vende sem se sentir visto",
     summary:
-      "Você já perdeu vendedor — e sabe que reconhecimento estruturado teria mudado o jogo. O problema não é meta; é cultura de visibilidade. Time que matricula e ninguém celebra começa a procurar lugar onde a entrega seja notada. E quando sai, leva pipeline junto.",
+      "Você já perdeu vendedor e sabe que reconhecimento estruturado teria mudado o jogo. O problema não é meta, é cultura de visibilidade. Time que matricula e ninguém celebra começa a procurar um lugar onde a entrega seja notada. E quando sai, leva a carteira junto.",
     actionSteps: [
-      "Implante celebração automática no WhatsApp da equipe a cada matrícula — antes do gestor ficar sabendo, o grupo já reconheceu.",
-      "Configure ranking mensal e Hall da Fama dos últimos 6 meses — visibilidade que persiste, não só pico de mês.",
-      "Use gamificação ligada à ação real (matrícula, follow-up, rotina preenchida) — XP que reflete comportamento, não vaidade.",
+      "Implante celebração automática no WhatsApp da equipe a cada matrícula: antes de você ficar sabendo, o grupo já reconheceu.",
+      "Configure ranking mensal e histórico de destaques. Visibilidade que dura, não só no pico do mês.",
+      "Use gamificação ligada à ação real (matrícula, retorno ao lead, rotina preenchida). Pontuação que reflete comportamento, não vaidade.",
     ],
-    emailSubject: "Seu diagnóstico: Risco de turnover — como blindar seu time",
+    emailSubject: "Seu diagnóstico: Risco de turnover. Como proteger seu time",
     emailIntro:
-      "Você marcou que já perdeu vendedor por falta de reconhecimento. Esse diagnóstico é o que mais custa caro a longo prazo — porque a cada saída, vai 6 meses de pipeline.",
+      "Você marcou que já perdeu vendedor por falta de reconhecimento. É o diagnóstico que mais custa no longo prazo, porque a cada saída a carteira de leads vai junto.",
     accentColor: "#f59e0b",
   },
   pressure_culture: {
     badge: "Cultura de cobrança",
     title: "Sua equipe só produz quando você pressiona",
     summary:
-      "Time que só faz o necessário quando você cobra é time que não internalizou meta. O que falta não é talento — é sistema que crie accountability sem você precisar estar presente. Hoje, você é a única engrenagem ativa. Se sair de férias 1 semana, a operação para.",
+      "Time que só faz o necessário quando você cobra é time que ainda não assumiu a meta como dele. O que falta não é talento, é um sistema que cobre sem você precisar estar presente. Hoje a cobrança depende de você. Se você sai uma semana, o ritmo cai.",
     actionSteps: [
-      "Ative penalidade automática de inatividade — XP que diminui sozinho quando assessor some por dias úteis. Cobrança vira sistemática, não personalizada.",
-      "Estabeleça rotina semanal com fechamento sexta 23:59 — quem não preencher entra como pendência visível para todos.",
-      "Configure relatório semanal automático com top performers — celebra quem produz e expõe quem some, sem você precisar comentar.",
+      "Ative a perda automática de pontuação por inatividade: ela cai sozinha quando alguém some por dias úteis. A cobrança vira regra, não conversa pessoal.",
+      "Estabeleça rotina semanal com fechamento na sexta às 23h59. Quem não preencher aparece como pendência visível para todos.",
+      "Configure relatório semanal automático com os destaques. Ele celebra quem produz e mostra quem sumiu, sem você precisar comentar.",
     ],
-    emailSubject: "Seu diagnóstico: Cultura de cobrança — como sair do meio",
+    emailSubject: "Seu diagnóstico: Cultura de cobrança. Como sair do meio",
     emailIntro:
-      "Você marcou que time só produz sob pressão. Isso é cultura, não pessoa — e cultura se muda com sistema, não com sermão.",
+      "Você marcou que o time só produz sob pressão. Isso é cultura, não pessoa, e cultura se muda com sistema, não com sermão.",
     accentColor: "#d946ef",
   },
   blind_closing: {
     badge: "Fechamento às cegas",
     title: "Você descobre o resultado quando o mês acabou",
     summary:
-      "Você espera fechar o mês para saber se a meta bateu. A reunião de segunda é só recuperação de informação. Decisões só acontecem quando já não dá mais para mudar o resultado — e a próxima semana começa igualzinha. Você gerencia o passado, não o presente.",
+      "Você espera fechar o mês para saber se a meta bateu. A reunião de segunda é só recuperação de informação. As decisões acontecem quando já não dá para mudar o resultado, e a semana seguinte começa igual. Você gerencia o passado, não o presente.",
     actionSteps: [
-      "Ative analytics de funil em tempo real — conversão stage-to-stage, comparação mensal, breakdown por unidade.",
-      "Substitua reunião de segunda por leitura prévia do painel — chegue na reunião com decisão, não com pergunta.",
-      "Configure relatório semanal automático para diretoria toda segunda 8h BRT — sem precisar montar manualmente.",
+      "Acompanhe o funil em tempo real: conversão de etapa a etapa, comparação com o mês anterior e visão por pessoa ou por unidade.",
+      "Troque a reunião de segunda por leitura prévia do painel. Chegue com decisão, não com pergunta.",
+      "Configure relatório semanal automático para a direção, toda segunda às 8h, sem ninguém montar na mão.",
     ],
-    emailSubject: "Seu diagnóstico: Fechamento às cegas — como ver o mês antes de acabar",
+    emailSubject: "Seu diagnóstico: Fechamento às cegas. Como ver o mês antes de acabar",
     emailIntro:
-      "Você marcou que descobre o resultado só no fechamento. Isso significa que sua janela de intervenção é zero — e a margem de erro é total.",
+      "Você marcou que descobre o resultado só no fechamento. Isso significa que não sobra tempo para intervir antes de o mês acabar.",
     accentColor: "#06b6d4",
   },
   inconclusive: {
     badge: "Diagnóstico em zona cinzenta",
-    title: "Sua operação tem sinais misturados — vale uma conversa",
+    title: "Sua operação tem sinais misturados. Vale uma conversa",
     summary:
-      "Suas respostas indicam que sua rede não tem um único gargalo dominante: alguns pontos funcionam, outros precisam de ajuste. Isso é comum em redes em transição (3-7 unidades) — onde processos informais começam a falhar mas a operação ainda não quebrou. Um diagnóstico ao vivo de 30 min com o fundador identifica onde está o gargalo real, baseado nos seus números, não num quiz.",
+      "Suas respostas indicam que não existe um único gargalo dominante: alguns pontos funcionam, outros precisam de ajuste. Isso é comum em operação em crescimento, quando o processo informal começa a falhar mas ainda não quebrou. Uma conversa de 30 minutos com o fundador identifica onde está o gargalo real, com base nos seus números, não num quiz.",
     actionSteps: [
-      "Agende um diagnóstico ao vivo de 30 min — gratuito para os primeiros 20 contratos. Trazemos perguntas específicas pro seu segmento.",
-      "Antes da conversa, anote: quantos candidatos entraram no último mês, quantos viraram matrícula, e quantos sumiram sem ninguém perceber.",
-      "Compare hoje vs há 6 meses — se a equipe cresceu mais que os processos, esse é o seu ponto crítico.",
+      "Agende uma conversa de 30 minutos, sem custo. Trazemos perguntas específicas para a sua operação.",
+      "Antes da conversa, anote: quantos leads entraram no último mês, quantos viraram matrícula e quantos sumiram sem ninguém perceber.",
+      "Compare hoje com seis meses atrás. Se a equipe cresceu mais que os processos, esse é o seu ponto crítico.",
     ],
-    emailSubject: "Seu diagnóstico: zona cinzenta — vamos olhar de perto",
+    emailSubject: "Seu diagnóstico: zona cinzenta. Vamos olhar de perto",
     emailIntro:
-      "Suas respostas não apontaram um único gargalo crítico — o que é normal e tratável. Nesses casos, conversa direta vale mais que diagnóstico padronizado.",
+      "Suas respostas não apontaram um único gargalo crítico, o que é normal e tratável. Nesses casos, conversa direta vale mais que diagnóstico padronizado.",
     accentColor: "#94a3b8",
   },
   healthy_operation: {
     badge: "Operação saudável",
-    title: "Sua rede já roda com visibilidade — raro e admirável",
+    title: "Sua operação já roda com visibilidade",
     summary:
-      "Você é minoria. A maioria das redes de escolas e cursos vive de planilha desatualizada e reunião reconstruindo a semana. Se sua operação está saudável, vale aprofundar o que já funciona — e reforçar nos pontos onde a cultura ainda pode regredir quando a rede crescer.",
+      "Muita escola e muito curso ainda vivem de planilha desatualizada e de reunião para reconstruir a semana. Se a sua operação está saudável, vale aprofundar o que já funciona e reforçar os pontos em que a cultura pode regredir quando a equipe crescer.",
     actionSteps: [
-      "Documente o que funciona — quando crescer para 8+ unidades, processo informal vira gargalo.",
-      "Indique outras redes do seu segmento que ainda estão na planilha — você ganha network e nós ganhamos clientes que precisam.",
-      "Considere o Team Manager para escalar visibilidade — o que você faz hoje no detalhe, o sistema mantém quando a rede triplicar.",
+      "Documente o que funciona. Quando a operação crescer, processo informal vira gargalo.",
+      "Conhece outra escola que ainda está na planilha? Indique: quem precisa agradece.",
+      "Considere o Team Manager para manter essa visibilidade. O que você faz hoje no detalhe, o sistema sustenta quando a operação crescer.",
     ],
-    emailSubject: "Seu diagnóstico: Operação saudável — vamos aprofundar",
+    emailSubject: "Seu diagnóstico: Operação saudável. Vamos aprofundar",
     emailIntro:
-      "Sua rede está em condição rara. Maioria dos diagnósticos que rodamos retorna problema crítico — o seu retornou maturidade.",
+      "Suas respostas mostram uma operação madura: você já enxerga o que acontece sem precisar perguntar.",
     accentColor: "#22d3a4",
   },
 };
@@ -271,7 +271,7 @@ export const DIAGNOSTIC_COPY: Record<Diagnostic, DiagnosticCopy> = {
 export const QUESTIONS = [
   {
     key: "q1" as const,
-    title: "Você sabe exatamente quantos candidatos cada consultor atendeu essa semana?",
+    title: "Você sabe exatamente quantos leads cada pessoa do comercial atendeu essa semana?",
     options: [
       { value: "realtime" as Q1, label: "Sim, em tempo real" },
       { value: "partial" as Q1, label: "Sei de alguns" },
@@ -291,7 +291,7 @@ export const QUESTIONS = [
   },
   {
     key: "q3" as const,
-    title: "Você consegue ver quais unidades estão abaixo da meta antes do fechamento do mês?",
+    title: "Você consegue ver quem está abaixo da meta antes do fechamento do mês?",
     options: [
       { value: "daily" as Q3, label: "Sim, acompanho diariamente" },
       { value: "mid_month" as Q3, label: "No meio do mês" },
