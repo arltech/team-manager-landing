@@ -22,9 +22,9 @@ export const alt =
   "Team Manager: do primeiro contato ao contrato assinado, a operação comercial da rede em um sistema";
 
 // Paleta de site.css, nao inventada aqui.
-const TINTA = "#070b24";
-const TINTA_2 = "#0f1440";
-const TEXTO_FRACO = "rgba(255,255,255,0.44)";
+const TINTA = "#0b2470";
+const TINTA_2 = "#102b81";
+const TEXTO_FRACO = "rgba(255,255,255,0.56)";
 const LINHA_FORTE = "rgba(255,255,255,0.22)";
 const ACENTO = "#9db2ff";
 
@@ -51,7 +51,7 @@ export default async function OpengraphImage() {
           justifyContent: "space-between",
           padding: "56px 72px",
           backgroundColor: TINTA,
-          backgroundImage: `radial-gradient(1000px 600px at 90% 0%, ${TINTA_2} 0%, rgba(15,20,64,0) 70%)`,
+          backgroundImage: `radial-gradient(1000px 600px at 90% 0%, ${TINTA_2} 0%, rgba(16,43,129,0) 70%)`,
           color: "#ffffff",
           fontFamily: "Archivo",
           fontWeight: 700,

@@ -127,7 +127,7 @@ export default async function PreviewPdfPage({ searchParams }: PageProps) {
                   Diagnóstico de operação
                 </div>
                 <div
-                  className="text-[15px] font-extrabold tracking-tight text-[#1e3a8a]"
+                  className="text-[15px] font-extrabold tracking-tight text-[#102b81]"
                   style={{ fontFamily: "Manrope, Inter, sans-serif" }}
                 >
                   Rede de escolas e cursos
@@ -164,7 +164,7 @@ export default async function PreviewPdfPage({ searchParams }: PageProps) {
           </div>
 
           <h1
-            className="text-3xl md:text-[34px] font-extrabold leading-[1.15] tracking-tight mb-6 text-[#0a0e27]"
+            className="text-3xl md:text-[34px] font-extrabold leading-[1.15] tracking-tight mb-6 text-[#0b2470]"
             style={{ fontFamily: "Manrope, Inter, sans-serif" }}
           >
             {copy.title}
@@ -271,7 +271,7 @@ export default async function PreviewPdfPage({ searchParams }: PageProps) {
             className="rounded-2xl p-8 mb-12"
             style={{
               background:
-                "linear-gradient(135deg, #0a0e27 0%, #1e1b4b 50%, #1e3a8a 100%)",
+                "linear-gradient(135deg, #0b2470 0%, #102b81 50%, #102b81 100%)",
             }}
           >
             <h3
@@ -284,7 +284,7 @@ export default async function PreviewPdfPage({ searchParams }: PageProps) {
               Agende uma demonstração ao vivo do Team Manager. Em 45 min mostramos como o sistema
               implanta esse plano nas suas unidades — em até 72h.
             </p>
-            <div className="inline-flex items-center gap-2 text-xs px-4 py-2.5 rounded-lg bg-white text-[#1e3a8a] font-bold">
+            <div className="inline-flex items-center gap-2 text-xs px-4 py-2.5 rounded-lg bg-white text-[#102b81] font-bold">
               app.teammanager.app/agendar
             </div>
           </section>

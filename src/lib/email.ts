@@ -62,7 +62,7 @@ export function buildDiagnosticEmail(
 
   const html = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; max-width: 560px; margin: 0 auto; color: #1a1b22;">
-      <div style="background: #00288e; padding: 24px; border-radius: 8px 8px 0 0;">
+      <div style="background: #102b81; padding: 24px; border-radius: 8px 8px 0 0;">
         <h2 style="color: white; margin: 0; font-size: 22px;">Team Manager</h2>
         <p style="color: rgba(255,255,255,0.75); margin: 6px 0 0; font-size: 13px;">Diagnóstico personalizado para sua rede</p>
       </div>
@@ -82,7 +82,7 @@ export function buildDiagnosticEmail(
         </ol>
         <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid #eee;">
           <p style="font-size: 13px; color: #525c87; margin: 0 0 12px;">Quer ver como o Team Manager implanta esse plano em 72 horas?</p>
-          <a href="${demoUrl}" style="background: #00288e; color: white; padding: 12px 22px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600;">Agendar demonstração</a>
+          <a href="${demoUrl}" style="background: #102b81; color: white; padding: 12px 22px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600;">Agendar demonstração</a>
         </div>
       </div>
       <p style="text-align: center; font-size: 11px; color: #999; margin: 16px 0 0;">Você recebeu este email porque solicitou o resultado do diagnóstico no Team Manager.</p>

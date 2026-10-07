@@ -71,7 +71,7 @@
   --card: #ffffff;
   --card-foreground: #1a1b22;
 
-  --primary: #1e3a8a;
+  --primary: #102b81;
   --primary-foreground: #ffffff;
   --primary-container: #3b82f6;
   --primary-vibrant: #6366f1;
@@ -83,11 +83,11 @@
   --muted-foreground: #444653;
 
   --accent: #c7d2fe;
-  --accent-foreground: #1e1b4b;
+  --accent-foreground: #0b2470;
 
   --destructive: #dc2626;
   --border: #c4c5d5;
-  --ring: #1e3a8a;
+  --ring: #102b81;
 
   --surface: #fbf8ff;
   --surface-container: #eeedf7;
@@ -101,8 +101,8 @@
   --tertiary: #611e00;
   --tertiary-fixed: #ffdbce;
 
-  --hero-from: #0a0e27;
-  --hero-to: #1e1b4b;
+  --hero-from: #0b2470;
+  --hero-to: #102b81;
 
   --success: #059669;
   --success-subtle: rgb(5 150 105 / 0.12);
@@ -182,7 +182,7 @@
 /* Hero gradient com profundidade — azul Yale + indigo + warm flare */
 .hero-gradient {
   background:
-    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(99, 102, 241, 0.32) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(77, 134, 255, 0.28) 0%, transparent 60%),
     radial-gradient(ellipse 60% 50% at 90% 100%, rgba(244, 114, 182, 0.14) 0%, transparent 55%),
     radial-gradient(ellipse 70% 60% at 50% 110%, rgba(59, 130, 246, 0.18) 0%, transparent 60%),
     linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);

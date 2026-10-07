@@ -33,7 +33,7 @@ const COLORS = {
   ink: "#1a1b22",
   inkSoft: "#444653",
   inkMuted: "#757684",
-  primary: "#1e3a8a",
+  primary: "#102b81",
   primaryTint: "#eeedf7",
   trackBg: "#eef0fa",
 };

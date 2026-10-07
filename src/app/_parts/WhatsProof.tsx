@@ -119,7 +119,7 @@ export function WhatsProof() {
     <section
       id="provas"
       className="relative overflow-hidden text-[#f5f5fa] py-28"
-      style={{ background: "linear-gradient(180deg,#0a0e27,#0d1130)" }}
+      style={{ background: "linear-gradient(180deg,#0b2470,#0a2168)" }}
     >
       <div
         className="absolute inset-0"
