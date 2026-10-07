@@ -20,7 +20,11 @@ const FRASES = [
   ["Do achismo de sexta", "ao número de terça."],
 ] as const;
 
-export function Promessa() {
+export function Promessa({
+  frases = FRASES,
+}: {
+  frases?: readonly (readonly [string, string])[];
+}) {
   const [i, setI] = useState(0);
 
   // Quem pede movimento reduzido nao quer o DESLIZE, e nao perder o conteudo:
@@ -29,13 +33,13 @@ export function Promessa() {
   useEffect(() => {
     const suave = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const t = setInterval(
-      () => setI((n) => (n + 1) % FRASES.length),
+      () => setI((n) => (n + 1) % frases.length),
       suave ? 5200 : 3400,
     );
     return () => clearInterval(t);
-  }, []);
+  }, [frases.length]);
 
-  const [antes, depois] = FRASES[i];
+  const [antes, depois] = frases[i];
 
   return (
     <h1 className="tm-h1 tm-promessa">

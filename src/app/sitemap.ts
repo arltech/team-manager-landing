@@ -8,6 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: SITE_URL, lastModified: agora, changeFrequency: "weekly", priority: 1 },
     {
+      url: `${SITE_URL}/escolas-de-idiomas`,
+      lastModified: agora,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${SITE_URL}/diagnostico`,
       lastModified: agora,
       changeFrequency: "monthly",
