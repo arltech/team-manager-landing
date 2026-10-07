@@ -496,8 +496,8 @@ export function Landing({ t: variante }: { t?: Partial<Texto> }) {
             {/* Dados da empresa e links legais: a verificação de Provedor de
                 Tecnologia da Meta pede um site que mostre quem fornece o serviço. */}
             <p>
-              36.023.244 LUCAS RODRIGUES ALVES (ARLTech) · CNPJ 36.023.244/0001-37 ·
-              Recife/PE ·{" "}
+              ARLTECH TECNOLOGIA LTDA · CNPJ 36.023.244/0001-37 · Jaboatão dos
+              Guararapes/PE ·{" "}
               <a href="mailto:lucas@arltech.emp.br">lucas@arltech.emp.br</a> ·{" "}
               <a href="https://app.teammanager.tech/privacidade">Privacidade</a> ·{" "}
               <a href="https://app.teammanager.tech/termos">Termos de uso</a>

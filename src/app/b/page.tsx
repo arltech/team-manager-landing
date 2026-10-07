@@ -554,7 +554,7 @@ export default function Page() {
           <span className="grid gap-1 text-[13px] text-[var(--muted-foreground)]">
             <span>© Team Manager · ARLTech · Sistema de operação para redes de escolas e cursos</span>
             <span>
-              36.023.244 LUCAS RODRIGUES ALVES (ARLTech) · CNPJ 36.023.244/0001-37 · Recife/PE ·{" "}
+              ARLTECH TECNOLOGIA LTDA · CNPJ 36.023.244/0001-37 · Jaboatão dos Guararapes/PE ·{" "}
               <a className="underline" href="https://app.teammanager.tech/privacidade">Privacidade</a> ·{" "}
               <a className="underline" href="https://app.teammanager.tech/termos">Termos de uso</a>
             </span>
