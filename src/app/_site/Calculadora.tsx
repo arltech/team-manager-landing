@@ -33,10 +33,10 @@ const PLANOS = [
 const brl = (n: number) =>
   n.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 
-export function Calculadora() {
+export function Calculadora({ unidadesIniciais = 3 }: { unidadesIniciais?: number }) {
   const [leads, setLeads] = useState(120);
   const [conversao, setConversao] = useState(8);
-  const [unidades, setUnidades] = useState(3);
+  const [unidades, setUnidades] = useState(unidadesIniciais);
   const [ticket, setTicket] = useState(TICKET_PADRAO);
 
   const perdidosAno = Math.round(leads * 12 * SEM_SEGUNDO_CONTATO);

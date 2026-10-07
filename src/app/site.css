@@ -173,6 +173,7 @@
 .tm .tm-sobre { color: var(--acento); margin-bottom: 20px; }
 .tm .tm-h1 { font-size: clamp(36px, 5vw, 62px); margin-bottom: 24px; max-width: 15ch; }
 .tm .tm-sub { font-size: clamp(17px, 1.4vw, 20px); color: var(--texto-claro); max-width: 52ch; margin-bottom: 30px; }
+.tm .tm-chapeu { display: block; margin-bottom: 16px; }
 .tm .tm-hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
 .tm .tm-hero-nota { font-size: 14.5px; color: var(--texto-fraco); max-width: 48ch; }
 
