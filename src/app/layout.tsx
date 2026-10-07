@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 import Script from "next/script";
+import { Tracking } from "@/app/_components/Tracking";
 import "./globals.css";
 import "./site.css";
 
@@ -116,7 +117,7 @@ const STRUCTURED_DATA = {
         name: `Team Manager ${nome}`,
         price: preco,
         priceCurrency: "BRL",
-        url: `${SITE_URL}/#oferta`,
+        url: `${SITE_URL}/#precos`,
         availability: "https://schema.org/InStock",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
@@ -167,6 +168,7 @@ export default function RootLayout({
             {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","${CLARITY_ID}");`}
           </Script>
         )}
+        <Tracking />
         {children}
         <Toaster position="top-center" richColors />
       </body>
