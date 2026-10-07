@@ -470,6 +470,14 @@
 /* A secao de dores agora abre a pagina, logo depois do hero. Fundo um degrau
    mais claro que o resto para ela se destacar sem virar outra faixa clara. */
 .tm .tm-dores-band { background: var(--tinta-2); }
+/* Fundo da faixa de modulos: feixes de luz, da mesma familia dos cards
+   (tm-cards/fundos.py, receita "feixes", base --tinta). As bordas de cima e de
+   baixo voltam ao azul liso para emendar com as faixas vizinhas. */
+.tm #modulos {
+  background:
+    linear-gradient(180deg, var(--tinta) 0%, transparent 14%, transparent 86%, var(--tinta) 100%),
+    var(--tinta) url("/modulos-feixes.webp") right top / cover no-repeat;
+}
 .tm .tm-dores-band .tm-dores-lista li { border-color: rgba(255, 255, 255, 0.14); }
 .tm .tm-logo-rodape { height: 36px; }
 
