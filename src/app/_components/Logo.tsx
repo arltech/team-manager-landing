@@ -40,7 +40,7 @@ export function Logo({
       <Link
         href={href}
         className="inline-flex items-center group"
-        aria-label="Team Manager — Página inicial"
+        aria-label="Team Manager: página inicial"
       >
         <Image
           src="/icon-512.png"
@@ -60,7 +60,7 @@ export function Logo({
     <Link
       href={href}
       className="inline-flex items-center group"
-      aria-label="Team Manager — Página inicial"
+      aria-label="Team Manager: página inicial"
     >
       <Image
         src="/a-logo.png"

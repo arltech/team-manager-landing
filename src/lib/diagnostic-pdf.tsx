@@ -382,9 +382,9 @@ function DiagnosticDocument({ data }: { data: DiagnosticPdfData }) {
 
   return (
     <Document
-      title={`Diagnóstico Team Manager — ${copy.badge}`}
+      title={`Diagnóstico Team Manager: ${copy.badge}`}
       author="Team Manager"
-      subject="Diagnóstico de operação para redes de escolas e cursos"
+      subject="Diagnóstico de operação comercial para escolas e cursos"
     >
       <Page size="A4" style={styles.page}>
         {/* Header */}
@@ -396,7 +396,7 @@ function DiagnosticDocument({ data }: { data: DiagnosticPdfData }) {
             <View>
               <Text style={styles.brand}>TEAM MANAGER</Text>
               <Text style={styles.brandTag}>
-                Diagnóstico de operação · rede de escolas e cursos
+                Diagnóstico de operação comercial · escolas e cursos
               </Text>
             </View>
           </View>
@@ -501,7 +501,7 @@ function DiagnosticDocument({ data }: { data: DiagnosticPdfData }) {
 
         {/* Footer */}
         <Text style={styles.footer} fixed>
-          Team Manager · sistema de operação para redes de escolas e cursos ·
+          Team Manager · sistema de operação comercial para escolas e cursos ·
           diagnóstico gerado automaticamente
         </Text>
       </Page>

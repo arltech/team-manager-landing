@@ -381,7 +381,7 @@ function ResultView({ result }: { result: SubmitResult }) {
             </h1>
             <p className="text-[var(--muted-foreground)] text-base md:text-lg leading-relaxed mb-8">
               Deixe seu nome e WhatsApp e a gente te mostra o resultado
-              completo, com o plano de ação pra sua rede. Uma mensagem só,
+              completo, com o plano de ação pra sua operação. Uma mensagem só,
               sem spam, e quem responde é o time, não robô.
             </p>
             <form

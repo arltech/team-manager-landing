@@ -4,9 +4,9 @@ import { QuizClient } from "./quiz-client";
 export const metadata: Metadata = {
   // Sem isto a pagina herda o canonical "/" do layout e se declara copia da home.
   alternates: { canonical: "/diagnostico" },
-  title: "Diagnóstico gratuito da operação da sua rede",
+  title: "Diagnóstico gratuito da sua operação comercial",
   description:
-    "Descubra em 2 minutos onde sua rede está perdendo visibilidade. 5 perguntas, resultado imediato, sem cadastro.",
+    "Descubra em 2 minutos quanto da sua operação comercial você enxerga sem perguntar ao time. 5 perguntas e um plano de ação em três passos.",
 };
 
 export default function DiagnosticoPage() {
