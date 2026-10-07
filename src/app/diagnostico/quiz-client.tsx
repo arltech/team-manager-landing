@@ -217,7 +217,7 @@ function fireDiagnosticConfetti(diagnostic: Diagnostic, accent: string) {
   const isHealthy = diagnostic === "healthy_operation";
   const palette = isHealthy
     ? ["#22d3a4", "#34d399", "#86efac", "#ffffff"]
-    : [accent, "#c7d2fe", "#1e3a8a", "#ffffff"];
+    : [accent, "#c7d2fe", "#102b81", "#ffffff"];
 
   const particles = isHealthy ? 90 : 50;
   const spread = isHealthy ? 78 : 60;

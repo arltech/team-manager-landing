@@ -239,7 +239,7 @@ export default function Page() {
               </div>
             </div>
             <div
-              style={{ boxShadow: "0 18px 40px rgba(30,58,138,.18)" }}
+              style={{ boxShadow: "0 18px 40px rgba(16,43,129,.18)" }}
               className="floatchip absolute top-[60px] -right-2.5 bg-white rounded-[14px] px-4 py-3 border border-[var(--border)]"
             >
               <div className="flex items-center gap-2">
@@ -251,7 +251,7 @@ export default function Page() {
               </div>
             </div>
             <div
-              style={{ animationDelay: "-3s", background: navy, boxShadow: "0 18px 40px rgba(30,58,138,.35)" }}
+              style={{ animationDelay: "-3s", background: navy, boxShadow: "0 18px 40px rgba(16,43,129,.35)" }}
               className="floatchip absolute bottom-10 -left-3 text-white rounded-[14px] px-4 py-3"
             >
               <div className="text-[11.5px] font-bold opacity-70 uppercase tracking-[0.08em]">Matrículas · mês</div>
@@ -567,11 +567,11 @@ export default function Page() {
           background: rgba(99, 102, 241, 0.2);
         }
         .b-page .dot-bg {
-          background-image: radial-gradient(circle, rgba(30, 58, 138, 0.08) 1px, transparent 1px);
+          background-image: radial-gradient(circle, rgba(16,43,129, 0.08) 1px, transparent 1px);
           background-size: 22px 22px;
         }
         .b-page .winframe {
-          box-shadow: 0 40px 100px -20px rgba(30, 58, 138, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 40px 100px -20px rgba(16,43,129, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.04);
         }
         .b-page .floatchip {
           animation: b-bob 6s ease-in-out infinite;

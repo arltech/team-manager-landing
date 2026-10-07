@@ -11,30 +11,28 @@
 
 .tm {
   /* Paleta do design system do produto, nao inventada aqui:
-     --primary #00288e (azul Minds) e --plano-topo #00288e (violeta), com o
-     violeta claro para funcionar sobre fundo escuro. O laranja da versao
+     o royal do icone do app (#102b81) como base, com azul claro para
+     funcionar sobre fundo escuro. O laranja da versao
      anterior nao existia em lugar nenhum do sistema e saiu. */
-  --tinta: #070b24;
-  --tinta-2: #0f1440;
-  --tinta-3: #1b2059;
+  --tinta: #0b2470;
+  --tinta-2: #102b81;
+  --tinta-3: #1a3796;
 
   --claro: #f1f4fb;
   --claro-2: #e3e8f2;
   --claro-linha: #c4c5d5;
 
-  /* O #00288e do design system era azul demais como FUNDO chapado: destoava
-     do azul-noite do resto da pagina. Como fundo solido usa-se um marinho
-     profundo, na mesma familia do --tinta; como TEXTO em faixa clara o azul
-     da marca continua. */
-  --marca: #0d1b4b;
-  --marca-texto: #00288e;
+  /* Azul da marca: o royal do icone do app (#102b81). O fundo da pagina usa o
+     tom escuro do mesmo royal (--tinta), para o texto branco ler em pagina longa. */
+  --marca: #102b81;
+  --marca-texto: #102b81;
   --acento: #9db2ff;
-  --acento-forte: #00288e;
+  --acento-forte: #102b81;
   --acento-btn: #ffffff;
   --acento-btn-hover: #e8eeff;
 
   --texto-claro: rgba(255, 255, 255, 0.68);
-  --texto-fraco: rgba(255, 255, 255, 0.44);
+  --texto-fraco: rgba(255, 255, 255, 0.56);
   --linha: rgba(255, 255, 255, 0.12);
   --linha-forte: rgba(255, 255, 255, 0.22);
 
@@ -134,7 +132,7 @@
 /* ── HEADER ───────────────────────────────────────────────── */
 .tm .tm-header {
   position: sticky; top: 0; z-index: 40;
-  background: rgba(11, 16, 32, 0.92);
+  background: rgba(11, 36, 112, 0.92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--linha);
 }
