@@ -173,7 +173,7 @@ const FAQ: Texto["faq"] = [
   ],
   [
     "E se eu tiver mais unidades que o plano inclui?",
-    "Cada plano já vem com um número de unidades. Acima disso entra unidade avulsa por um valor fixo, sem trocar de degrau. O limite operacional é de 15 usuários por unidade.",
+    "Cada plano já vem com um número de unidades. Acima disso entra unidade avulsa por um valor fixo, sem trocar de degrau, até 10 unidades. Rede com mais de 10 escolas entra no plano Rede, montado sob proposta. O limite operacional é de 15 usuários por unidade.",
   ],
   [
     "Quanto tempo leva para implantar?",
@@ -440,7 +440,8 @@ export function Landing({ t: variante }: { t?: Partial<Texto> }) {
           </p>
           <p className="tm-precos-nota">
             Precisa de mais unidades do que o plano inclui? Entra unidade avulsa
-            por valor fixo, sem trocar de degrau. Até 15 usuários por unidade.
+            por valor fixo, sem trocar de degrau, até 10 unidades. Acima de 10, o
+            plano Rede é montado sob proposta. Até 15 usuários por unidade.
           </p>
           <div className="tm-garantia">
             <h3>Garantia de 30 dias</h3>
