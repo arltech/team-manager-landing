@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Play } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Volume2 } from "lucide-react";
 
 /**
  * Faixa do Oraculo IA: o degrau acima do Inteligencia (src/lib/planos.ts no
@@ -9,10 +9,15 @@ import { Play } from "lucide-react";
  *
  * O video e o mesmo da vitrine do Oraculo dentro do app (video-oraculo.tsx),
  * no bucket publico "site" do Supabase: trocar e subir por cima, com o mesmo
- * nome. preload="none" nao baixa os 21 MB de quem so rola a pagina, e a capa
- * segura o quadro 16:9 ate o clique. A capa inteira e o botao (mesma camada do
- * video do hero): clicar em qualquer parte toca ali mesmo, com som, e so entao
- * aparecem os controles nativos.
+ * nome.
+ *
+ * Igual ao hero: o video roda mudo em loop por tras, e o quadro inteiro e o
+ * botao. Clicar em qualquer parte volta para o zero e toca ali mesmo, com som
+ * e controles nativos; no fim, volta ao loop mudo. O loop so toca com a faixa
+ * na tela (preload="none" ate la), para quem nao rola ate aqui nao baixar nada.
+ *
+ * ponytail: o loop usa o arquivo cheio (21 MB, com audio); um loop leve de
+ * 720p sem audio, como o institucional-loop.mp4 do hero, se o peso pesar.
  */
 const VIDEO = "https://mticvezbaxllzbwkeskc.supabase.co/storage/v1/object/public/site/video/treinamentos";
 
@@ -33,11 +38,39 @@ const PONTOS = [
 
 export function Oraculo() {
   const video = useRef<HTMLVideoElement>(null);
-  const [tocando, setTocando] = useState(false);
+  const [comSom, setComSom] = useState(false);
 
-  function tocar() {
-    setTocando(true);
-    video.current?.play().catch(() => setTocando(false));
+  // Loop mudo so enquanto a faixa aparece; com som, quem manda e o player.
+  useEffect(() => {
+    const v = video.current;
+    if (!v || comSom) return;
+    v.muted = true;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(v);
+    return () => io.disconnect();
+  }, [comSom]);
+
+  function tocarComSom() {
+    const v = video.current;
+    if (!v) return;
+    v.currentTime = 0;
+    v.muted = false;
+    setComSom(true);
+    v.play().catch(() => {
+      v.muted = true;
+      setComSom(false);
+    });
+  }
+
+  function voltarAoLoop() {
+    if (video.current) video.current.muted = true;
+    setComSom(false);
   }
 
   return (
@@ -67,15 +100,18 @@ export function Oraculo() {
             ref={video}
             src={`${VIDEO}/oraculo.mp4`}
             poster={`${VIDEO}/oraculo-capa.jpg`}
-            controls={tocando}
+            controls={comSom}
+            loop={!comSom}
+            muted
+            onEnded={voltarAoLoop}
             playsInline
             preload="none"
-            aria-label="Vídeo de apresentação do Oráculo"
+            aria-label="Vídeo de apresentação do Oráculo, sem som até o clique"
           />
-          {!tocando && (
-            <button type="button" className="tm-video-play" onClick={tocar}>
+          {!comSom && (
+            <button type="button" className="tm-video-play" onClick={tocarComSom}>
               <span className="btn tm-video-pilula">
-                <Play size={20} className="tm-video-play-icone" aria-hidden />
+                <Volume2 size={20} aria-hidden />
                 Assistir com som
               </span>
             </button>

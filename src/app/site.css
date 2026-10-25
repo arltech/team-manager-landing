@@ -689,7 +689,6 @@
   box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.7);
   transition: transform 0.15s ease, background 0.15s ease;
 }
-.tm .tm-video-play-icone { fill: currentColor; }
 @media (max-width: 599px) { .tm .tm-video-pilula { min-height: 44px; padding-inline: 18px; font-size: 14.5px; } }
 .tm .tm-video-play:hover .tm-video-pilula { background: var(--destaque-hover); transform: scale(1.04); }
 .tm .tm-video-dialog {
