@@ -1,11 +1,18 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { Play } from "lucide-react";
+
 /**
  * Faixa do Oraculo IA: o degrau acima do Inteligencia (src/lib/planos.ts no
  * repo do app, PLANOS.oraculo).
  *
  * O video e o mesmo da vitrine do Oraculo dentro do app (video-oraculo.tsx),
  * no bucket publico "site" do Supabase: trocar e subir por cima, com o mesmo
- * nome. Player nativo de proposito: preload="none" nao baixa os 21 MB de quem
- * so rola a pagina, e a capa segura o quadro 16:9 ate o clique.
+ * nome. preload="none" nao baixa os 21 MB de quem so rola a pagina, e a capa
+ * segura o quadro 16:9 ate o clique. A capa inteira e o botao (mesma camada do
+ * video do hero): clicar em qualquer parte toca ali mesmo, com som, e so entao
+ * aparecem os controles nativos.
  */
 const VIDEO = "https://mticvezbaxllzbwkeskc.supabase.co/storage/v1/object/public/site/video/treinamentos";
 
@@ -25,6 +32,14 @@ const PONTOS = [
 ];
 
 export function Oraculo() {
+  const video = useRef<HTMLVideoElement>(null);
+  const [tocando, setTocando] = useState(false);
+
+  function tocar() {
+    setTocando(true);
+    video.current?.play().catch(() => setTocando(false));
+  }
+
   return (
     <div className="tm-oraculo">
       <div>
@@ -49,13 +64,22 @@ export function Oraculo() {
       <figure className="tm-tela tm-video">
         <div className="tm-video-quadro">
           <video
+            ref={video}
             src={`${VIDEO}/oraculo.mp4`}
             poster={`${VIDEO}/oraculo-capa.jpg`}
-            controls
+            controls={tocando}
             playsInline
             preload="none"
             aria-label="Vídeo de apresentação do Oráculo"
           />
+          {!tocando && (
+            <button type="button" className="tm-video-play" onClick={tocar}>
+              <span className="btn tm-video-pilula">
+                <Play size={20} className="tm-video-play-icone" aria-hidden />
+                Assistir com som
+              </span>
+            </button>
+          )}
         </div>
         <figcaption>Telas do sistema com dados de exemplo. Pouco mais de 2 minutos.</figcaption>
       </figure>

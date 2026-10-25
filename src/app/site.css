@@ -676,12 +676,22 @@
   box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.75);
 }
 .tm .tm-video-quadro video { display: block; width: 100%; height: 100%; object-fit: cover; }
-.tm .tm-video-ouvir {
-  position: absolute; right: 12px; top: 12px; min-height: 44px;
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--destaque); color: var(--tinta);
+/* Camada clicavel por cima do video inteiro, com a pilula no meio: qualquer
+   clique no quadro solta o som, nao so o clique no botao. */
+.tm .tm-video-play {
+  position: absolute; inset: 0; width: 100%; padding: 0; border: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent; cursor: pointer;
 }
-.tm .tm-video-ouvir:hover { background: var(--destaque-hover); color: var(--tinta); }
+.tm .tm-video-play:focus-visible { outline: 3px solid var(--destaque); outline-offset: -3px; }
+.tm .tm-video-pilula {
+  background: var(--destaque); color: var(--tinta); font-weight: 700;
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.7);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.tm .tm-video-play-icone { fill: currentColor; }
+@media (max-width: 599px) { .tm .tm-video-pilula { min-height: 44px; padding-inline: 18px; font-size: 14.5px; } }
+.tm .tm-video-play:hover .tm-video-pilula { background: var(--destaque-hover); transform: scale(1.04); }
 .tm .tm-video-dialog {
   width: 100vw; height: 100dvh; max-width: none; max-height: none;
   margin: 0; padding: 0; border: 0; background: #000;
