@@ -1,8 +1,8 @@
 import {
-  Activity, BarChart3, BookOpen, ClipboardList, CreditCard, FileSignature,
+  Activity, BarChart3, BookOpen, ClipboardList, CreditCard, Disc3, FileSignature,
   FileText, Flame, Gauge, Gift, Handshake, HeartPulse, History,
   LayoutDashboard, Lightbulb, MapPin, Megaphone, Radar, Search, ShieldAlert,
-  ShieldCheck, Sparkles, TrendingUp, Trophy, Users, Wallet,
+  ShieldCheck, Sparkles, Ticket, TrendingUp, Trophy, Users, Wallet,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -46,6 +46,7 @@ const GRUPOS: { titulo: string; itens: Modulo[] }[] = [
     itens: [
       { Icon: Users, nome: "CRM de Leads", desc: "Cada lead com dono, origem, etapa e o histórico inteiro da conversa.", plano: "Essencial" },
       { Icon: MapPin, nome: "Atividades Externas", desc: "Ação de rua com escala, QR por pessoa e cada lead ligado ao evento.", plano: "Inteligência" },
+      { Icon: Ticket, nome: "Sorteio do Evento", desc: "O público se inscreve pelo QR, o sorteio roda ao vivo na tela e só depois os inscritos vão para o time.", plano: "Inteligência" },
       { Icon: Handshake, nome: "Parcerias", desc: "Quem indica, quanto traz e o que cada parceria rendeu de fato.", plano: "Essencial" },
       { Icon: Search, nome: "Buscar Leads", desc: "Prospecção na web com extração por IA, direto para o CRM.", plano: "Inteligência" },
       { Icon: FileText, nome: "Scripts de Vendas", desc: "O melhor pitch vira padrão, com o uso registrado lead a lead.", plano: "Performance" },
@@ -78,6 +79,7 @@ const GRUPOS: { titulo: string; itens: Modulo[] }[] = [
       { Icon: Trophy, nome: "Ranking", desc: "O placar da rede, por pessoa e por unidade, publicado sozinho.", plano: "Essencial" },
       { Icon: Sparkles, nome: "Feed de Conquistas", desc: "O que o time alcançou aparece na hora, para todo mundo.", plano: "Essencial" },
       { Icon: Gift, nome: "Premiações", desc: "Campanha de prêmio com critério publicado e regra clara.", plano: "Essencial" },
+      { Icon: Disc3, nome: "Roleta do Administrativo", desc: "Rematrícula parcelada vira giro com prêmio da diretoria; à vista, bônus em dinheiro no contracheque.", plano: "Inteligência" },
       { Icon: History, nome: "Timeline de Prêmios", desc: "O que já foi entregue, para ninguém discutir depois.", plano: "Essencial" },
       { Icon: Flame, nome: "Motivação", desc: "A mensagem que abre o dia, no sistema e no grupo.", plano: "Essencial" },
       { Icon: Lightbulb, nome: "Sugestões de Melhoria", desc: "A ideia do time entra com status, em vez de morrer no corredor.", plano: "Essencial" },
