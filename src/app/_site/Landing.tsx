@@ -5,6 +5,7 @@ import { Promessa } from "@/app/_site/Promessa";
 import { Modulos } from "@/app/_site/Modulos";
 import { Avisos } from "@/app/_site/Avisos";
 import { VideoInstitucional } from "@/app/_site/VideoInstitucional";
+import { Oraculo } from "@/app/_site/Oraculo";
 
 /**
  * A landing, usada pela home e pelas variantes de publico (ver
@@ -224,6 +225,7 @@ export function Landing({ t: variante }: { t?: Partial<Texto> }) {
           <nav className="tm-nav">
             <a href="#ciclo">O ciclo</a>
             <a href="#modulos">Módulos</a>
+            <a href="#oraculo">Oráculo</a>
             <a href="#avisos">Avisos</a>
             <a href="#conta">A conta</a>
             <a href="#precos">Preços</a>
@@ -320,6 +322,13 @@ export function Landing({ t: variante }: { t?: Partial<Texto> }) {
           </p>
           <Modulos />
           <p className="tm-mod-nota">{t.modNota}</p>
+        </div>
+      </section>
+
+      {/* ── ORÁCULO ── */}
+      <section id="oraculo" className="band tm-oraculo-band">
+        <div className="shell">
+          <Oraculo />
         </div>
       </section>
 
@@ -499,6 +508,7 @@ export function Landing({ t: variante }: { t?: Partial<Texto> }) {
               <span className="rotulo">Produto</span>
               <a href="#ciclo">O ciclo</a>
               <a href="#modulos">Módulos</a>
+              <a href="#oraculo">Oráculo</a>
               <a href="#precos">Preços</a>
               <a href="#faq">Dúvidas</a>
             </nav>

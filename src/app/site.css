@@ -155,7 +155,8 @@
 }
 .tm .tm-entrar:hover { color: #fff; }
 .tm .tm-btn-sm { min-height: 44px; padding-inline: 18px; font-size: 14.5px; }
-@media (min-width: 940px) { .tm .tm-nav { display: flex; } }
+/* 1140: com o Oraculo sao 7 itens, e abaixo disso "O ciclo" e "A conta" quebravam em duas linhas. */
+@media (min-width: 1140px) { .tm .tm-nav { display: flex; } }
 
 /* ── HERO ─────────────────────────────────────────────────── */
 /* Fundo do hero: o mesmo chao de pontos dos cards (gerado por tm-cards/fundos.py,
@@ -694,3 +695,18 @@
   background: rgba(255, 255, 255, 0.16); color: #fff;
 }
 .tm .tm-video-fechar:hover { background: rgba(255, 255, 255, 0.28); }
+
+/* ── ORACULO ──────────────────────────────────────────────── */
+/* Linha no topo porque vem logo depois de Modulos, na mesma cor de faixa. */
+.tm .tm-oraculo-band { border-top: 1px solid var(--linha); }
+.tm .tm-oraculo { display: grid; gap: clamp(36px, 5vw, 60px); align-items: center; }
+@media (min-width: 1020px) { .tm .tm-oraculo { grid-template-columns: 0.9fr 1.1fr; } }
+/* Coluna de texto e mais estreita que a faixa cheia: o tm-h2 padrao quebrava em 5 linhas. */
+.tm .tm-oraculo .tm-h2 { font-size: clamp(30px, 3.4vw, 44px); }
+.tm .tm-oraculo-rotulo { display: block; color: var(--destaque); margin-bottom: 14px; }
+.tm .tm-oraculo-pontos { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 18px; }
+.tm .tm-oraculo-pontos li { border-left: 3px solid var(--acento); padding-left: 16px; }
+.tm .tm-oraculo-pontos strong { display: block; color: #fff; font-size: 17px; margin-bottom: 4px; }
+.tm .tm-oraculo-pontos p { color: var(--texto-claro); font-size: 15.5px; line-height: 1.5; }
+.tm .tm-oraculo-nota { margin-top: 24px; color: var(--texto-fraco); font-size: 14.5px; }
+.tm .tm-oraculo .tm-video-quadro video { object-fit: contain; background: #000; }
