@@ -1,12 +1,12 @@
 # Team Manager
 
-> Sistema de operação para redes de escolas e cursos (1 a 15 unidades): CRM de candidatos, follow-up automático, ranking de equipe e rotinas semanais, num só sistema que cobra, lembra, reconhece e reporta pelo gestor.
+> Sistema de operação para redes de escolas e cursos (1 a 10 unidades; acima disso, plano Rede sob proposta): CRM de candidatos, follow-up automático, ranking de equipe e rotinas semanais, num só sistema que cobra, lembra, reconhece e reporta pelo gestor.
 
 Team Manager substitui a combinação de planilha + WhatsApp usada por redes de escolas de idiomas, cursos profissionalizantes, educação infantil e preparatórios. Centraliza CRM de candidatos, automação de follow-up, ranking de equipe comercial e rotinas semanais em um painel único, com visibilidade em tempo real por unidade.
 
 ## Para quem é
 
-Gestores e donos de redes de escolas e cursos com 1 a 15 unidades que hoje dependem de planilhas manuais e mensagens de WhatsApp para acompanhar matrículas, follow-up de candidatos e desempenho da equipe comercial.
+Gestores e donos de redes de escolas e cursos com 1 a 10 unidades (redes maiores entram no plano Rede, sob proposta) que hoje dependem de planilhas manuais e mensagens de WhatsApp para acompanhar matrículas, follow-up de candidatos e desempenho da equipe comercial.
 
 ## Principais páginas
 
@@ -16,10 +16,11 @@ Gestores e donos de redes de escolas e cursos com 1 a 15 unidades que hoje depen
 
 ## Planos
 
-Três degraus, cada um acrescentando ao anterior. Preço por mês, com 20% de desconto no ciclo anual. O eixo de cobrança é a unidade, não o usuário: cada plano já inclui um número de unidades e as demais entram como unidade avulsa, com limite operacional de 15 usuários por unidade.
+Três degraus, cada um acrescentando ao anterior. Preço por mês, com 20% de desconto no ciclo anual. O eixo de cobrança é a unidade, não o usuário: cada plano já inclui um número de unidades e as demais entram como unidade avulsa até 10 unidades, com limite operacional de 15 usuários por unidade.
 
 - Essencial (R$ 397/mês, 1 unidade inclusa): CRM de candidatos, quadro de tarefas, diário de atividades, métricas diárias, análise de conversão do funil, gamificação com ranking, parcerias e e-mails automáticos.
 - Performance (R$ 697/mês, 3 unidades inclusas): tudo do Essencial, mais desempenho por assessor, fila de resgate de lead parado, objetivo x conversão, gestão do time (mapa de carga, pulse, distribuição de leads, auditoria de supervisão) e scripts de venda.
 - Inteligência (R$ 1.297/mês, 6 unidades inclusas): tudo do Performance, mais Sentinela Comercial com IA (temperatura, risco e próxima ação por ficha), busca de leads na web, financeiro com comissão, contratos assinados pelo WhatsApp, atividades externas e automações de WhatsApp.
+- Rede (acima de 10 unidades): plano montado sob proposta, com implantação feita em ondas de escolas.
 
 Garantia de 30 dias com devolução integral. Setup em até 72 horas. Sem fidelidade.

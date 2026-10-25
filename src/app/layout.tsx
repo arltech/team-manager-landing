@@ -16,7 +16,7 @@ const SITE_NAME = "Team Manager";
 const TITLE =
   "Team Manager: do primeiro contato ao contrato assinado";
 const DESCRIPTION =
-  "A operação comercial da sua rede em um sistema: captura na rua com QR, CRM, cobrança automática do follow-up, contrato assinado no celular e a receita no fim. De 1 a 15 unidades.";
+  "A operação comercial da sua rede em um sistema: captura na rua com QR, CRM, cobrança automática do follow-up, contrato assinado no celular e a receita no fim. De 1 a 10 unidades, e plano Rede para redes maiores.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -132,7 +132,7 @@ const STRUCTURED_DATA = {
       })),
       audience: {
         "@type": "Audience",
-        audienceType: "Redes com 1 a 15 unidades",
+        audienceType: "Redes com 1 a 10 unidades",
       },
     },
   ],
