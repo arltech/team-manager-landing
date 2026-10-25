@@ -65,9 +65,12 @@ export function VideoInstitucional() {
           preload="metadata"
           aria-label="Vídeo institucional do Team Manager, sem som"
         />
-        <button type="button" className="btn tm-btn-sm tm-video-ouvir" onClick={abrir}>
-          <Volume2 size={18} aria-hidden />
-          Ouvir o vídeo
+        {/* O quadro inteiro e o botao: clicar em qualquer parte do loop abre com som. */}
+        <button type="button" className="tm-video-play" onClick={abrir}>
+          <span className="btn tm-video-pilula">
+            <Volume2 size={20} aria-hidden />
+            Ouvir o vídeo
+          </span>
         </button>
       </div>
       <figcaption>
