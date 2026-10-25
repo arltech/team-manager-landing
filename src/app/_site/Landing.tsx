@@ -144,6 +144,7 @@ const PLANOS = [
       "Temperatura, risco e próxima ação em cada ficha",
       "Financeiro, comissão e contrato pelo WhatsApp",
       "Busca de leads e automações de WhatsApp",
+      "Roleta do administrativo e sorteio no evento",
     ],
     destaque: false,
   },
@@ -317,7 +318,7 @@ export function Landing({ t: variante }: { t?: Partial<Texto> }) {
         <div className="shell">
           <h2 className="tm-h2 tm-centro">Tudo o que entra junto</h2>
           <p className="tm-lead tm-centro tm-estreito">
-            Não é um CRM com puxadinho. São 26 telas que já conversam entre si,
+            Não é um CRM com puxadinho. São 28 telas que já conversam entre si,
             e a etiqueta diz em qual plano cada uma entra.
           </p>
           <Modulos />
