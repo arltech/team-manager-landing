@@ -534,6 +534,10 @@ export function Landing({ t: variante }: { t?: Partial<Texto> }) {
             <p>
               © {new Date().getFullYear()} Team Manager · ARLTECH TECNOLOGIA LTDA ·
               CNPJ 36.023.244/0001-37 · Jaboatão dos Guararapes/PE
+              <br />
+              {/* Tech Provider Terms 4.1: a única afiliação permitida é a de
+                  desenvolvedor autorizado. Sem logo e sem "parceiro". */}
+              Desenvolvedor autorizado de soluções na WhatsApp Business Platform
             </p>
             <p>
               <a href="https://app.teammanager.tech/privacidade">Privacidade</a>
